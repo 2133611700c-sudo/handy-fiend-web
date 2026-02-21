@@ -1245,7 +1245,7 @@ function toggle(id){
   document.querySelectorAll('.drawer').forEach(d=>{d.style.maxHeight='0px';});
   document.querySelectorAll('.scard').forEach(c=>c.classList.remove('open'));
   if(!open){
-    dr.style.maxHeight=Math.min(dr.scrollHeight+320,780)+'px';
+    dr.style.maxHeight=(dr.scrollHeight+32)+'px';
     const card=dr.closest('.scard');
     if(card){
       card.classList.add('open');
