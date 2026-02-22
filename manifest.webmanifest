@@ -1,0 +1,17 @@
+{
+  "name": "Handy & Fiend",
+  "short_name": "Handy & Fiend",
+  "description": "Premium handyman in Los Angeles — TV Mounting, Furniture, Painting, Flooring & more",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
