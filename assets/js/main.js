@@ -790,6 +790,7 @@ function renderGrid(){
   g.innerHTML='';
   L().svcs.forEach(svc=>{
     const card=document.createElement('div');
+    card.className='scard';
     const phHTML=`<div class="sph"><img src="${SVC_IMG[svc.id]||''}" alt="${svc.name}" loading="lazy" width="320" height="190" decoding="async"></div>`;
     card.innerHTML=`${phHTML}
       <div class="scb">
