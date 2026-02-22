@@ -45,6 +45,6 @@ jobs:
         run: |
           grep -q 'rel="canonical"' index.html          && echo "✅ canonical" || echo "⚠️  canonical missing"
           grep -q 'og:image'        index.html          && echo "✅ og:image"  || echo "⚠️  og:image missing"
-          grep -q 'robots.txt'      robots.txt          && echo "✅ robots.txt" || echo "⚠️  robots.txt empty"
+          grep -q 'User-agent'      robots.txt          && echo "✅ robots.txt" || echo "⚠️  robots.txt empty"
           grep -q 'sitemap'         sitemap.xml         && echo "✅ sitemap"   || echo "⚠️  sitemap empty"
           echo "✅ SEO checks done"
