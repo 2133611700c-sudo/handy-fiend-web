@@ -13,10 +13,10 @@ const P={
    PHOTOS
 ═══════════════════════════════════════════════ */
 const SVC_IMG={
-  tv:   'assets/img/tv-mounting.png',
-  fur:  'assets/img/furniture.png',
-  art:  'assets/img/art.png',
-  paint:'assets/img/painting.png',
+  tv:   'assets/img/tv-mounting.jpg',
+  fur:  'assets/img/furniture.jpg',
+  art:  'assets/img/art.jpg',
+  paint:'assets/img/painting.jpg',
   floor:'assets/img/flooring.jpeg',
   plumb:'assets/img/plumbing.jpeg',
   elec: 'assets/img/electrical.jpeg'
