@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.handyandfriend.com"
+        }
+      ],
+      "destination": "https://handyandfriend.com/$1",
+      "permanent": true
+    }
+  ]
+}
