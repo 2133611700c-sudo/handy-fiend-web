@@ -342,6 +342,13 @@ input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,
 .bwa:hover{transform:scale(1.06);box-shadow:0 8px 32px rgba(37,211,102,.60)}
 .bwa:active{transform:scale(.93)}
 .bwa svg{width:24px;height:24px}
+.bemail{width:50px;height:50px;border-radius:50%;flex-shrink:0;background:#4285F4;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(66,133,244,.50);transition:transform 140ms,box-shadow 140ms}
+@media(min-width:900px){.bemail{width:54px;height:54px}}
+.bemail:hover{transform:scale(1.06);box-shadow:0 8px 32px rgba(66,133,244,.60)}
+.bemail:active{transform:scale(.93)}
+.bemail svg{width:20px;height:20px}
 .pb{height:14px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
