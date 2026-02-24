@@ -133,14 +133,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="hero">
   <div class="hbg"></div>
   <div class="htxt">
-    <div class="hero-trust-badge">⭐ Trusted by 500+ LA Families | Same-Day Response</div>
+    <div class="hero-trust-badge-group">
+      <div class="proof-chip">✅ Reply in 10–30 min (8am–8pm)</div>
+      <div class="proof-chip">✅ Transparent pricing (labor only, no hidden)</div>
+      <div class="proof-chip">✅ Clean-up included</div>
+    </div>
     <h1 class="hh" id="heroH">Professional Handyman<br>Available <span style="color:#ff6b35">Today</span></h1>
     <p class="hs" id="heroSub">✓ Licensed · ✓ Insured · ✓ Upfront Pricing<br>No Surprise Costs. TV Mounting • Furniture Assembly • Painting & More</p>
     <div class="hero-ctas">
-      <a class="hero-cta-primary" href="https://wa.me/12133611700?text=Hi%20Handy%20%26%20Friend%2C%20I%20need%20help%20with%20a%20project" data-event="contact_whatsapp" id="heroCta1">💬 Message on WhatsApp</a>
-      <a class="hero-cta-secondary" href="tel:+12133611700" data-event="click_call" id="heroCta2">📞 Call Now</a>
-      <a class="hero-cta-ghost" href="#calcBox" id="heroCta3">📋 Get Free Quote</a>
+      <!-- MAIN CTA -->
+      <a class="cta-primary" href="#calcBox" id="heroCta1">Get a Quote in 2 Minutes</a>
+
+      <!-- BACKUP OPTIONS -->
+      <div class="cta-secondary-group">
+        <a class="cta-secondary" href="tel:+12133611700" data-event="click_call" id="heroCta2">
+          <span style="font-size:16px">📞</span> Call Now
+        </a>
+        <a class="cta-secondary" href="https://wa.me/12133611700?text=Hi%20Handy%20%26%20Friend%2C%20I%20need%20help%20with%20a%20project" data-event="contact_whatsapp" id="heroCta3">
+          <span style="font-size:16px">💬</span> WhatsApp
+        </a>
+      </div>
     </div>
+    <p class="cta-subtitle">No spam. Only about your request.</p>
     <p style="margin-top:12px;font-size:13px;color:#666">⏰ Most calls answered within 10 minutes | 📱 Available 8am-8pm Daily</p>
   </div>
 </div>
@@ -301,6 +315,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <button class="rbtn" id="resCopy"><span id="resCopyTxt"></span></button>
           </div>
         </div>
+
+        <!-- SMS CAPTURE MINI-FORM (after calculator result) -->
+        <div id="smsCaptureMini" style="display:none;background:#fff;padding:20px;border-radius:12px;margin-top:16px;border:1px solid #d9d1c0">
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#3a3a3a" id="smsCaptureTitle"></h3>
+          <div style="display:grid;gap:10px">
+            <input type="tel" id="smsPhone" placeholder="Your phone number" style="padding:12px;border:1px solid #d9d1c0;border-radius:8px;font-size:14px;font-family:inherit">
+            <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#666">
+              <input type="checkbox" id="smsMktConsent" style="margin-top:2px;width:18px;height:18px">
+              <span id="smsConsent"></span>
+            </label>
+            <button id="smsSendBtn" style="padding:12px;background:#3a3a3a;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;transition:opacity 200ms"></button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -424,19 +451,19 @@ document.addEventListener('DOMContentLoaded', function() {
       <div style="padding:24px;border-radius:14px;background:var(--glt);border:1px solid var(--gbd)">
         <div style="display:flex;gap:4px;margin-bottom:12px;color:#ffc107">⭐⭐⭐⭐⭐</div>
         <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);">"Amazing service! Fixed my TV mounting in 1 hour. Professional and quick. Highly recommend!"</p>
-        <p style="font-size:12px;font-weight:700;color:var(--gold)">— Sarah M., Los Angeles</p>
+        <p style="font-size:12px;font-weight:700;color:var(--gold)">— Sarah M. • Hollywood, 90028 • Feb 2026</p>
       </div>
 
       <div style="padding:24px;border-radius:14px;background:var(--glt);border:1px solid var(--gbd)">
         <div style="display:flex;gap:4px;margin-bottom:12px;color:#ffc107">⭐⭐⭐⭐⭐</div>
         <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);">"Best handyman in LA. Upfront pricing, no surprises. Called me back within 10 mins!"</p>
-        <p style="font-size:12px;font-weight:700;color:var(--gold)">— Marcus T., Los Angeles</p>
+        <p style="font-size:12px;font-weight:700;color:var(--gold)">— Marcus T. • Beverly Hills, 90210 • Feb 2026</p>
       </div>
 
       <div style="padding:24px;border-radius:14px;background:var(--glt);border:1px solid var(--gbd)">
         <div style="display:flex;gap:4px;margin-bottom:12px;color:#ffc107">⭐⭐⭐⭐⭐</div>
         <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);">"Perfect furniture assembly! Licensed, insured, and super reliable. Will call again!"</p>
-        <p style="font-size:12px;font-weight:700;color:var(--gold)">— Jessica L., Los Angeles</p>
+        <p style="font-size:12px;font-weight:700;color:var(--gold)">— Jessica L. • Los Feliz, 90027 • Feb 2026</p>
       </div>
     </div>
   </div>
@@ -470,11 +497,11 @@ document.addEventListener('DOMContentLoaded', function() {
       <textarea id="leadMessage" placeholder="Brief description of your project..." style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit;min-height:80px;resize:none"></textarea>
 
       <button type="submit" style="padding:16px;background:var(--ink);color:#fff;border:none;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;transition:opacity 200ms" data-event="lead_submit">
-        ✅ Get Free Quote Now
+        Get Your Quote in 2 Min
       </button>
 
       <p style="font-size:12px;color:var(--ink3);margin:0">
-        📞 Or call directly: <strong style="color:var(--gold)">213-361-1700</strong>
+        No spam. We only contact you to confirm the job.
       </p>
     </form>
 

@@ -396,3 +396,167 @@ input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,
     box-shadow:0 6px 20px rgba(42,31,20,.20);transition:opacity 120ms}
   .calc-anchor:active{opacity:.82}
 }
+
+/* ═══════════════════════════════════════
+   PROOF CHIPS & CTA HIERARCHY STYLES
+   ═══════════════════════════════════════ */
+
+/* PROOF CHIPS GROUP */
+.hero-trust-badge-group{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+@media(min-width:900px){
+  .hero-trust-badge-group{
+    flex-direction:row;
+    gap:12px;
+  }
+}
+
+.proof-chip{
+  display:inline-block;
+  padding:8px 14px;
+  background:rgba(255,255,255,0.12);
+  border-radius:999px;
+  color:rgba(255,255,255,0.92);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.03em;
+  backdrop-filter:blur(10px);
+  white-space:nowrap;
+}
+
+@media(min-width:900px){
+  .proof-chip{
+    font-size:13px;
+    padding:10px 16px;
+  }
+}
+
+/* PRIMARY CTA */
+.cta-primary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:56px;
+  padding:0 32px;
+  background:#b88924;
+  color:#fff;
+  border-radius:999px;
+  font-weight:700;
+  font-size:16px;
+  letter-spacing:0.04em;
+  box-shadow:0 12px 40px rgba(184,137,44,0.50);
+  transition:all 200ms ease;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  width:100%;
+  box-sizing:border-box;
+}
+
+@media(min-width:900px){
+  .cta-primary{
+    width:auto;
+  }
+}
+
+.cta-primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 56px rgba(184,137,44,0.65);
+}
+
+.cta-primary:active{
+  transform:scale(0.97);
+}
+
+/* SECONDARY CTA GROUP */
+.cta-secondary-group{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+@media(min-width:900px){
+  .cta-secondary-group{
+    flex-wrap:nowrap;
+    margin-top:0;
+    margin-left:12px;
+  }
+}
+
+/* SECONDARY CTA */
+.cta-secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  height:48px;
+  padding:0 20px;
+  background:rgba(255,255,255,0.12);
+  border:1.5px solid rgba(255,255,255,0.25);
+  color:rgba(255,255,255,0.90);
+  border-radius:999px;
+  font-weight:600;
+  font-size:13px;
+  letter-spacing:0.02em;
+  backdrop-filter:blur(10px);
+  transition:all 150ms ease;
+  text-decoration:none;
+  flex:1;
+}
+
+@media(min-width:900px){
+  .cta-secondary{
+    flex:0;
+    width:auto;
+  }
+}
+
+.cta-secondary:hover{
+  background:rgba(255,255,255,0.20);
+  border-color:rgba(255,255,255,0.50);
+}
+
+/* CTA SUBTITLE */
+.cta-subtitle{
+  margin-top:14px;
+  font-size:12px;
+  color:rgba(255,255,255,0.72);
+  letter-spacing:0.02em;
+}
+
+/* SERVICE CARD DETAILS */
+.card-time{
+  font-size:12px;
+  color:#666;
+  font-weight:600;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid #e5dfd5;
+}
+
+.card-benefit{
+  font-size:13px;
+  font-weight:500;
+  color:#3a3a3a;
+  margin-top:6px;
+  line-height:1.4;
+}
+
+.card-badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 10px;
+  background:#f5f1e8;
+  border:1px solid #e5dfd5;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  color:#b88924;
+  letter-spacing:0.05em;
+}

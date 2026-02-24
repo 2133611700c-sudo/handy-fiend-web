@@ -279,7 +279,44 @@ const T={
       ],
       flProv:"Flooring, underlayment & transitions",
       flN:"$500 minimum. Leveling compound & subfloor repairs quoted on-site after assessment."
-    }
+    },
+
+    /* PROOF CHIPS & CTA HIERARCHY */
+    proofChip1:"Reply in 10–30 min (8am–8pm)",
+    proofChip2:"Transparent pricing (labor only, no hidden)",
+    proofChip3:"Clean-up included",
+
+    /* HERO CTA */
+    ctaPrimaryHero:"Get a Quote in 2 Minutes",
+    ctaSubtitle:"No spam. Only about your request.",
+
+    /* SERVICE CARD ADDITIONS */
+    cardTimeLabel:"Typical time:",
+    tvTime:"1–2h",furTime:"1.5–4h",artTime:"1–2.5h",
+    paintTime:"Varies by area",floorTime:"Varies by area",
+    plumbTime:"1–3h",elecTime:"1–2.5h",
+
+    tvBenefit:"No mess. Wall-safe mounting.",
+    furBenefit:"All parts included. Fully assembled.",
+    artBenefit:"Level guarantee. Properly secured.",
+    paintBenefit:"Professional finish. No spillage.",
+    floorBenefit:"Clean installation. Debris removed.",
+    plumbBenefit:"No leaks. Quality fixtures.",
+    elecBenefit:"Safe wiring. Code-compliant.",
+
+    tvBadge:"Most popular",paintBadge:"Same-day possible",
+
+    /* SMS CAPTURE */
+    smsCaptureTitle:"Get This Estimate via SMS",
+    smsPhonePlaceholder:"Your phone number",
+    smsConsent:"I agree to receive SMS about my estimate & special offers",
+    smsSendBtn:"Text me this estimate",
+    smsSuccess:"Estimate texted!",
+    smsSuccessMsg:"Check your SMS in moments.",
+
+    /* FORM UPDATES */
+    formBtnNew:"Get Your Quote in 2 Min",
+    formSubNew:"No spam. We only contact you to confirm the job."
   },
 
   es:{
@@ -426,7 +463,44 @@ const T={
       ],
       flProv:"Piso, base y transiciones",
       flN:"Mínimo $500. Compuesto de nivelación y reparaciones de subsuelo: cotización en sitio."
-    }
+    },
+
+    /* PROOF CHIPS & CTA HIERARCHY */
+    proofChip1:"Respondemos en 10–30 min (8am–8pm)",
+    proofChip2:"Precios transparentes (solo mano de obra, sin ocultos)",
+    proofChip3:"Limpieza incluida",
+
+    /* HERO CTA */
+    ctaPrimaryHero:"Obtén tu estimado en 2 minutos",
+    ctaSubtitle:"Sin spam. Solo acerca de tu solicitud.",
+
+    /* SERVICE CARD ADDITIONS */
+    cardTimeLabel:"Tiempo típico:",
+    tvTime:"1–2h",furTime:"1.5–4h",artTime:"1–2.5h",
+    paintTime:"Varía según el área",floorTime:"Varía según el área",
+    plumbTime:"1–3h",elecTime:"1–2.5h",
+
+    tvBenefit:"Sin desorden. Montaje seguro en pared.",
+    furBenefit:"Todas las piezas incluidas. Completamente ensamblado.",
+    artBenefit:"Garantía de nivel. Bien asegurado.",
+    paintBenefit:"Acabado profesional. Sin derrames.",
+    floorBenefit:"Instalación limpia. Escombros retirados.",
+    plumbBenefit:"Sin fugas. Accesorios de calidad.",
+    elecBenefit:"Cableado seguro. Conforme a códigos.",
+
+    tvBadge:"Más popular",paintBadge:"Posible mismo día",
+
+    /* SMS CAPTURE */
+    smsCaptureTitle:"Recibe este estimado por SMS",
+    smsPhonePlaceholder:"Tu número de teléfono",
+    smsConsent:"Acepto recibir SMS sobre mi estimado y ofertas especiales",
+    smsSendBtn:"Envíame este estimado",
+    smsSuccess:"¡Estimado enviado!",
+    smsSuccessMsg:"Revisa tu SMS en un momento.",
+
+    /* FORM UPDATES */
+    formBtnNew:"Obtén tu estimado en 2 min",
+    formSubNew:"Sin spam. Solo para confirmar tu trabajo."
   },
 
   ru:{
@@ -573,7 +647,44 @@ const T={
       ],
       flProv:"Покрытие, подложка и порожки",
       flN:"Минимум $500. Выравнивающая смесь и ремонт чернового пола — оценка на месте после осмотра."
-    }
+    },
+
+    /* PROOF CHIPS & CTA HIERARCHY */
+    proofChip1:"Ответим в 10–30 мин (8am–8pm)",
+    proofChip2:"Прозрачные цены (только работа, без скрытых)",
+    proofChip3:"Уборка включена",
+
+    /* HERO CTA */
+    ctaPrimaryHero:"Получить смету за 2 минуты",
+    ctaSubtitle:"Без спама. Только о вашей заявке.",
+
+    /* SERVICE CARD ADDITIONS */
+    cardTimeLabel:"Типичное время:",
+    tvTime:"1–2ч",furTime:"1.5–4ч",artTime:"1–2.5ч",
+    paintTime:"Зависит от площади",floorTime:"Зависит от площади",
+    plumbTime:"1–3ч",elecTime:"1–2.5ч",
+
+    tvBenefit:"Без беспорядка. Безопасное крепление на стену.",
+    furBenefit:"Все части включены. Полная сборка.",
+    artBenefit:"Гарантия уровня. Надежное крепление.",
+    paintBenefit:"Профессиональная отделка. Без пролива.",
+    floorBenefit:"Чистая установка. Мусор вывезен.",
+    plumbBenefit:"Без протечек. Качественная фурнитура.",
+    elecBenefit:"Безопасная проводка. По кодексу.",
+
+    tvBadge:"Самый популярный",paintBadge:"Возможно в тот же день",
+
+    /* SMS CAPTURE */
+    smsCaptureTitle:"Получить смету по СМС",
+    smsPhonePlaceholder:"Ваш номер телефона",
+    smsConsent:"Я согласен получать СМС о моей смете и специальных предложениях",
+    smsSendBtn:"Отправить мне эту смету",
+    smsSuccess:"Смета отправлена!",
+    smsSuccessMsg:"Проверьте СМС через минуту.",
+
+    /* FORM UPDATES */
+    formBtnNew:"Получить смету за 2 мин",
+    formSubNew:"Без спама. Мы свяжемся только для подтверждения работы."
   },
 
   ua:{
@@ -720,7 +831,44 @@ const T={
       ],
       flProv:"Покриття, підкладка та поріжки",
       flN:"Мінімум $500. Вирівнювальна суміш та ремонт чорнової підлоги — оцінка на місці після огляду."
-    }
+    },
+
+    /* PROOF CHIPS & CTA HIERARCHY */
+    proofChip1:"Відповімо за 10–30 хв (8am–8pm)",
+    proofChip2:"Прозорі ціни (тільки робота, без прихованих)",
+    proofChip3:"Прибирання включено",
+
+    /* HERO CTA */
+    ctaPrimaryHero:"Отримати смету за 2 хвилини",
+    ctaSubtitle:"Без спаму. Тільки про вашу заявку.",
+
+    /* SERVICE CARD ADDITIONS */
+    cardTimeLabel:"Типовий час:",
+    tvTime:"1–2год",furTime:"1.5–4год",artTime:"1–2.5год",
+    paintTime:"Залежить від площі",floorTime:"Залежить від площі",
+    plumbTime:"1–3год",elecTime:"1–2.5год",
+
+    tvBenefit:"Без беруху. Безпечне кріплення на стіну.",
+    furBenefit:"Усі деталі включені. Повне збирання.",
+    artBenefit:"Гарантія рівня. Надійне кріплення.",
+    paintBenefit:"Професійна обробка. Без розливів.",
+    floorBenefit:"Чисте встановлення. Сміття вивезено.",
+    plumbBenefit:"Без протіканння. Якісна фурнітура.",
+    elecBenefit:"Безпечна проводка. За кодексом.",
+
+    tvBadge:"Найпопулярніший",paintBadge:"Можна в той же день",
+
+    /* SMS CAPTURE */
+    smsCaptureTitle:"Отримати смету по СМС",
+    smsPhonePlaceholder:"Ваш номер телефону",
+    smsConsent:"Я згоден отримувати СМС про мою смету та спеціальні пропозиції",
+    smsSendBtn:"Надішліть мені цю смету",
+    smsSuccess:"Смета надіслана!",
+    smsSuccessMsg:"Перевірте СМС через хвилину.",
+
+    /* FORM UPDATES */
+    formBtnNew:"Отримати смету за 2 хв",
+    formSubNew:"Без спаму. Ми зв'яжемось тільки для підтвердження роботи."
   }
 };
 
@@ -736,6 +884,74 @@ let lang=localStorage.getItem('hf_lang')||'en';
 let calcMode='room';
 function L(){return T[lang]||T.en}
 let lastEst=null;
+
+/* ─── SMS CAPTURE HANDLER ─── */
+function handleSmsCapture(e) {
+  if(e)e.preventDefault();
+
+  const phone = document.getElementById('smsPhone').value;
+  const consent = document.getElementById('smsMktConsent').checked;
+  const l = L();
+
+  if (!phone) {
+    alert('Please provide your phone number');
+    return;
+  }
+
+  if (!consent) {
+    alert('Please agree to receive SMS');
+    return;
+  }
+
+  // Get current estimate from calculator
+  const calcResAmt = document.getElementById('resAmt')?.innerText || 'N/A';
+
+  // Send SMS via backend API
+  fetch('/api/send-sms', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      phone: phone,
+      estimate: calcResAmt,
+      timestamp: new Date().toISOString(),
+      consent: true
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      // Show success message
+      const successHtml = `
+        <div style="text-align:center;padding:20px;color:#3a3a3a">
+          <div style="font-size:32px;margin-bottom:8px">✅</div>
+          <p style="font-weight:700">${l.smsSuccess}</p>
+          <p style="font-size:13px;color:#666">${l.smsSuccessMsg}</p>
+        </div>
+      `;
+      document.getElementById('smsCaptureMini').innerHTML = successHtml;
+
+      // Track in Meta Pixel
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'SMS_Lead', {
+          value: calcResAmt,
+          currency: 'USD'
+        });
+      }
+
+      // Track in GA4
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'sms_lead_generated', {
+          estimate: calcResAmt
+        });
+      }
+    } else {
+      alert('Error sending SMS. Please try again.');
+    }
+  })
+  .catch(err => {
+    console.error('SMS error:', err);
+    alert('Network error. Please try again.');
+  });
+}
 
 function applyLang(){
   localStorage.setItem('hf_lang',lang);
@@ -780,23 +996,95 @@ function applyLang(){
   const sel=document.getElementById('svcSel'),cv=sel.value;
   sel.innerHTML=l.opts.map(o=>`<option value="${o.v}">${o.l}</option>`).join('');
   if(cv)sel.value=cv;
+
+  /* NEW: SMS Capture translations */
+  const smsTitleEl=document.getElementById('smsCaptureTitle');
+  if(smsTitleEl)smsTitleEl.textContent=l.smsCaptureTitle;
+  const smsPhoneEl=document.getElementById('smsPhone');
+  if(smsPhoneEl)smsPhoneEl.placeholder=l.smsPhonePlaceholder;
+  const smsConsentEl=document.getElementById('smsConsent');
+  if(smsConsentEl)smsConsentEl.textContent=l.smsConsent;
+  const smsBtn=document.getElementById('smsSendBtn');
+  if(smsBtn)smsBtn.textContent=l.smsSendBtn;
+
   renderGrid();
   updateAddons();
   updateArea();
 }
 
+/* ─── SERVICE CARD DETAILS MAPPING ─── */
+const serviceDetails = {
+  tv: {
+    time: 'tvTime',
+    benefit: 'tvBenefit',
+    badge: 'tvBadge'
+  },
+  fur: {
+    time: 'furTime',
+    benefit: 'furBenefit',
+    badge: null
+  },
+  art: {
+    time: 'artTime',
+    benefit: 'artBenefit',
+    badge: null
+  },
+  paint: {
+    time: 'paintTime',
+    benefit: 'paintBenefit',
+    badge: 'paintBadge'
+  },
+  floor: {
+    time: 'floorTime',
+    benefit: 'floorBenefit',
+    badge: null
+  },
+  plumb: {
+    time: 'plumbTime',
+    benefit: 'plumbBenefit',
+    badge: null
+  },
+  elec: {
+    time: 'elecTime',
+    benefit: 'elecBenefit',
+    badge: null
+  }
+};
+
 function renderGrid(){
   const g=document.getElementById('servGrid');
   g.innerHTML='';
-  L().svcs.forEach(svc=>{
+  const l = L();
+  l.svcs.forEach(svc=>{
     const card=document.createElement('div');
     card.className='scard';
     const phHTML=`<div class="sph"><img src="${SVC_IMG[svc.id]||''}" alt="${svc.name}" loading="lazy" width="320" height="190" decoding="async"></div>`;
+
+    // Get service details (time, benefit, badge)
+    const detail = serviceDetails[svc.id];
+    const timeText = detail && detail.time ? l[detail.time] : '';
+    const benefitText = detail && detail.benefit ? l[detail.benefit] : '';
+    const badgeKey = detail && detail.badge ? detail.badge : null;
+    const badgeText = badgeKey ? l[badgeKey] : '';
+
+    // Build extra details HTML
+    let extraHTML = '';
+    if(timeText) {
+      extraHTML += `<div class="card-time"><strong>${l.cardTimeLabel}</strong> ${timeText}</div>`;
+    }
+    if(benefitText) {
+      extraHTML += `<div class="card-benefit">${benefitText}</div>`;
+    }
+    if(badgeText) {
+      extraHTML += `<div class="card-badge">${badgeText}</div>`;
+    }
+
     card.innerHTML=`${phHTML}
       <div class="scb">
         <div class="scbd">
           <div class="scn">${svc.name}</div>
           <div class="scp"><b>${svc.from}</b></div>
+          ${extraHTML}
         </div>
         <div class="schev">
           <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
@@ -1029,6 +1317,35 @@ document.getElementById('calcBtn').addEventListener('click',()=>{
     document.getElementById('resMinTxt').textContent=L().minApplied+' (min $'+min+')';}
   else rm.style.display='none';
   document.getElementById('calcRes').classList.add('show');
+
+  /* Show SMS capture form after result */
+  const smsCaptureEl = document.getElementById('smsCaptureMini');
+  if(smsCaptureEl) {
+    smsCaptureEl.style.display = 'block';
+    // Reset SMS form for new estimate
+    document.getElementById('smsPhone').value = '';
+    document.getElementById('smsMktConsent').checked = false;
+    // Clear previous success message if any
+    const oldHTML = smsCaptureEl.innerHTML;
+    if(!oldHTML.includes('smsPhone')) {
+      // Re-render the form if it was replaced with success message
+      const l = L();
+      smsCaptureEl.innerHTML = `
+        <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#3a3a3a" id="smsCaptureTitle">${l.smsCaptureTitle}</h3>
+        <div style="display:grid;gap:10px">
+          <input type="tel" id="smsPhone" placeholder="${l.smsPhonePlaceholder}" style="padding:12px;border:1px solid #d9d1c0;border-radius:8px;font-size:14px;font-family:inherit">
+          <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#666">
+            <input type="checkbox" id="smsMktConsent" style="margin-top:2px;width:18px;height:18px">
+            <span id="smsConsent">${l.smsConsent}</span>
+          </label>
+          <button id="smsSendBtn" style="padding:12px;background:#3a3a3a;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;transition:opacity 200ms">${l.smsSendBtn}</button>
+        </div>
+      `;
+      // Reattach button listener
+      document.getElementById('smsSendBtn').addEventListener('click', handleSmsCapture);
+    }
+  }
+
   document.getElementById('calcRes').scrollIntoView({behavior:'smooth',block:'nearest'});
   track('calc_calculate',{service:v,area_sqft:Math.round(sf),total:tot,hours});
 });
@@ -1081,6 +1398,14 @@ document.getElementById('langBtn').addEventListener('click',()=>{
 })();
 
 applyLang();updateAddons();updateArea();
+
+/* ─── INITIALIZE SMS CAPTURE ─── */
+document.addEventListener('DOMContentLoaded',()=>{
+  const smsSendBtn=document.getElementById('smsSendBtn');
+  if(smsSendBtn){
+    smsSendBtn.addEventListener('click',handleSmsCapture);
+  }
+});
 
 // ─── CTA Click Tracking ───
 document.querySelector('.bcall')?.addEventListener('click',()=>{
