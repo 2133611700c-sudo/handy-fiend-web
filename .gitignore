@@ -141,3 +141,7 @@ vite.config.ts.timestamp-*
 
 # Claude AI temporary files
 .claude/
+.env*.local
+
+# macOS Finder metadata
+.DS_Store
