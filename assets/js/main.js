@@ -873,6 +873,368 @@ const T={
 };
 
 /* ═══════════════════════════════════════════════
+   Static page i18n (sections outside calculator cards)
+═══════════════════════════════════════════════ */
+const UI_I18N={
+  en:{
+    seoTitle:'Handy & Friend | Los Angeles Handyman',
+    seoDescription:'Handy & Friend — handyman services and home repair in Los Angeles. TV mounting, furniture assembly, painting, flooring, plumbing and electrical.',
+    seoOgTitle:'Handy & Friend | Los Angeles Handyman',
+    seoOgDescription:'Premium labor-only handyman. Same-week availability. Call or WhatsApp for a quote.',
+    seoLocale:'en_US',
+    langBtnTitle:'Change language',
+    heroCallNow:'Call Now',
+    heroWhatsApp:'WhatsApp',
+    heroResponseNote:'⏰ Most calls answered within 10 minutes | 📱 Available 8am-8pm Daily',
+    urgencyChip:'⚡ LIMITED: Only 3 booking slots available this week',
+    urgencyTitle:'🎯 Book Your Service Today',
+    urgencySub:'100% Satisfaction Guarantee • Money-Back Guarantee if Not Happy • Licensed & Insured • Same-Day Response',
+    urgencyBtn:'✅ Claim Your Slot Now',
+    whyTitle:'Why Choose Handy & Friend?',
+    painLabel:'❌ Pain Point',
+    promiseLabel:'✅ Our Promise',
+    pain1Title:"Contractors don't show up",
+    pain1Sub:"You're left hanging. Wasted time.",
+    promise1Title:'100% Reliability',
+    promise1Sub:'We show up on time. Guaranteed.',
+    pain2Title:'Hidden fees surprise you',
+    pain2Sub:'Final bill is 2x the quote.',
+    promise2Title:'Upfront Transparent Pricing',
+    promise2Sub:'No surprises. What you see is what you pay.',
+    pain3Title:'Poor quality finish',
+    pain3Sub:'Work looks sloppy. Frustrating.',
+    promise3Title:'Professional Quality',
+    promise3Sub:'Licensed, insured. Satisfaction guaranteed.',
+    servicesTitle:'Services',
+    serviceTv:'TV Mounting',
+    serviceFurniture:'Furniture Assembly',
+    serviceArt:'Art & Mirrors',
+    servicePainting:'Painting',
+    serviceFlooring:'Flooring',
+    servicePlumbing:'Plumbing',
+    serviceElectrical:'Electrical',
+    stickyCall:'Call 213-361-1700',
+    testimonialsTitle:'Trusted by LA Families',
+    testimonialsSub:'500+ satisfied customers • 4.9 ⭐ rating',
+    review1:'"Amazing service! Fixed my TV mounting in 1 hour. Professional and quick. Highly recommend!"',
+    review2:'"Best handyman in LA. Upfront pricing, no surprises. Called me back within 10 mins!"',
+    review3:'"Perfect furniture assembly! Licensed, insured, and super reliable. Will call again!"',
+    leadTitle:'Ready to Book Your Service?',
+    leadSub:'Get a free quote in 2 minutes. No credit card required.',
+    leadNamePlaceholder:'Your Name',
+    leadEmailPlaceholder:'Your Email',
+    leadPhonePlaceholder:'Phone Number (213-361-1700)',
+    leadServiceDefault:'Select Service Needed',
+    leadServiceTv:'📺 TV Mounting',
+    leadServiceFurniture:'🛋️ Furniture Assembly',
+    leadServicePainting:'🎨 Painting & Walls',
+    leadServiceFlooring:'🏠 Flooring',
+    leadServicePlumbing:'🚰 Plumbing',
+    leadServiceElectrical:'⚡ Electrical',
+    leadServiceMirrors:'🪞 Mirrors & Art Hanging',
+    leadServiceOther:'✋ Other Service',
+    leadProjectPlaceholder:'Brief description of your project...',
+    leadFormBtn:'Get Your Quote in 2 Min',
+    leadFormNote:'No spam. We only contact you to confirm the job.',
+    formSuccessTitle:'Quote Request Received!',
+    formSuccessSub:"We'll call you within 10 minutes to confirm your booking.",
+    formSuccessEmail:'Check your email for confirmation details.',
+    faqTitle:'Common Questions',
+    faqSub:'Everything you need to know',
+    faqQ1:'How quickly can you respond to my service request?',
+    faqA1:"Most calls are answered within 10 minutes. We're available 8am-8pm daily. For urgent same-day service, call 213-361-1700 directly.",
+    faqQ2:'Do you charge for estimates/quotes?',
+    faqA2:'No! All quotes are 100% free. We provide transparent, upfront pricing. No hidden fees. No credit card required.',
+    faqQ3:'Are you licensed and insured?',
+    faqA3:"Yes! We are fully licensed and insured. All work is guaranteed. If you're not 100% happy, we'll make it right.",
+    faqQ4:"What if I'm not satisfied with the work?",
+    faqA4:"100% satisfaction guarantee. If you're unhappy, we'll redo the work for free within 7 days. Your satisfaction is our priority.",
+    faqQ5:'Do you offer weekend or after-hours service?',
+    faqA5:'Yes! We offer flexible scheduling. Call 213-361-1700 to arrange weekend or evening appointments.',
+    faqQ6:'What payment methods do you accept?',
+    faqA6:'We accept cash, Venmo, PayPal, and all major credit cards. Payment is due upon completion of work.',
+    finalCtaTitle:"Don't Wait-Book Your Handyman Today",
+    finalCtaSub:'Limited slots available this week. Professional service, guaranteed satisfaction.',
+    finalCtaWhatsApp:'💬 Message on WhatsApp',
+    finalCtaCall:'📞 Call Now',
+    legalDisclaimerHtml:'<strong>Handy & Friend</strong> provides home repair services up to $1,000 (labor only). Services include TV mounting, furniture assembly, painting, flooring, plumbing, electrical, and art hanging. For work exceeding $1,000, structural modifications, permits, or licensed requirements, consult a licensed contractor. We carry General Liability Insurance. <strong><a href="tel:+12133611700" style="color:#b88924;text-decoration:none">Call 213-361-1700</a></strong> for details.',
+    copyDone:'✓ Copied!',
+    smsPhoneRequired:'Please provide your phone number',
+    smsConsentRequired:'Please agree to receive SMS',
+    smsSendError:'Error sending SMS. Please try again.',
+    smsNetworkError:'Network error. Please try again.',
+    leadSubmitError:'Error submitting form. Please call 213-361-1700 directly.'
+  },
+  es:{
+    seoTitle:'Handy & Friend | Handyman en Los Angeles',
+    seoDescription:'Handy & Friend — servicios de handyman y reparaciones en Los Angeles. Montaje de TV, muebles, pintura, pisos, plomeria y electrico.',
+    seoOgTitle:'Handy & Friend | Handyman en Los Angeles',
+    seoOgDescription:'Servicio premium solo mano de obra. Disponibilidad esta semana. Llama o escribe por WhatsApp.',
+    seoLocale:'es_ES',
+    langBtnTitle:'Cambiar idioma',
+    heroCallNow:'Llamar ahora',
+    heroWhatsApp:'WhatsApp',
+    heroResponseNote:'⏰ La mayoria de llamadas se responden en 10 minutos | 📱 Disponible 8am-8pm diario',
+    urgencyChip:'⚡ LIMITADO: Solo 3 espacios disponibles esta semana',
+    urgencyTitle:'🎯 Reserva tu servicio hoy',
+    urgencySub:'Garantia de satisfaccion 100% • Reembolso si no quedas conforme • Licenciado y asegurado • Respuesta el mismo dia',
+    urgencyBtn:'✅ Reserva tu lugar ahora',
+    whyTitle:'Por que elegir Handy & Friend?',
+    painLabel:'❌ Problema',
+    promiseLabel:'✅ Nuestra promesa',
+    pain1Title:'Los contratistas no llegan',
+    pain1Sub:'Te dejan esperando. Tiempo perdido.',
+    promise1Title:'100% confiabilidad',
+    promise1Sub:'Llegamos a tiempo. Garantizado.',
+    pain2Title:'Cargos ocultos sorpresa',
+    pain2Sub:'La factura final sale al doble.',
+    promise2Title:'Precios transparentes desde el inicio',
+    promise2Sub:'Sin sorpresas. Pagas lo que ves.',
+    pain3Title:'Acabado de mala calidad',
+    pain3Sub:'Trabajo descuidado y frustrante.',
+    promise3Title:'Calidad profesional',
+    promise3Sub:'Licenciado y asegurado. Satisfaccion garantizada.',
+    servicesTitle:'Servicios',
+    serviceTv:'Montaje de TV',
+    serviceFurniture:'Ensamblaje de muebles',
+    serviceArt:'Arte y espejos',
+    servicePainting:'Pintura',
+    serviceFlooring:'Pisos',
+    servicePlumbing:'Plomeria',
+    serviceElectrical:'Electrico',
+    stickyCall:'Llamar 213-361-1700',
+    testimonialsTitle:'Con la confianza de familias de LA',
+    testimonialsSub:'500+ clientes satisfechos • calificacion 4.9 ⭐',
+    review1:'"Servicio increible. Montaron mi TV en 1 hora. Profesional y rapido. Super recomendado."',
+    review2:'"El mejor handyman en LA. Precio claro y sin sorpresas. Me devolvieron la llamada en 10 minutos."',
+    review3:'"Armado de muebles perfecto. Licenciado, asegurado y muy confiable. Llamare de nuevo."',
+    leadTitle:'Listo para reservar tu servicio?',
+    leadSub:'Recibe una cotizacion gratis en 2 minutos. Sin tarjeta de credito.',
+    leadNamePlaceholder:'Tu nombre',
+    leadEmailPlaceholder:'Tu correo',
+    leadPhonePlaceholder:'Numero de telefono (213-361-1700)',
+    leadServiceDefault:'Selecciona el servicio',
+    leadServiceTv:'📺 Montaje de TV',
+    leadServiceFurniture:'🛋️ Ensamblaje de muebles',
+    leadServicePainting:'🎨 Pintura y paredes',
+    leadServiceFlooring:'🏠 Pisos',
+    leadServicePlumbing:'🚰 Plomeria',
+    leadServiceElectrical:'⚡ Electrico',
+    leadServiceMirrors:'🪞 Espejos y cuadros',
+    leadServiceOther:'✋ Otro servicio',
+    leadProjectPlaceholder:'Breve descripcion de tu proyecto...',
+    leadFormBtn:'Obtén tu cotizacion en 2 min',
+    leadFormNote:'Sin spam. Solo te contactamos para confirmar el trabajo.',
+    formSuccessTitle:'Solicitud de cotizacion recibida',
+    formSuccessSub:'Te llamaremos en 10 minutos para confirmar tu reserva.',
+    formSuccessEmail:'Revisa tu correo para los detalles de confirmacion.',
+    faqTitle:'Preguntas frecuentes',
+    faqSub:'Todo lo que necesitas saber',
+    faqQ1:'Que tan rapido responden a mi solicitud?',
+    faqA1:'La mayoria de llamadas se responden en 10 minutos. Estamos disponibles de 8am a 8pm todos los dias. Para servicio urgente el mismo dia, llama al 213-361-1700.',
+    faqQ2:'Cobran por estimados o cotizaciones?',
+    faqA2:'No. Todas las cotizaciones son 100% gratis. Damos precios claros y sin cargos ocultos.',
+    faqQ3:'Estan licenciados y asegurados?',
+    faqA3:'Si. Estamos totalmente licenciados y asegurados. Todo trabajo esta garantizado.',
+    faqQ4:'Que pasa si no quedo satisfecho?',
+    faqA4:'Garantia de satisfaccion 100%. Si no quedas conforme, rehacemos el trabajo gratis dentro de 7 dias.',
+    faqQ5:'Ofrecen servicio en fin de semana o fuera de horario?',
+    faqA5:'Si. Ofrecemos horarios flexibles. Llama al 213-361-1700 para coordinar.',
+    faqQ6:'Que metodos de pago aceptan?',
+    faqA6:'Aceptamos efectivo, Venmo, PayPal y tarjetas principales. El pago se realiza al finalizar.',
+    finalCtaTitle:'No esperes-Reserva tu handyman hoy',
+    finalCtaSub:'Espacios limitados esta semana. Servicio profesional con satisfaccion garantizada.',
+    finalCtaWhatsApp:'💬 Escribir por WhatsApp',
+    finalCtaCall:'📞 Llamar ahora',
+    legalDisclaimerHtml:'<strong>Handy & Friend</strong> ofrece servicios de reparacion del hogar hasta $1,000 (solo mano de obra). Incluye montaje de TV, ensamblaje de muebles, pintura, pisos, plomeria, electrico y colgado de arte. Para trabajos mayores a $1,000, modificaciones estructurales, permisos o requisitos de licencia, consulta a un contratista con licencia. Tenemos seguro de responsabilidad civil. <strong><a href="tel:+12133611700" style="color:#b88924;text-decoration:none">Llama al 213-361-1700</a></strong> para mas detalles.',
+    copyDone:'✓ Copiado',
+    smsPhoneRequired:'Ingresa tu numero de telefono',
+    smsConsentRequired:'Debes aceptar recibir SMS',
+    smsSendError:'Error al enviar SMS. Intentalo de nuevo.',
+    smsNetworkError:'Error de red. Intentalo de nuevo.',
+    leadSubmitError:'Error al enviar el formulario. Llama al 213-361-1700.'
+  },
+  ru:{
+    seoTitle:'Handy & Friend | Мастер в Лос-Анджелесе',
+    seoDescription:'Handy & Friend — услуги мастера и ремонт дома в Лос-Анджелесе. Монтаж ТВ, сборка мебели, покраска, полы, сантехника и электрика.',
+    seoOgTitle:'Handy & Friend | Мастер в Лос-Анджелесе',
+    seoOgDescription:'Премиальный сервис только за работу. Доступно на этой неделе. Позвоните или напишите в WhatsApp.',
+    seoLocale:'ru_RU',
+    langBtnTitle:'Сменить язык',
+    heroCallNow:'Позвонить',
+    heroWhatsApp:'WhatsApp',
+    heroResponseNote:'⏰ Обычно отвечаем в течение 10 минут | 📱 Доступны 8am-8pm ежедневно',
+    urgencyChip:'⚡ ОГРАНИЧЕНО: На этой неделе осталось только 3 слота',
+    urgencyTitle:'🎯 Забронируйте услугу сегодня',
+    urgencySub:'100% гарантия удовлетворенности • Вернем деньги, если не довольны • Лицензия и страховка • Ответ в тот же день',
+    urgencyBtn:'✅ Забронировать сейчас',
+    whyTitle:'Почему выбирают Handy & Friend?',
+    painLabel:'❌ Проблема',
+    promiseLabel:'✅ Наше обещание',
+    pain1Title:'Подрядчики не приезжают',
+    pain1Sub:'Вы теряете время в ожидании.',
+    promise1Title:'100% надежность',
+    promise1Sub:'Приезжаем вовремя. Гарантированно.',
+    pain2Title:'Скрытые доплаты',
+    pain2Sub:'Итоговый счет в 2 раза выше.',
+    promise2Title:'Прозрачная цена заранее',
+    promise2Sub:'Без сюрпризов. Платите то, что видите.',
+    pain3Title:'Плохое качество',
+    pain3Sub:'Небрежная работа и разочарование.',
+    promise3Title:'Профессиональное качество',
+    promise3Sub:'Лицензия, страховка, гарантия результата.',
+    servicesTitle:'Услуги',
+    serviceTv:'Монтаж ТВ',
+    serviceFurniture:'Сборка мебели',
+    serviceArt:'Картины и зеркала',
+    servicePainting:'Покраска',
+    serviceFlooring:'Полы',
+    servicePlumbing:'Сантехника',
+    serviceElectrical:'Электрика',
+    stickyCall:'Позвонить 213-361-1700',
+    testimonialsTitle:'Нам доверяют семьи Лос-Анджелеса',
+    testimonialsSub:'500+ довольных клиентов • рейтинг 4.9 ⭐',
+    review1:'"Отличный сервис! Смонтировали ТВ за 1 час. Профессионально и быстро."',
+    review2:'"Лучший мастер в ЛА. Прозрачные цены без сюрпризов. Перезвонили за 10 минут."',
+    review3:'"Идеальная сборка мебели! Лицензия, страховка, очень надежно. Обращусь снова."',
+    leadTitle:'Готовы забронировать услугу?',
+    leadSub:'Получите бесплатную смету за 2 минуты. Без банковской карты.',
+    leadNamePlaceholder:'Ваше имя',
+    leadEmailPlaceholder:'Ваш email',
+    leadPhonePlaceholder:'Телефон (213-361-1700)',
+    leadServiceDefault:'Выберите нужную услугу',
+    leadServiceTv:'📺 Монтаж ТВ',
+    leadServiceFurniture:'🛋️ Сборка мебели',
+    leadServicePainting:'🎨 Покраска и стены',
+    leadServiceFlooring:'🏠 Полы',
+    leadServicePlumbing:'🚰 Сантехника',
+    leadServiceElectrical:'⚡ Электрика',
+    leadServiceMirrors:'🪞 Зеркала и картины',
+    leadServiceOther:'✋ Другая услуга',
+    leadProjectPlaceholder:'Кратко опишите ваш проект...',
+    leadFormBtn:'Получить смету за 2 мин',
+    leadFormNote:'Без спама. Свяжемся только для подтверждения заказа.',
+    formSuccessTitle:'Заявка на смету получена',
+    formSuccessSub:'Мы перезвоним в течение 10 минут для подтверждения.',
+    formSuccessEmail:'Проверьте email для деталей подтверждения.',
+    faqTitle:'Частые вопросы',
+    faqSub:'Все, что важно знать',
+    faqQ1:'Как быстро вы отвечаете на запрос?',
+    faqA1:'Обычно отвечаем в течение 10 минут. Работаем ежедневно с 8am до 8pm. Для срочных задач звоните 213-361-1700.',
+    faqQ2:'Вы берете плату за смету?',
+    faqA2:'Нет. Все сметы бесплатные. Прозрачные цены без скрытых платежей.',
+    faqQ3:'У вас есть лицензия и страховка?',
+    faqA3:'Да. Мы полностью лицензированы и застрахованы. На все работы действует гарантия.',
+    faqQ4:'Что если я недоволен работой?',
+    faqA4:'100% гарантия удовлетворенности. Если не устроит, переделаем бесплатно в течение 7 дней.',
+    faqQ5:'Работаете по выходным и вечером?',
+    faqA5:'Да. Предлагаем гибкий график. Позвоните по номеру 213-361-1700.',
+    faqQ6:'Какие способы оплаты принимаете?',
+    faqA6:'Принимаем наличные, Venmo, PayPal и основные банковские карты.',
+    finalCtaTitle:'Не откладывайте-забронируйте мастера сегодня',
+    finalCtaSub:'На этой неделе осталось мало слотов. Профессиональный сервис с гарантией.',
+    finalCtaWhatsApp:'💬 Написать в WhatsApp',
+    finalCtaCall:'📞 Позвонить',
+    legalDisclaimerHtml:'<strong>Handy & Friend</strong> выполняет домашние ремонты до $1,000 (только работа). Включая монтаж ТВ, сборку мебели, покраску, полы, сантехнику, электрику и навес картин. Для работ свыше $1,000, конструктивных изменений, разрешений или лицензируемых задач обратитесь к лицензированному подрядчику. У нас есть страхование ответственности. <strong><a href="tel:+12133611700" style="color:#b88924;text-decoration:none">Позвоните 213-361-1700</a></strong> для деталей.',
+    copyDone:'✓ Скопировано',
+    smsPhoneRequired:'Введите номер телефона',
+    smsConsentRequired:'Нужно согласиться на получение SMS',
+    smsSendError:'Ошибка отправки SMS. Попробуйте снова.',
+    smsNetworkError:'Сетевая ошибка. Попробуйте снова.',
+    leadSubmitError:'Ошибка отправки формы. Позвоните 213-361-1700.'
+  },
+  ua:{
+    seoTitle:'Handy & Friend | Майстер у Лос-Анджелесі',
+    seoDescription:'Handy & Friend — послуги майстра та домашній ремонт у Лос-Анджелесі. Монтаж ТВ, збирання меблів, фарбування, підлога, сантехніка та електрика.',
+    seoOgTitle:'Handy & Friend | Майстер у Лос-Анджелесі',
+    seoOgDescription:'Преміальний сервіс лише за роботу. Доступно цього тижня. Телефонуйте або пишіть у WhatsApp.',
+    seoLocale:'uk_UA',
+    langBtnTitle:'Змінити мову',
+    heroCallNow:'Подзвонити',
+    heroWhatsApp:'WhatsApp',
+    heroResponseNote:'⏰ Зазвичай відповідаємо протягом 10 хвилин | 📱 Доступні 8am-8pm щодня',
+    urgencyChip:'⚡ ОБМЕЖЕНО: Цього тижня залишилось лише 3 слоти',
+    urgencyTitle:'🎯 Забронюйте послугу сьогодні',
+    urgencySub:'100% гарантія задоволення • Повернення коштів, якщо не задоволені • Ліцензія та страхування • Відповідь того ж дня',
+    urgencyBtn:'✅ Забронювати зараз',
+    whyTitle:'Чому обирають Handy & Friend?',
+    painLabel:'❌ Проблема',
+    promiseLabel:'✅ Наша обіцянка',
+    pain1Title:'Підрядники не приїжджають',
+    pain1Sub:'Ви марнуєте час в очікуванні.',
+    promise1Title:'100% надійність',
+    promise1Sub:'Приїжджаємо вчасно. Гарантовано.',
+    pain2Title:'Приховані доплати',
+    pain2Sub:'Фінальний рахунок у 2 рази вищий.',
+    promise2Title:'Прозора ціна наперед',
+    promise2Sub:'Без сюрпризів. Ви платите те, що бачите.',
+    pain3Title:'Низька якість',
+    pain3Sub:'Неакуратна робота і розчарування.',
+    promise3Title:'Професійна якість',
+    promise3Sub:'Ліцензія, страховка та гарантія результату.',
+    servicesTitle:'Послуги',
+    serviceTv:'Монтаж ТВ',
+    serviceFurniture:'Збирання меблів',
+    serviceArt:'Картини та дзеркала',
+    servicePainting:'Фарбування',
+    serviceFlooring:'Підлога',
+    servicePlumbing:'Сантехніка',
+    serviceElectrical:'Електрика',
+    stickyCall:'Подзвонити 213-361-1700',
+    testimonialsTitle:'Нам довіряють родини Лос-Анджелеса',
+    testimonialsSub:'500+ задоволених клієнтів • рейтинг 4.9 ⭐',
+    review1:'"Чудовий сервіс! ТВ змонтували за 1 годину. Професійно і швидко."',
+    review2:'"Найкращий handyman у ЛА. Прозора ціна без сюрпризів. Передзвонили за 10 хвилин."',
+    review3:'"Ідеальне збирання меблів! Ліцензія, страховка, дуже надійно. Звернусь ще."',
+    leadTitle:'Готові забронювати послугу?',
+    leadSub:'Отримайте безкоштовний кошторис за 2 хвилини. Без кредитної картки.',
+    leadNamePlaceholder:'Ваше ім’я',
+    leadEmailPlaceholder:'Ваш email',
+    leadPhonePlaceholder:'Телефон (213-361-1700)',
+    leadServiceDefault:'Оберіть потрібну послугу',
+    leadServiceTv:'📺 Монтаж ТВ',
+    leadServiceFurniture:'🛋️ Збирання меблів',
+    leadServicePainting:'🎨 Фарбування і стіни',
+    leadServiceFlooring:'🏠 Підлога',
+    leadServicePlumbing:'🚰 Сантехніка',
+    leadServiceElectrical:'⚡ Електрика',
+    leadServiceMirrors:'🪞 Дзеркала та картини',
+    leadServiceOther:'✋ Інша послуга',
+    leadProjectPlaceholder:'Коротко опишіть ваш проєкт...',
+    leadFormBtn:'Отримати кошторис за 2 хв',
+    leadFormNote:'Без спаму. Зв’яжемось лише для підтвердження замовлення.',
+    formSuccessTitle:'Запит на кошторис отримано',
+    formSuccessSub:'Ми передзвонимо протягом 10 хвилин для підтвердження.',
+    formSuccessEmail:'Перевірте email для деталей підтвердження.',
+    faqTitle:'Поширені запитання',
+    faqSub:'Усе, що потрібно знати',
+    faqQ1:'Як швидко ви відповідаєте на запит?',
+    faqA1:'Зазвичай відповідаємо протягом 10 хвилин. Працюємо щодня з 8am до 8pm. Для термінових робіт телефонуйте 213-361-1700.',
+    faqQ2:'Чи берете оплату за кошторис?',
+    faqA2:'Ні. Усі кошториси безкоштовні. Прозорі ціни без прихованих платежів.',
+    faqQ3:'Чи маєте ліцензію та страховку?',
+    faqA3:'Так. Ми повністю ліцензовані та застраховані. На всі роботи діє гарантія.',
+    faqQ4:'Що як я не задоволений роботою?',
+    faqA4:'100% гарантія задоволення. Якщо не влаштує, переробимо безкоштовно протягом 7 днів.',
+    faqQ5:'Чи працюєте у вихідні та ввечері?',
+    faqA5:'Так. Пропонуємо гнучкий графік. Телефонуйте 213-361-1700.',
+    faqQ6:'Які способи оплати приймаєте?',
+    faqA6:'Приймаємо готівку, Venmo, PayPal і основні банківські картки.',
+    finalCtaTitle:'Не зволікайте-бронюйте майстра сьогодні',
+    finalCtaSub:'Цього тижня залишилось мало слотів. Професійний сервіс з гарантією.',
+    finalCtaWhatsApp:'💬 Написати у WhatsApp',
+    finalCtaCall:'📞 Подзвонити',
+    legalDisclaimerHtml:'<strong>Handy & Friend</strong> виконує домашні ремонти до $1,000 (лише робота). Послуги включають монтаж ТВ, збирання меблів, фарбування, підлогу, сантехніку, електрику та навішування картин. Для робіт понад $1,000, конструктивних змін, дозволів або ліцензованих вимог звертайтесь до ліцензованого підрядника. Маємо страхування цивільної відповідальності. <strong><a href="tel:+12133611700" style="color:#b88924;text-decoration:none">Телефонуйте 213-361-1700</a></strong> для деталей.',
+    copyDone:'✓ Скопійовано',
+    smsPhoneRequired:'Вкажіть номер телефону',
+    smsConsentRequired:'Потрібно погодитись на SMS',
+    smsSendError:'Помилка надсилання SMS. Спробуйте ще раз.',
+    smsNetworkError:'Мережева помилка. Спробуйте ще раз.',
+    leadSubmitError:'Помилка відправки форми. Зателефонуйте 213-361-1700.'
+  }
+};
+
+/* ═══════════════════════════════════════════════
    RUNTIME
 ═══════════════════════════════════════════════ */
 
@@ -880,9 +1242,63 @@ const T={
 function track(name, params={}) {
   try { if(typeof gtag==='function') gtag('event', name, params); } catch(e){}
 }
-let lang=localStorage.getItem('hf_lang')||'en';
+const LANG_ORDER=['en','es','ru','ua'];
+const LANG_ALIASES={uk:'ua',ua:'ua',ru:'ru',es:'es',en:'en'};
+
+function normalizeLang(raw){
+  if(!raw)return 'en';
+  const base=String(raw).toLowerCase().split(/[-_]/)[0];
+  return LANG_ALIASES[base]||'en';
+}
+
+function browserPreferredLang(){
+  const nav=[...(navigator.languages||[]),navigator.language].filter(Boolean);
+  for(const item of nav){
+    const n=normalizeLang(item);
+    if(LANG_ORDER.includes(n))return n;
+  }
+  return 'en';
+}
+
+function readLangFromUrl(){
+  try{
+    const url=new URL(window.location.href);
+    const q=url.searchParams.get('lang');
+    return q?normalizeLang(q):'';
+  }catch(e){
+    return '';
+  }
+}
+
+function bootstrapLang(){
+  const urlLang=readLangFromUrl();
+  if(urlLang){
+    localStorage.setItem('hf_lang',urlLang);
+    return urlLang;
+  }
+
+  const saved=normalizeLang(localStorage.getItem('hf_lang')||'');
+  if(saved&&LANG_ORDER.includes(saved))return saved;
+
+  const detected=browserPreferredLang();
+  localStorage.setItem('hf_lang',detected);
+
+  // First visit: redirect once to URL with explicit lang for consistency/shareability.
+  if(!urlLang&&detected!=='en'){
+    try{
+      const url=new URL(window.location.href);
+      url.searchParams.set('lang',detected);
+      window.location.replace(url.toString());
+    }catch(e){}
+  }
+  return detected;
+}
+
+let lang=bootstrapLang();
 let calcMode='room';
 function L(){return T[lang]||T.en}
+function U(){return UI_I18N[lang]||UI_I18N.en}
+window.HF_UI=()=>U();
 let lastEst=null;
 
 /* ─── SMS CAPTURE HANDLER ─── */
@@ -892,14 +1308,15 @@ function handleSmsCapture(e) {
   const phone = document.getElementById('smsPhone').value;
   const consent = document.getElementById('smsMktConsent').checked;
   const l = L();
+  const ui = U();
 
   if (!phone) {
-    alert('Please provide your phone number');
+    alert(ui.smsPhoneRequired);
     return;
   }
 
   if (!consent) {
-    alert('Please agree to receive SMS');
+    alert(ui.smsConsentRequired);
     return;
   }
 
@@ -944,13 +1361,78 @@ function handleSmsCapture(e) {
         });
       }
     } else {
-      alert('Error sending SMS. Please try again.');
+      alert(ui.smsSendError);
     }
   })
   .catch(err => {
     console.error('SMS error:', err);
-    alert('Network error. Please try again.');
+    alert(ui.smsNetworkError);
   });
+}
+
+function applyStaticI18n(){
+  const ui=U();
+  const l=L();
+
+  document.querySelectorAll('[data-i18n]').forEach((el)=>{
+    const key=el.getAttribute('data-i18n');
+    const val=ui[key]??l[key];
+    if(typeof val==='string')el.textContent=val;
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el)=>{
+    const key=el.getAttribute('data-i18n-placeholder');
+    const val=ui[key]??l[key];
+    if(typeof val==='string')el.setAttribute('placeholder',val);
+  });
+
+  document.querySelectorAll('[data-i18n-title]').forEach((el)=>{
+    const key=el.getAttribute('data-i18n-title');
+    const val=ui[key]??l[key];
+    if(typeof val==='string')el.setAttribute('title',val);
+  });
+
+  const legal=document.getElementById('legalDisclaimerTxt');
+  if(legal&&ui.legalDisclaimerHtml){
+    legal.innerHTML=ui.legalDisclaimerHtml;
+  }
+}
+
+function syncLangInUrl(){
+  try{
+    const url=new URL(window.location.href);
+    url.searchParams.set('lang',lang);
+    history.replaceState({},'',url.toString());
+  }catch(e){}
+}
+
+function applySeoMetadata(){
+  const ui=U();
+  const title=ui.seoTitle||'Handy & Friend | Los Angeles Handyman';
+  const desc=ui.seoDescription||'Premium handyman services in Los Angeles.';
+  const ogTitle=ui.seoOgTitle||title;
+  const ogDesc=ui.seoOgDescription||desc;
+  const ogLocale=ui.seoLocale||'en_US';
+
+  document.title=title;
+
+  const metaDesc=document.getElementById('metaDesc')||document.querySelector('meta[name="description"]');
+  if(metaDesc)metaDesc.setAttribute('content',desc);
+
+  const ogTitleEl=document.getElementById('ogTitle')||document.querySelector('meta[property="og:title"]');
+  if(ogTitleEl)ogTitleEl.setAttribute('content',ogTitle);
+
+  const ogDescEl=document.getElementById('ogDesc')||document.querySelector('meta[property="og:description"]');
+  if(ogDescEl)ogDescEl.setAttribute('content',ogDesc);
+
+  const twTitleEl=document.getElementById('twTitle')||document.querySelector('meta[name="twitter:title"]');
+  if(twTitleEl)twTitleEl.setAttribute('content',ogTitle);
+
+  const twDescEl=document.getElementById('twDesc')||document.querySelector('meta[name="twitter:description"]');
+  if(twDescEl)twDescEl.setAttribute('content',ogDesc);
+
+  const ogLocaleEl=document.getElementById('ogLocale')||document.querySelector('meta[property="og:locale"]');
+  if(ogLocaleEl)ogLocaleEl.setAttribute('content',ogLocale);
 }
 
 function applyLang(){
@@ -958,8 +1440,7 @@ function applyLang(){
   document.documentElement.lang=lang==='ua'?'uk':lang; // SEO: update <html lang>
   const l=L();
   // Show current lang · show next lang hint
-  const o=['en','es','ru','ua'];
-  const nextL=T[o[(o.indexOf(lang)+1)%4]].lang;
+  const nextL=T[LANG_ORDER[(LANG_ORDER.indexOf(lang)+1)%LANG_ORDER.length]].lang;
   document.getElementById('langTxt').textContent=l.lang;
   document.getElementById('langNext').textContent=`→ ${nextL}`;
   document.getElementById('heroH').innerHTML=l.heroH.replace('\n','<br>');
@@ -1007,6 +1488,9 @@ function applyLang(){
   const smsBtn=document.getElementById('smsSendBtn');
   if(smsBtn)smsBtn.textContent=l.smsSendBtn;
 
+  syncLangInUrl();
+  applySeoMetadata();
+  applyStaticI18n();
   renderGrid();
   updateAddons();
   updateArea();
@@ -1365,14 +1849,14 @@ document.getElementById('resCopy').addEventListener('click',async()=>{
   if(!lastEst)return;
   const detail=lastEst.hours?`~${lastEst.hours}h`:`${lastEst.sf} sq ft`;
   const txt=`${lastEst.name}: $${lastEst.tot.toLocaleString()} (${detail})\nHandy & Friend · (213) 361-1700`;
+  const ui=U();
   try{await navigator.clipboard.writeText(txt);}catch(e){}
   const btn=document.getElementById('resCopy'),old=btn.textContent;
-  btn.textContent='✓ Copied!';setTimeout(()=>{btn.textContent=old;},1800);
+  btn.textContent=ui.copyDone;setTimeout(()=>{btn.textContent=old;},1800);
 });
 
 document.getElementById('langBtn').addEventListener('click',()=>{
-  const o=['en','es','ru','ua'];
-  lang=o[(o.indexOf(lang)+1)%4];
+  lang=LANG_ORDER[(LANG_ORDER.indexOf(lang)+1)%LANG_ORDER.length];
   track('language_change',{language:lang});
   applyLang();
 });

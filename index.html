@@ -9,18 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/main.css?v=5">
 
-<meta name="description" content="Handy &amp; Friend — handyman services &amp; home repair in Los Angeles, CA 90038. TV Mounting, Furniture Assembly, Painting, Flooring. Labor only, upfront pricing. Call 2133611700.">
+<meta name="description" id="metaDesc" content="Handy &amp; Friend — handyman services &amp; home repair in Los Angeles, CA 90038. TV Mounting, Furniture Assembly, Painting, Flooring. Labor only, upfront pricing. Call 2133611700.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://handyandfriend.com/">
 
-<meta property="og:title" content="Handy &amp; Friend | Los Angeles Handyman">
-<meta property="og:description" content="Premium labor-only handyman. Same-week availability. Call or WhatsApp for a quote.">
+<meta property="og:title" id="ogTitle" content="Handy &amp; Friend | Los Angeles Handyman">
+<meta property="og:description" id="ogDesc" content="Premium labor-only handyman. Same-week availability. Call or WhatsApp for a quote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://handyandfriend.com/">
 <meta property="og:image" content="https://handyandfriend.com/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:locale" id="ogLocale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="Handy &amp; Friend | Los Angeles Handyman">
+<meta name="twitter:description" id="twDesc" content="Premium labor-only handyman. Same-week availability. Call or WhatsApp for a quote.">
 <meta name="twitter:image" content="https://handyandfriend.com/assets/img/og.jpg">
 
 <meta name="theme-color" content="#1a1a1a">
@@ -124,7 +127,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="ti">
     <div class="brand"><span class="bdot"></span>Handy &amp; Friend</div>
     <div class="sp"></div>
-    <button class="lbtn" id="langBtn" title="Change language">
+    <button class="lbtn" id="langBtn" title="Change language" data-i18n-title="langBtnTitle">
       🌐 <span id="langTxt">EN</span><span id="langNext" style="opacity:.55;font-size:9px;font-weight:600"> → ES</span>
     </button>
   </div>
@@ -134,9 +137,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hbg"></div>
   <div class="htxt">
     <div class="hero-trust-badge-group">
-      <div class="proof-chip">✅ Reply in 10–30 min (8am–8pm)</div>
-      <div class="proof-chip">✅ Transparent pricing (labor only, no hidden)</div>
-      <div class="proof-chip">✅ Clean-up included</div>
+      <div class="proof-chip" data-i18n="proofChip1">✅ Reply in 10–30 min (8am–8pm)</div>
+      <div class="proof-chip" data-i18n="proofChip2">✅ Transparent pricing (labor only, no hidden)</div>
+      <div class="proof-chip" data-i18n="proofChip3">✅ Clean-up included</div>
     </div>
     <h1 class="hh" id="heroH">Professional Handyman<br>Available <span style="color:#ff6b35">Today</span></h1>
     <p class="hs" id="heroSub">✓ Insured · ✓ Upfront Pricing · ✓ Services up to $1,000<br>No Surprise Costs. TV • Furniture • Painting • Flooring • Plumbing • Electrical & More</p>
@@ -147,29 +150,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- BACKUP OPTIONS -->
       <div class="cta-secondary-group">
         <a class="cta-secondary" href="tel:+12133611700" data-event="click_call" id="heroCta2">
-          <span style="font-size:16px">📞</span> Call Now
+          <span style="font-size:16px">📞</span> <span data-i18n="heroCallNow">Call Now</span>
         </a>
         <a class="cta-secondary" href="https://wa.me/12133611700?text=Hi%20Handy%20%26%20Friend%2C%20I%20need%20help%20with%20a%20project" data-event="contact_whatsapp" id="heroCta3">
-          <span style="font-size:16px">💬</span> WhatsApp
+          <span style="font-size:16px">💬</span> <span data-i18n="heroWhatsApp">WhatsApp</span>
         </a>
       </div>
     </div>
-    <p class="cta-subtitle">No spam. Only about your request.</p>
-    <p style="margin-top:12px;font-size:13px;color:#666">⏰ Most calls answered within 10 minutes | 📱 Available 8am-8pm Daily</p>
+    <p class="cta-subtitle" data-i18n="ctaSubtitle">No spam. Only about your request.</p>
+    <p style="margin-top:12px;font-size:13px;color:#666" data-i18n="heroResponseNote">⏰ Most calls answered within 10 minutes | 📱 Available 8am-8pm Daily</p>
   </div>
 </div>
 
 <!-- URGENCY + SOCIAL PROOF SECTION -->
 <div style="background:linear-gradient(135deg,#2A1F14 0%,#3D2E23 100%);padding:32px 18px;text-align:center">
   <div style="max-width:1200px;margin:0 auto">
-    <div style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(255,107,53,0.15);border-radius:999px;margin-bottom:16px;color:#ff6b35;font-size:13px;font-weight:700">
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(255,107,53,0.15);border-radius:999px;margin-bottom:16px;color:#ff6b35;font-size:13px;font-weight:700" data-i18n="urgencyChip">
       ⚡ LIMITED: Only 3 booking slots available this week
     </div>
-    <h2 style="color:#fff;font-size:28px;font-weight:700;margin:0 0 14px;font-family:var(--fs)">🎯 Book Your Service Today</h2>
-    <p style="color:rgba(255,255,255,0.75);font-size:15px;margin:0 0 18px;max-width:500px;margin-left:auto;margin-right:auto">
+    <h2 style="color:#fff;font-size:28px;font-weight:700;margin:0 0 14px;font-family:var(--fs)" data-i18n="urgencyTitle">🎯 Book Your Service Today</h2>
+    <p style="color:rgba(255,255,255,0.75);font-size:15px;margin:0 0 18px;max-width:500px;margin-left:auto;margin-right:auto" data-i18n="urgencySub">
       100% Satisfaction Guarantee • Money-Back Guarantee if Not Happy • Licensed & Insured • Same-Day Response
     </p>
-    <a href="https://wa.me/12133611700?text=I%20want%20to%20book%20a%20service%20this%20week" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 28px;background:#25D366;color:#fff;border-radius:999px;font-weight:700;font-size:14px;transition:opacity 200ms" data-event="urgency_booking">
+    <a href="https://wa.me/12133611700?text=I%20want%20to%20book%20a%20service%20this%20week" style="display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 28px;background:#25D366;color:#fff;border-radius:999px;font-weight:700;font-size:14px;transition:opacity 200ms" data-event="urgency_booking" data-i18n="urgencyBtn">
       ✅ Claim Your Slot Now
     </a>
   </div>
@@ -178,47 +181,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- PAIN POINTS SECTION -->
 <div style="padding:48px 18px;background:#fff">
   <div style="max-width:1200px;margin:0 auto">
-    <h2 style="font-size:28px;font-weight:700;font-family:var(--fs);text-align:center;color:var(--ink);margin-bottom:32px">Why Choose Handy & Friend?</h2>
+    <h2 style="font-size:28px;font-weight:700;font-family:var(--fs);text-align:center;color:var(--ink);margin-bottom:32px" data-i18n="whyTitle">Why Choose Handy & Friend?</h2>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
       <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
-        <div style="font-size:32px;margin-bottom:12px">❌ Pain Point</div>
-        <p style="font-weight:700;color:var(--ink);margin-bottom:8px">Contractors don't show up</p>
-        <p style="font-size:13px;color:var(--ink2)">You're left hanging. Wasted time.</p>
+        <div style="font-size:32px;margin-bottom:12px" data-i18n="painLabel">❌ Pain Point</div>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:8px" data-i18n="pain1Title">Contractors don't show up</p>
+        <p style="font-size:13px;color:var(--ink2)" data-i18n="pain1Sub">You're left hanging. Wasted time.</p>
       </div>
 
       <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
-        <div style="font-size:32px;margin-bottom:12px">✅ Our Promise</div>
-        <p style="font-weight:700;color:var(--ink);margin-bottom:8px">100% Reliability</p>
-        <p style="font-size:13px;color:var(--ink2)">We show up on time. Guaranteed.</p>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:24px">
-      <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
-        <div style="font-size:32px;margin-bottom:12px">❌ Pain Point</div>
-        <p style="font-weight:700;color:var(--ink);margin-bottom:8px">Hidden fees surprise you</p>
-        <p style="font-size:13px;color:var(--ink2)">Final bill is 2x the quote.</p>
-      </div>
-
-      <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
-        <div style="font-size:32px;margin-bottom:12px">✅ Our Promise</div>
-        <p style="font-weight:700;color:var(--ink);margin-bottom:8px">Upfront Transparent Pricing</p>
-        <p style="font-size:13px;color:var(--ink2)">No surprises. What you see is what you pay.</p>
+        <div style="font-size:32px;margin-bottom:12px" data-i18n="promiseLabel">✅ Our Promise</div>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:8px" data-i18n="promise1Title">100% Reliability</p>
+        <p style="font-size:13px;color:var(--ink2)" data-i18n="promise1Sub">We show up on time. Guaranteed.</p>
       </div>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:24px">
       <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
-        <div style="font-size:32px;margin-bottom:12px">❌ Pain Point</div>
-        <p style="font-weight:700;color:var(--ink);margin-bottom:8px">Poor quality finish</p>
-        <p style="font-size:13px;color:var(--ink2)">Work looks sloppy. Frustrating.</p>
+        <div style="font-size:32px;margin-bottom:12px" data-i18n="painLabel">❌ Pain Point</div>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:8px" data-i18n="pain2Title">Hidden fees surprise you</p>
+        <p style="font-size:13px;color:var(--ink2)" data-i18n="pain2Sub">Final bill is 2x the quote.</p>
       </div>
 
       <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
-        <div style="font-size:32px;margin-bottom:12px">✅ Our Promise</div>
-        <p style="font-weight:700;color:var(--ink);margin-bottom:8px">Professional Quality</p>
-        <p style="font-size:13px;color:var(--ink2)">Licensed, insured. Satisfaction guaranteed.</p>
+        <div style="font-size:32px;margin-bottom:12px" data-i18n="promiseLabel">✅ Our Promise</div>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:8px" data-i18n="promise2Title">Upfront Transparent Pricing</p>
+        <p style="font-size:13px;color:var(--ink2)" data-i18n="promise2Sub">No surprises. What you see is what you pay.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:24px">
+      <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
+        <div style="font-size:32px;margin-bottom:12px" data-i18n="painLabel">❌ Pain Point</div>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:8px" data-i18n="pain3Title">Poor quality finish</p>
+        <p style="font-size:13px;color:var(--ink2)" data-i18n="pain3Sub">Work looks sloppy. Frustrating.</p>
+      </div>
+
+      <div style="padding:24px;border-radius:12px;background:var(--glt);border:1px solid var(--gbd)">
+        <div style="font-size:32px;margin-bottom:12px" data-i18n="promiseLabel">✅ Our Promise</div>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:8px" data-i18n="promise3Title">Professional Quality</p>
+        <p style="font-size:13px;color:var(--ink2)" data-i18n="promise3Sub">Licensed, insured. Satisfaction guaranteed.</p>
       </div>
     </div>
   </div>
@@ -229,15 +232,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="slbl" id="gridLbl"></div>
     <div class="bb" id="baseBanner"></div>
     <section class="seo-skeleton" aria-label="Services">
-      <h2 class="seo-h2">Services</h2>
+      <h2 class="seo-h2" data-i18n="servicesTitle">Services</h2>
       <ul class="seo-services">
-        <li>TV Mounting</li>
-        <li>Furniture Assembly</li>
-        <li>Art &amp; Mirrors</li>
-        <li>Painting</li>
-        <li>Flooring</li>
-        <li>Plumbing</li>
-        <li>Electrical</li>
+        <li data-i18n="serviceTv">TV Mounting</li>
+        <li data-i18n="serviceFurniture">Furniture Assembly</li>
+        <li data-i18n="serviceArt">Art &amp; Mirrors</li>
+        <li data-i18n="servicePainting">Painting</li>
+        <li data-i18n="serviceFlooring">Flooring</li>
+        <li data-i18n="servicePlumbing">Plumbing</li>
+        <li data-i18n="serviceElectrical">Electrical</li>
       </ul>
     </section>
     <div class="grid" id="servGrid"></div>
@@ -363,7 +366,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span>Call 213-361-1700</span>
+    <span data-i18n="stickyCall">Call 213-361-1700</span>
   </a>
 </div>
 <style>
@@ -443,26 +446,26 @@ document.addEventListener('DOMContentLoaded', function() {
 <div style="background:#fff;padding:56px 18px;margin-top:40px;border-top:1px solid var(--st)">
   <div style="max-width:1200px;margin:0 auto">
     <div style="text-align:center;margin-bottom:40px">
-      <h2 style="font-size:32px;font-weight:700;font-family:var(--fs);margin-bottom:12px;color:var(--ink)">Trusted by LA Families</h2>
-      <p style="font-size:16px;color:var(--ink2)">500+ satisfied customers • 4.9 ⭐ rating</p>
+      <h2 style="font-size:32px;font-weight:700;font-family:var(--fs);margin-bottom:12px;color:var(--ink)" data-i18n="testimonialsTitle">Trusted by LA Families</h2>
+      <p style="font-size:16px;color:var(--ink2)" data-i18n="testimonialsSub">500+ satisfied customers • 4.9 ⭐ rating</p>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
       <div style="padding:24px;border-radius:14px;background:var(--glt);border:1px solid var(--gbd)">
         <div style="display:flex;gap:4px;margin-bottom:12px;color:#ffc107">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);">"Amazing service! Fixed my TV mounting in 1 hour. Professional and quick. Highly recommend!"</p>
+        <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);" data-i18n="review1">"Amazing service! Fixed my TV mounting in 1 hour. Professional and quick. Highly recommend!"</p>
         <p style="font-size:12px;font-weight:700;color:var(--gold)">— Sarah M. • Hollywood, 90028 • Feb 2026</p>
       </div>
 
       <div style="padding:24px;border-radius:14px;background:var(--glt);border:1px solid var(--gbd)">
         <div style="display:flex;gap:4px;margin-bottom:12px;color:#ffc107">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);">"Best handyman in LA. Upfront pricing, no surprises. Called me back within 10 mins!"</p>
+        <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);" data-i18n="review2">"Best handyman in LA. Upfront pricing, no surprises. Called me back within 10 mins!"</p>
         <p style="font-size:12px;font-weight:700;color:var(--gold)">— Marcus T. • Beverly Hills, 90210 • Feb 2026</p>
       </div>
 
       <div style="padding:24px;border-radius:14px;background:var(--glt);border:1px solid var(--gbd)">
         <div style="display:flex;gap:4px;margin-bottom:12px;color:#ffc107">⭐⭐⭐⭐⭐</div>
-        <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);">"Perfect furniture assembly! Licensed, insured, and super reliable. Will call again!"</p>
+        <p style="font-size:14px;font-weight:500;margin-bottom:12px;color:var(--ink);" data-i18n="review3">"Perfect furniture assembly! Licensed, insured, and super reliable. Will call again!"</p>
         <p style="font-size:12px;font-weight:700;color:var(--gold)">— Jessica L. • Los Feliz, 90027 • Feb 2026</p>
       </div>
     </div>
@@ -472,44 +475,44 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- LEAD CAPTURE FORM SECTION -->
 <div style="background:linear-gradient(135deg,#B8892C 0%,#A0752A 100%);padding:64px 18px;text-align:center;margin-top:40px">
   <div style="max-width:600px;margin:0 auto">
-    <h2 style="color:#fff;font-size:32px;font-weight:700;font-family:var(--fs);margin-bottom:12px">Ready to Book Your Service?</h2>
-    <p style="color:rgba(255,255,255,0.90);font-size:16px;margin-bottom:32px">Get a free quote in 2 minutes. No credit card required.</p>
+    <h2 style="color:#fff;font-size:32px;font-weight:700;font-family:var(--fs);margin-bottom:12px" data-i18n="leadTitle">Ready to Book Your Service?</h2>
+    <p style="color:rgba(255,255,255,0.90);font-size:16px;margin-bottom:32px" data-i18n="leadSub">Get a free quote in 2 minutes. No credit card required.</p>
 
     <form id="leadForm" style="background:rgba(255,255,255,0.95);padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:16px" onsubmit="handleLeadSubmit(event)">
-      <input type="text" id="leadName" placeholder="Your Name" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
+      <input type="text" id="leadName" placeholder="Your Name" data-i18n-placeholder="leadNamePlaceholder" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
 
-      <input type="email" id="leadEmail" placeholder="Your Email" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
+      <input type="email" id="leadEmail" placeholder="Your Email" data-i18n-placeholder="leadEmailPlaceholder" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
 
-      <input type="tel" id="leadPhone" placeholder="Phone Number (213-361-1700)" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
+      <input type="tel" id="leadPhone" placeholder="Phone Number (213-361-1700)" data-i18n-placeholder="leadPhonePlaceholder" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
 
       <select id="leadService" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
-        <option value="">Select Service Needed</option>
-        <option value="tv-mounting">📺 TV Mounting</option>
-        <option value="furniture-assembly">🛋️ Furniture Assembly</option>
-        <option value="painting">🎨 Painting & Walls</option>
-        <option value="flooring">🏠 Flooring</option>
-        <option value="plumbing">🚰 Plumbing</option>
-        <option value="electrical">⚡ Electrical</option>
-        <option value="mirrors">🪞 Mirrors & Art Hanging</option>
-        <option value="other">✋ Other Service</option>
+        <option value="" data-i18n="leadServiceDefault">Select Service Needed</option>
+        <option value="tv-mounting" data-i18n="leadServiceTv">📺 TV Mounting</option>
+        <option value="furniture-assembly" data-i18n="leadServiceFurniture">🛋️ Furniture Assembly</option>
+        <option value="painting" data-i18n="leadServicePainting">🎨 Painting & Walls</option>
+        <option value="flooring" data-i18n="leadServiceFlooring">🏠 Flooring</option>
+        <option value="plumbing" data-i18n="leadServicePlumbing">🚰 Plumbing</option>
+        <option value="electrical" data-i18n="leadServiceElectrical">⚡ Electrical</option>
+        <option value="mirrors" data-i18n="leadServiceMirrors">🪞 Mirrors & Art Hanging</option>
+        <option value="other" data-i18n="leadServiceOther">✋ Other Service</option>
       </select>
 
-      <textarea id="leadMessage" placeholder="Brief description of your project..." style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit;min-height:80px;resize:none"></textarea>
+      <textarea id="leadMessage" placeholder="Brief description of your project..." data-i18n-placeholder="leadProjectPlaceholder" style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit;min-height:80px;resize:none"></textarea>
 
       <button type="submit" style="padding:16px;background:var(--ink);color:#fff;border:none;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;transition:opacity 200ms" data-event="lead_submit">
-        Get Your Quote in 2 Min
+        <span data-i18n="leadFormBtn">Get Your Quote in 2 Min</span>
       </button>
 
-      <p style="font-size:12px;color:var(--ink3);margin:0">
+      <p style="font-size:12px;color:var(--ink3);margin:0" data-i18n="leadFormNote">
         No spam. We only contact you to confirm the job.
       </p>
     </form>
 
     <div id="formSuccess" style="display:none;background:#fff;padding:28px;border-radius:16px;margin-top:20px;text-align:center">
       <div style="font-size:48px;margin-bottom:12px">✅</div>
-      <h3 style="color:var(--ink);font-weight:700;margin-bottom:8px">Quote Request Received!</h3>
-      <p style="color:var(--ink2);font-size:15px;margin-bottom:16px">We'll call you within 10 minutes to confirm your booking.</p>
-      <p style="color:var(--ink3);font-size:13px">Check your email for confirmation details.</p>
+      <h3 style="color:var(--ink);font-weight:700;margin-bottom:8px" data-i18n="formSuccessTitle">Quote Request Received!</h3>
+      <p style="color:var(--ink2);font-size:15px;margin-bottom:16px" data-i18n="formSuccessSub">We'll call you within 10 minutes to confirm your booking.</p>
+      <p style="color:var(--ink3);font-size:13px" data-i18n="formSuccessEmail">Check your email for confirmation details.</p>
     </div>
   </div>
 </div>
@@ -518,39 +521,39 @@ document.addEventListener('DOMContentLoaded', function() {
 <div style="padding:64px 18px;background:#f9f7f4">
   <div style="max-width:900px;margin:0 auto">
     <div style="text-align:center;margin-bottom:40px">
-      <h2 style="font-size:32px;font-weight:700;font-family:var(--fs);color:var(--ink);margin-bottom:12px">Common Questions</h2>
-      <p style="color:var(--ink2);font-size:16px">Everything you need to know</p>
+      <h2 style="font-size:32px;font-weight:700;font-family:var(--fs);color:var(--ink);margin-bottom:12px" data-i18n="faqTitle">Common Questions</h2>
+      <p style="color:var(--ink2);font-size:16px" data-i18n="faqSub">Everything you need to know</p>
     </div>
 
     <div style="display:grid;gap:16px">
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none">How quickly can you respond to my service request?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6">Most calls are answered within 10 minutes. We're available 8am-8pm daily. For urgent same-day service, call 213-361-1700 directly.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ1">How quickly can you respond to my service request?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA1">Most calls are answered within 10 minutes. We're available 8am-8pm daily. For urgent same-day service, call 213-361-1700 directly.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none">Do you charge for estimates/quotes?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6">No! All quotes are 100% free. We provide transparent, upfront pricing. No hidden fees. No credit card required.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ2">Do you charge for estimates/quotes?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA2">No! All quotes are 100% free. We provide transparent, upfront pricing. No hidden fees. No credit card required.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none">Are you licensed and insured?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6">Yes! We are fully licensed and insured. All work is guaranteed. If you're not 100% happy, we'll make it right.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ3">Are you licensed and insured?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA3">Yes! We are fully licensed and insured. All work is guaranteed. If you're not 100% happy, we'll make it right.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none">What if I'm not satisfied with the work?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6">100% satisfaction guarantee. If you're unhappy, we'll redo the work for free within 7 days. Your satisfaction is our priority.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ4">What if I'm not satisfied with the work?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA4">100% satisfaction guarantee. If you're unhappy, we'll redo the work for free within 7 days. Your satisfaction is our priority.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none">Do you offer weekend or after-hours service?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6">Yes! We offer flexible scheduling. Call 213-361-1700 to arrange weekend or evening appointments.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ5">Do you offer weekend or after-hours service?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA5">Yes! We offer flexible scheduling. Call 213-361-1700 to arrange weekend or evening appointments.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none">What payment methods do you accept?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6">We accept cash, Venmo, PayPal, and all major credit cards. Payment is due upon completion of work.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ6">What payment methods do you accept?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA6">We accept cash, Venmo, PayPal, and all major credit cards. Payment is due upon completion of work.</p>
       </details>
     </div>
   </div>
@@ -559,14 +562,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- FINAL CTA SECTION -->
 <div style="background:var(--ink);padding:48px 18px;text-align:center">
   <div style="max-width:800px;margin:0 auto">
-    <h2 style="color:#fff;font-size:28px;font-weight:700;font-family:var(--fs);margin-bottom:16px">Don't Wait—Book Your Handyman Today</h2>
-    <p style="color:rgba(255,255,255,0.80);font-size:16px;margin-bottom:24px">Limited slots available this week. Professional service, guaranteed satisfaction.</p>
+    <h2 style="color:#fff;font-size:28px;font-weight:700;font-family:var(--fs);margin-bottom:16px" data-i18n="finalCtaTitle">Don't Wait—Book Your Handyman Today</h2>
+    <p style="color:rgba(255,255,255,0.80);font-size:16px;margin-bottom:24px" data-i18n="finalCtaSub">Limited slots available this week. Professional service, guaranteed satisfaction.</p>
 
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="https://wa.me/12133611700?text=I%20want%20to%20book%20a%20service%20this%20week" style="display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:#25D366;color:#fff;border-radius:999px;font-weight:700;text-decoration:none;transition:opacity 200ms" data-event="final_cta_whatsapp">
+      <a href="https://wa.me/12133611700?text=I%20want%20to%20book%20a%20service%20this%20week" style="display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:#25D366;color:#fff;border-radius:999px;font-weight:700;text-decoration:none;transition:opacity 200ms" data-event="final_cta_whatsapp" data-i18n="finalCtaWhatsApp">
         💬 Message on WhatsApp
       </a>
-      <a href="tel:+12133611700" style="display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:rgba(255,255,255,0.15);color:#fff;border-radius:999px;font-weight:700;text-decoration:none;transition:background 200ms;border:1.5px solid rgba(255,255,255,0.30)" data-event="final_cta_call">
+      <a href="tel:+12133611700" style="display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:rgba(255,255,255,0.15);color:#fff;border-radius:999px;font-weight:700;text-decoration:none;transition:background 200ms;border:1.5px solid rgba(255,255,255,0.30)" data-event="final_cta_call" data-i18n="finalCtaCall">
         📞 Call Now
       </a>
     </div>
@@ -576,6 +579,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 function handleLeadSubmit(e) {
   e.preventDefault();
+  const ui = (typeof window.HF_UI === 'function') ? window.HF_UI() : {};
 
   const name = document.getElementById('leadName').value;
   const email = document.getElementById('leadEmail').value;
@@ -594,8 +598,8 @@ function handleLeadSubmit(e) {
     });
   }
 
-  // Send email via Formspree (free form backend)
-  fetch('https://formspree.io/f/xyzqwert', {
+  // Send lead to our own Vercel serverless endpoint (emails via Resend)
+  fetch('/api/submit-lead', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -623,9 +627,11 @@ function handleLeadSubmit(e) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, service, message })
       }).catch(err => console.log('Notification sent'));
+    } else {
+      alert(ui.leadSubmitError || 'Error submitting form. Please call 213-361-1700 directly.');
     }
   }).catch(err => {
-    alert('Error submitting form. Please call 213-361-1700 directly.');
+    alert(ui.leadSubmitError || 'Error submitting form. Please call 213-361-1700 directly.');
     console.error(err);
   });
 }
@@ -645,7 +651,7 @@ document.getElementById('leadForm')?.addEventListener('input', (e) => {
 <!-- LEGAL DISCLAIMER (Services up to $1,000 limit) -->
 <footer style="background:#f9f8f6;padding:24px 18px;margin-top:40px;border-top:1px solid #e5dfd5;text-align:center">
   <div style="max-width:1200px;margin:0 auto;font-size:12px;color:#666;line-height:1.6">
-    <p style="margin:0">
+    <p style="margin:0" id="legalDisclaimerTxt">
       <strong>Handy & Friend</strong> provides home repair services up to $1,000 (labor only). Services include TV mounting, furniture assembly, painting, flooring, plumbing, electrical, and art hanging.
       For work exceeding $1,000, structural modifications, permits, or licensed requirements, consult a licensed contractor.
       We carry General Liability Insurance. <strong><a href="tel:+12133611700" style="color:#b88924;text-decoration:none">Call 213-361-1700</a></strong> for details.
