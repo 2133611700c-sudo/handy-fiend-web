@@ -1444,7 +1444,8 @@ function applyLang(){
   document.getElementById('langTxt').textContent=l.lang;
   document.getElementById('langNext').textContent=`→ ${nextL}`;
   document.getElementById('heroH').innerHTML=l.heroH.replace('\n','<br>');
-  document.getElementById('heroSub').textContent=l.heroSub;
+  const heroSubEl=document.getElementById('heroSub');
+  if(heroSubEl)heroSubEl.textContent=l.heroSub;
   document.getElementById('gridLbl').textContent=l.gridLbl;
   document.getElementById('calcTitle').textContent=l.calcTitle;
   document.getElementById('calcSub').textContent=l.calcSub;
