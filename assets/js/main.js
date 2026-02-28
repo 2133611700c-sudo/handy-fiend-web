@@ -137,7 +137,7 @@ const T={
   en:{
     lang:"EN",
     heroEyebrow:"Handyman Services in Los Angeles",
-    heroH:"Get Instant Help For Any Home Project",
+    heroH:"Professional Handyman\nAvailable Today",
     heroAccent:"Instant Help",
     heroSub:"Describe your project and get AI-powered guidance on pricing, timeline, and next steps—instantly.",
     aiPowered:"AI Powered",
@@ -529,7 +529,7 @@ const T={
   ru:{
     lang:"RU",
     heroEyebrow:"Услуги мастера в Лос-Анджелесе",
-    heroH:"Получите мгновенную помощь для любого проекта",
+    heroH:"Профессиональный мастер\nДоступен сегодня",
     heroAccent:"мгновенную помощь",
     heroSub:"Опишите свой проект и получите помощь ИИ по ценам, срокам и следующим шагам — мгновенно.",
     aiPowered:"Работает ИИ",
@@ -733,7 +733,7 @@ const T={
   ua:{
     lang:"UA",
     heroEyebrow:"Послуги майстра у Лос-Анджелесі",
-    heroH:"Отримайте миттєву допомогу для будь-якого проекту",
+    heroH:"Професійний майстер\nДоступний сьогодні",
     heroAccent:"миттєву допомогу",
     heroSub:"Опишіть свій проект і отримайте допомогу ШІ щодо цін, термінів та наступних кроків — миттєво.",
     aiPowered:"Працює ШІ",
