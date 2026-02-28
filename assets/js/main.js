@@ -1454,6 +1454,14 @@ function syncLangInUrl(){
   }catch(e){}
 }
 
+function updatePricingLinks(){
+  // Update pricing links to include language parameter
+  const pricingLinks = document.querySelectorAll('a[href="/pricing"]');
+  pricingLinks.forEach(link => {
+    link.href = `/pricing?lang=${lang}`;
+  });
+}
+
 function applySeoMetadata(){
   const ui=U();
   const title=ui.seoTitle||'Handy & Friend | Los Angeles Handyman';
@@ -1538,6 +1546,7 @@ function applyLang(){
   if(smsBtn)smsBtn.textContent=l.smsSendBtn;
 
   syncLangInUrl();
+  updatePricingLinks();
   applySeoMetadata();
   applyStaticI18n();
   renderGrid();

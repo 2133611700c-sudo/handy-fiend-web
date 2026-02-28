@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Handy & Friend | Full Pricing</title>
+  <meta name="description" content="Transparent handyman pricing in Los Angeles. TV mounting, furniture assembly, painting and flooring calculator, plumbing and electrical." />
+  <style>
+    html,body{margin:0;padding:0;background:#f9f6f1;color:#1a1410;font-family:Inter,Arial,sans-serif}
+    *{box-sizing:border-box}
+    button{font:inherit;cursor:pointer}
+  </style>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+/* ─── COLORS ──────────────────────────────────────────────────── */
+const C = {
+  bg:"#f9f6f1", dark:"#1a1612", cream:"#f5f0e8",
+  gold:"#b8860b", goldL:"#d4af37", goldBg:"rgba(212,175,55,0.09)",
+  goldBorder:"rgba(212,175,55,0.25)",
+  text:"#1a1410", mid:"#5a4a30", light:"#9a8a6a",
+  green:"#1e7e34", greenBg:"rgba(30,126,52,0.08)",
+  card:"#ffffff", border:"#e8e0d0", red:"#b03020",
+};
+
+/* ─── COMBOS (language-neutral) ───────────────────────────────── */
+const COMBOS = [
+  {svcs:["📺 TV Mount","🖼️ 2 Mirrors"],  orig:300,  price:240,  save:60},
+  {svcs:["🛋️ Dresser","🖼️ Art hanging"], orig:350,  price:280,  save:70},
+  {svcs:["🎨 Paint 300sf","🏠 Floor 200sf"],orig:1525,price:1220,save:305},
+  {svcs:["🚰 Faucet swap","⚡ 2 Fixtures"],orig:370,  price:296,  save:74},
+];
+
+function wa(text){ return `https://wa.me/12133611700?text=${encodeURIComponent(text)}`; }
+function fmt(n){ return "$"+Math.round(n).toLocaleString(); }
+
+/* ─── TRANSLATIONS ─────────────────────────────────────────────── */
+const T = {
+/* ══════════════════════════ ENGLISH ══════════════════════════ */
+en:{
+  htmlLang:"en", navLogo:"Handy & Friend", navHome:"← Home",
+  langs:[{code:"ru",label:"RU"},{code:"ua",label:"UA"}],
+  heroTag:"🔧 Handy & Friend · Los Angeles",
+  heroTitle:"Transparent Pricing.\nNo Surprises.",
+  heroSub:"$150 service call · $70/hr after 2h · $500 min on paint & floors",
+  trust:["✅ Licensed & Insured","⭐ 4.9 · 500+ clients","📍 LA-wide"],
+  svcOrder:["tv","furniture","art","painting","flooring","plumbing","electrical"],
+  svcIcon:{tv:"📺",furniture:"🛋️",art:"🖼️",painting:"🎨",flooring:"🏠",plumbing:"🚰",electrical:"⚡"},
+  svcBase:{tv:"$150",furniture:"$150",art:"$150",painting:"$2.25",flooring:"$4.25",plumbing:"$150",electrical:"$150"},
+  svcNote:{tv:"fixed",furniture:"from",art:"up to 5 pcs",painting:"per sq ft",flooring:"per sq ft",plumbing:"from",electrical:"from"},
+  svcType:{tv:"fixed",furniture:"fixed",art:"fixed_plus",painting:"sqft",flooring:"sqft",plumbing:"fixed",electrical:"fixed_plus"},
+  svcPopular:{tv:true},
+  svcs:{
+    tv:{
+      label:"TV Mounting", tagline:"No mess. Wall-safe. Same day.", badge:"Most Popular",
+      included:["Wall-safe mounting","Surface cable management included","All holes patched & painted","Level guarantee"],
+      youProvide:["TV bracket / arm","In-wall wiring if fire blocks present"],
+      options:[
+        {label:'Standard mount (up to 65")',sub:"Drywall / studs",price:150,time:"1–1.5h",popular:true},
+        {label:"Mount + concealed wires",sub:"In-wall or cable channel",price:220,time:"2–2.5h"},
+      ],
+      example:{desc:'65" TV on drywall + surface cable mgmt',price:150},
+      wa:"Hi! I need TV mounting.",
+    },
+    furniture:{
+      label:"Furniture Assembly", tagline:"All parts included. Fully assembled.",
+      included:["Full IKEA & flat-pack assembly","Hardware installation","Cleanup after job"],
+      youProvide:["All parts, hardware & instructions","Missing parts billed $70/hr"],
+      options:[
+        {label:"Small items (2–3 pcs)",sub:"Nightstand / chair / shelf",price:150,time:"1–1.5h"},
+        {label:"Dresser (3–6 drawers)",price:200,time:"2–3h"},
+        {label:"Bed frame",sub:"Storage/lift +$70/hr",price:275,time:"2.5–4h"},
+        {label:"PAX / large closet",sub:"$70/hr · min 4h",price:280,time:"≥4h",hourly:true},
+      ],
+      example:{desc:"HEMNES dresser + nightstand",price:200},
+      wa:"Hi! I need furniture assembly.",
+    },
+    art:{
+      label:"Art & Mirrors", tagline:"Level guarantee. Properly secured.",
+      included:["Level guarantee on all pieces","Up to 5 pieces per visit","Anchors & fasteners installed"],
+      youProvide:["Hardware, anchors, brackets","Gallery >5 pcs billed $70/hr after 2h"],
+      options:[
+        {label:"Art / Mirrors up to 5 pcs",sub:"Max 40 lbs per piece",price:150,time:"up to 2h"},
+        {label:"Curtain rods / Blinds (1st window)",price:150,time:"1.5–2.5h"},
+      ],
+      addon:{label:"Each additional window",price:30,time:"~30 min"},
+      example:{desc:"3 artworks + 1 large mirror",price:150},
+      wa:"Hi! I need art & mirror hanging.",
+    },
+    painting:{
+      label:"Painting", tagline:"Professional finish. No spillage.", badge:"Same-day possible",
+      included:["Professional prep & drop cloths","No spillage guarantee","Clean edges & trim","Same-day for small jobs"],
+      youProvide:["All paint, primer & tools","Structural repairs quoted separately"],
+      surfaces:[
+        {id:"w1",label:"Walls — 1 coat (same color)",price:2.25},
+        {id:"w2",label:"Walls — 2 coats (color change)",price:3.00},
+        {id:"cs",label:"Ceiling smooth (2 coats)",price:2.50},
+        {id:"ct",label:"Ceiling textured (2 coats)",price:3.25},
+        {id:"cg",label:"Ceiling semi-gloss (2 coats)",price:4.00},
+      ],
+      addons:[
+        {id:"sand",label:"+ Sanding / prep",price:0.80},
+        {id:"wall",label:"+ Wallpaper removal",price:1.60},
+        {id:"mold",label:"+ Mold treatment",price:2.00},
+      ],
+      trim:[
+        {label:"Baseboards",price:"$4.50/lf"},
+        {label:"Door casings simple",price:"$5.00/lf"},
+        {label:"Door casings profile",price:"$5.75/lf"},
+        {label:"Crown / cornice molding",price:"$6.75/lf"},
+      ],
+      minimum:500,
+      example:{desc:"Living room 300sf, 1 coat walls",price:675},
+      wa:"Hi! I need painting service.",
+    },
+    flooring:{
+      label:"Flooring", tagline:"Clean install. Debris removed.",
+      included:["Clean installation","Debris & packaging removal","120–250 sqft/day","Straight and level finish"],
+      youProvide:["Flooring, underlayment & transitions","Leveling compound quoted on-site"],
+      surfaces:[
+        {id:"lam",label:"Laminate click-lock",price:4.25},
+        {id:"lvp",label:"LVP / Luxury Vinyl click",price:5.00},
+      ],
+      addons:[
+        {id:"demo",label:"+ Demo existing floor",price:2.00},
+        {id:"under",label:"+ Underlayment install",price:0.75},
+      ],
+      extras:[
+        {label:"Transition strip",price:"$45/ea"},
+        {label:"Baseboard remove + reinstall",price:"$2.50/lf"},
+        {label:"Door undercut",price:"$45–65/door"},
+        {label:"Spot leveling",price:"$2.50–5.00/sf"},
+      ],
+      minimum:500,
+      example:{desc:"300sf LVP + demo old floor",price:2100},
+      wa:"Hi! I need flooring installation.",
+    },
+    plumbing:{
+      label:"Plumbing", tagline:"No leaks. Quality fixtures.", badge:"No permits needed",
+      included:["Cosmetic replacements only","No permits required","Quality finish guaranteed"],
+      youProvide:["Fixture, faucet, or parts","New supply lines → licensed C-36 referral"],
+      options:[
+        {label:"Faucet replacement",sub:"Kitchen or bathroom",price:195,time:"1.5–2.5h"},
+        {label:"Shower head replacement",price:150,time:"< 1h"},
+        {label:"Toilet tank / flapper repair",price:150,time:"~1h"},
+        {label:"Re-caulk tub / shower",sub:"Old caulk removal included",price:215,time:"2–3h"},
+      ],
+      example:{desc:"Kitchen faucet replacement",price:195},
+      wa:"Hi! I need plumbing service.",
+    },
+    electrical:{
+      label:"Electrical", tagline:"Safe wiring. Like-for-like only.", badge:"Code-compliant",
+      included:["Like-for-like replacements only","Existing boxes only","App setup for smart devices"],
+      youProvide:["Fixture, device, or switch","Panel work → licensed C-10 referral"],
+      options:[
+        {label:"Light fixture swap",sub:"1 fixture (existing box)",price:175,time:"1–2h"},
+        {label:"Outlets / switches (first 3)",price:150,time:"1–2h"},
+        {label:"Smart doorbell / lock + app setup",price:195,time:"1.5–2.5h"},
+      ],
+      addon:{label:"Each additional outlet/switch",price:20,time:"~15 min"},
+      example:{desc:"2 light fixtures + 3 outlets",price:325},
+      wa:"Hi! I need electrical service.",
+    },
+  },
+  included:"✅ Included", youProvide:"📦 You Provide",
+  pricingHdr:"Pricing", svcHdr:"Service", priceHdr:"Price", timeHdr:"Time",
+  popularTag:"Popular", rates:"Rates", addons:"Prep Add-ons",
+  trim:"Trim & Millwork", extras:"Extras",
+  minimum:"⚡ Minimum:", minNote:"· Estimate visit $75 → credited",
+  example:"💡 Typical Job Example", waQuote:"💬 WhatsApp Quote", callNow:"📞 Call Now",
+  calcTitle:"Cost Estimator", laborOnly:"labor only",
+  lFt:"L (ft)", wFt:"W (ft)", sqftOr:"Or enter sq ft directly", sqftPH:"Total sq ft",
+  surfaceType:"Surface type", addonsPH:"Add-ons", calcBtn:"Get My Estimate →",
+  calcResult:"Estimated labor cost", calcWA:"💬 Send estimate via WhatsApp",
+  minApplied:"⚡ Minimum $", applied:" applied",
+  comboTitle:"Book 2+ Services — Save 20%",
+  comboSub:"Mention combo deal when you call or message",
+  comboSave:"Save", comboCTA:"Claim My 20% Discount →",
+  faqTitle:"Common Questions",
+  faqs:[
+    {q:"How fast do you respond?",a:"Within 10 min. Available 8am–8pm daily. Urgent same-day: call 213-361-1700."},
+    {q:"Free estimates?",a:"100% free quotes. Transparent pricing. No hidden fees."},
+    {q:"Licensed and insured?",a:"Yes. Fully licensed & insured. All work guaranteed."},
+    {q:"Satisfaction guarantee?",a:"100%. Unhappy? We'll redo it free within 7 days."},
+    {q:"Weekend service?",a:"Yes. Call 213-361-1700 for weekend/evening appointments."},
+    {q:"Payment methods?",a:"Cash, Venmo, PayPal, all major credit cards. Pay after completion."},
+  ],
+  readyTitle:"Ready to Book?", readySub:"Free quote in 2 minutes. No spam.",
+  readyWA:"💬 Message on WhatsApp", readyCall:"📞 213-361-1700",
+},
+
+/* ══════════════════════════ RUSSIAN ══════════════════════════ */
+ru:{
+  htmlLang:"ru", navLogo:"Handy & Friend", navHome:"← На главную",
+  langs:[{code:"en",label:"EN"},{code:"ua",label:"UA"}],
+  heroTag:"🔧 Handy & Friend · Лос-Анджелес",
+  heroTitle:"Прозрачные цены.\nБез сюрпризов.",
+  heroSub:"$150 вызов мастера · +$70/ч после 2ч · мин. $500 покраска/полы",
+  trust:["✅ Лицензия и страховка","⭐ 4.9 · 500+ клиентов","📍 Весь LA"],
+  svcOrder:["tv","furniture","art","painting","flooring","plumbing","electrical"],
+  svcIcon:{tv:"📺",furniture:"🛋️",art:"🖼️",painting:"🎨",flooring:"🏠",plumbing:"🚰",electrical:"⚡"},
+  svcBase:{tv:"$150",furniture:"$150",art:"$150",painting:"$2.25",flooring:"$4.25",plumbing:"$150",electrical:"$150"},
+  svcNote:{tv:"фикс.",furniture:"от",art:"до 5 шт.",painting:"за кв.ф.",flooring:"за кв.ф.",plumbing:"от",electrical:"от"},
+  svcType:{tv:"fixed",furniture:"fixed",art:"fixed_plus",painting:"sqft",flooring:"sqft",plumbing:"fixed",electrical:"fixed_plus"},
+  svcPopular:{tv:true},
+  svcs:{
+    tv:{
+      label:"Монтаж ТВ", tagline:"Без беспорядка. Безопасное крепление.", badge:"Самый популярный",
+      included:["Безопасный монтаж на стену","Управление кабелями включено","Все отверстия заделаны и покрашены","Гарантия уровня"],
+      youProvide:["Кронштейн для ТВ","Прокладка в стене при огнезащитных блоках"],
+      options:[
+        {label:'Стандартный монтаж (до 65")',sub:"Гипсокартон / стойки",price:150,time:"1–1.5ч",popular:true},
+        {label:"Монтаж + скрытые провода",sub:"Внутри стены или кабель-канал",price:220,time:"2–2.5ч"},
+      ],
+      example:{desc:'65" ТВ на гипсокартоне + кабели',price:150},
+      wa:"Здравствуйте! Мне нужен монтаж ТВ.",
+    },
+    furniture:{
+      label:"Сборка мебели", tagline:"Все детали включены. Полная сборка.",
+      included:["Сборка IKEA и плоских упаковок","Установка фурнитуры","Уборка после работы"],
+      youProvide:["Все детали, фурнитура и инструкции","Недостающие детали — $70/ч"],
+      options:[
+        {label:"Небольшие предметы (2–3 шт.)",sub:"Тумбочка / стул / полка",price:150,time:"1–1.5ч"},
+        {label:"Комод (3–6 ящиков)",price:200,time:"2–3ч"},
+        {label:"Кроватный каркас",sub:"Хранение/подъём +$70/ч",price:275,time:"2.5–4ч"},
+        {label:"PAX / большой шкаф",sub:"$70/ч · мин. 4ч",price:280,time:"≥4ч",hourly:true},
+      ],
+      example:{desc:"Комод HEMNES + тумбочка",price:200},
+      wa:"Здравствуйте! Мне нужна сборка мебели.",
+    },
+    art:{
+      label:"Картины и зеркала", tagline:"Гарантия уровня. Надёжное крепление.",
+      included:["Гарантия уровня на все предметы","До 5 предметов за один визит","Установка анкеров и крепежей"],
+      youProvide:["Фурнитура, анкеры, кронштейны","Галерея >5 шт. — $70/ч после 2ч"],
+      options:[
+        {label:"Картины / зеркала до 5 шт.",sub:"Макс. 18 кг на предмет",price:150,time:"до 2ч"},
+        {label:"Карнизы / жалюзи (1-е окно)",price:150,time:"1.5–2.5ч"},
+      ],
+      addon:{label:"Каждое следующее окно",price:30,time:"~30 мин"},
+      example:{desc:"3 картины + 1 большое зеркало",price:150},
+      wa:"Здравствуйте! Нужно повесить картины/зеркала.",
+    },
+    painting:{
+      label:"Покраска", tagline:"Профессиональная отделка. Без проливов.", badge:"Возможно в тот же день",
+      included:["Профессиональная подготовка и плёнки","Гарантия без проливов","Чёткие края и отделка","В тот же день для небольших работ"],
+      youProvide:["Вся краска, грунтовка и инструменты","Конструктивный ремонт — по отдельной смете"],
+      surfaces:[
+        {id:"w1",label:"Стены — 1 слой (тот же цвет)",price:2.25},
+        {id:"w2",label:"Стены — 2 слоя (смена цвета)",price:3.00},
+        {id:"cs",label:"Потолок гладкий (2 слоя)",price:2.50},
+        {id:"ct",label:"Потолок фактурный (2 слоя)",price:3.25},
+        {id:"cg",label:"Потолок полуглянцевый (2 слоя)",price:4.00},
+      ],
+      addons:[
+        {id:"sand",label:"+ Шлифовка / подготовка",price:0.80},
+        {id:"wall",label:"+ Снятие обоев",price:1.60},
+        {id:"mold",label:"+ Обработка плесени",price:2.00},
+      ],
+      trim:[
+        {label:"Плинтуса",price:"$4.50/п.ф"},
+        {label:"Наличники простые",price:"$5.00/п.ф"},
+        {label:"Наличники профильные",price:"$5.75/п.ф"},
+        {label:"Карнизная лепнина",price:"$6.75/п.ф"},
+      ],
+      minimum:500,
+      example:{desc:"Гостиная 300 кв.ф, 1 слой стены",price:675},
+      wa:"Здравствуйте! Мне нужна покраска.",
+    },
+    flooring:{
+      label:"Напольные покрытия", tagline:"Чистая укладка. Мусор вывозим.",
+      included:["Чистая укладка","Вывоз мусора и упаковки","120–250 кв.ф/день","Ровная и горизонтальная укладка"],
+      youProvide:["Покрытие, подложка и порожки","Нивелировка — расчёт на месте"],
+      surfaces:[
+        {id:"lam",label:"Ламинат click-lock",price:4.25},
+        {id:"lvp",label:"LVP / Виниловый клик",price:5.00},
+      ],
+      addons:[
+        {id:"demo",label:"+ Демонтаж старого покрытия",price:2.00},
+        {id:"under",label:"+ Укладка подложки",price:0.75},
+      ],
+      extras:[
+        {label:"Порожек перехода",price:"$45/шт"},
+        {label:"Снятие и установка плинтуса",price:"$2.50/п.ф"},
+        {label:"Подрезка дверей",price:"$45–65/дверь"},
+        {label:"Локальная нивелировка",price:"$2.50–5.00/кв.ф"},
+      ],
+      minimum:500,
+      example:{desc:"300 кв.ф LVP + демонтаж старого",price:2100},
+      wa:"Здравствуйте! Мне нужна укладка пола.",
+    },
+    plumbing:{
+      label:"Сантехника", tagline:"Без течей. Качественные материалы.", badge:"Без разрешений",
+      included:["Только косметическая замена","Разрешения не требуются","Гарантия качества"],
+      youProvide:["Прибор, смеситель или запчасти","Новые подводки → рефф. лицензированного C-36"],
+      options:[
+        {label:"Замена смесителя",sub:"Кухня или ванная",price:195,time:"1.5–2.5ч"},
+        {label:"Замена лейки душа",price:150,time:"< 1ч"},
+        {label:"Ремонт бачка / клапана унитаза",price:150,time:"~1ч"},
+        {label:"Перегерметизация ванны / душа",sub:"Снятие старого герметика включено",price:215,time:"2–3ч"},
+      ],
+      example:{desc:"Замена кухонного смесителя",price:195},
+      wa:"Здравствуйте! Мне нужна сантехника.",
+    },
+    electrical:{
+      label:"Электрика", tagline:"Безопасная проводка. Только замена.", badge:"Соответствие нормам",
+      included:["Только аналогичная замена","Только существующие коробки","Настройка приложений для умных устройств"],
+      youProvide:["Прибор, устройство или выключатель","Работы со щитком → рефф. лицензированного C-10"],
+      options:[
+        {label:"Замена светильника",sub:"1 прибор (существующая коробка)",price:175,time:"1–2ч"},
+        {label:"Розетки / выключатели (первые 3)",price:150,time:"1–2ч"},
+        {label:"Умный звонок / замок + настройка",price:195,time:"1.5–2.5ч"},
+      ],
+      addon:{label:"Каждая доп. розетка/выключатель",price:20,time:"~15 мин"},
+      example:{desc:"2 светильника + 3 розетки",price:325},
+      wa:"Здравствуйте! Мне нужна электрика.",
+    },
+  },
+  included:"✅ Включено", youProvide:"📦 Вы предоставляете",
+  pricingHdr:"Цены", svcHdr:"Услуга", priceHdr:"Цена", timeHdr:"Время",
+  popularTag:"Популярное", rates:"Тарифы", addons:"Дополнения",
+  trim:"Молдинги и плинтуса", extras:"Доп. работы",
+  minimum:"⚡ Минимум:", minNote:"· Выезд на смету $75 → засчитывается",
+  example:"💡 Типичный пример", waQuote:"💬 Написать в WhatsApp", callNow:"📞 Позвонить",
+  calcTitle:"Калькулятор", laborOnly:"только работа",
+  lFt:"Длина (фут)", wFt:"Ширина (фут)", sqftOr:"Или введите кв.ф. напрямую", sqftPH:"Кв. футов",
+  surfaceType:"Тип поверхности", addonsPH:"Дополнения", calcBtn:"Рассчитать →",
+  calcResult:"Ориентировочная стоимость", calcWA:"💬 Отправить смету в WhatsApp",
+  minApplied:"⚡ Применён минимум $", applied:"",
+  comboTitle:"Закажи 2+ услуги — сэкономь 20%",
+  comboSub:"Упомяните комбо при звонке или сообщении",
+  comboSave:"Экономия", comboCTA:"Получить скидку 20% →",
+  faqTitle:"Частые вопросы",
+  faqs:[
+    {q:"Как быстро вы отвечаете?",a:"В течение 10 минут. Работаем 8:00–20:00 ежедневно. Срочный вызов: 213-361-1700."},
+    {q:"Бесплатная оценка?",a:"Да, 100% бесплатно. Прозрачные цены без скрытых платежей."},
+    {q:"Есть лицензия и страховка?",a:"Да. Полная лицензия и страховка. Все работы гарантированы."},
+    {q:"Гарантия?",a:"100%. Если не устроит — переделаем бесплатно в течение 7 дней."},
+    {q:"Работаете в выходные?",a:"Да. Звоните 213-361-1700 для записи в вечернее и выходное время."},
+    {q:"Как оплатить?",a:"Наличные, Venmo, PayPal, все карты. Оплата после выполнения работы."},
+  ],
+  readyTitle:"Готовы записаться?", readySub:"Бесплатная смета за 2 минуты. Без спама.",
+  readyWA:"💬 Написать в WhatsApp", readyCall:"📞 213-361-1700",
+},
+
+/* ══════════════════════════ UKRAINIAN ════════════════════════ */
+ua:{
+  htmlLang:"uk", navLogo:"Handy & Friend", navHome:"← На головну",
+  langs:[{code:"en",label:"EN"},{code:"ru",label:"RU"}],
+  heroTag:"🔧 Handy & Friend · Лос-Анджелес",
+  heroTitle:"Прозорі ціни.\nБез сюрпризів.",
+  heroSub:"$150 виклик майстра · +$70/год після 2год · мін. $500 фарбування/підлога",
+  trust:["✅ Ліцензія і страховка","⭐ 4.9 · 500+ клієнтів","📍 Весь LA"],
+  svcOrder:["tv","furniture","art","painting","flooring","plumbing","electrical"],
+  svcIcon:{tv:"📺",furniture:"🛋️",art:"🖼️",painting:"🎨",flooring:"🏠",plumbing:"🚰",electrical:"⚡"},
+  svcBase:{tv:"$150",furniture:"$150",art:"$150",painting:"$2.25",flooring:"$4.25",plumbing:"$150",electrical:"$150"},
+  svcNote:{tv:"фікс.",furniture:"від",art:"до 5 шт.",painting:"за кв.ф.",flooring:"за кв.ф.",plumbing:"від",electrical:"від"},
+  svcType:{tv:"fixed",furniture:"fixed",art:"fixed_plus",painting:"sqft",flooring:"sqft",plumbing:"fixed",electrical:"fixed_plus"},
+  svcPopular:{tv:true},
+  svcs:{
+    tv:{
+      label:"Монтаж ТВ", tagline:"Без безладу. Безпечне кріплення.", badge:"Найпопулярніший",
+      included:["Безпечний монтаж на стіну","Управління кабелями включено","Всі отвори зашпакльовані і пофарбовані","Гарантія рівня"],
+      youProvide:["Кронштейн для ТВ","Прокладка у стіні при вогнезахисних блоках"],
+      options:[
+        {label:'Стандартний монтаж (до 65")',sub:"Гіпсокартон / стійки",price:150,time:"1–1.5год",popular:true},
+        {label:"Монтаж + приховані дроти",sub:"Всередині стіни або кабель-канал",price:220,time:"2–2.5год"},
+      ],
+      example:{desc:'65" ТВ на гіпсокартоні + кабелі',price:150},
+      wa:"Добрий день! Мені потрібен монтаж ТВ.",
+    },
+    furniture:{
+      label:"Збірка меблів", tagline:"Всі деталі включено. Повна збірка.",
+      included:["Збірка IKEA і плоских упаковок","Встановлення фурнітури","Прибирання після роботи"],
+      youProvide:["Всі деталі, фурнітура та інструкції","Відсутні деталі — $70/год"],
+      options:[
+        {label:"Невеликі предмети (2–3 шт.)",sub:"Тумбочка / стілець / полиця",price:150,time:"1–1.5год"},
+        {label:"Комод (3–6 ящиків)",price:200,time:"2–3год"},
+        {label:"Каркас ліжка",sub:"Зберігання/підйом +$70/год",price:275,time:"2.5–4год"},
+        {label:"PAX / великий шаф",sub:"$70/год · мін. 4год",price:280,time:"≥4год",hourly:true},
+      ],
+      example:{desc:"Комод HEMNES + тумбочка",price:200},
+      wa:"Добрий день! Мені потрібна збірка меблів.",
+    },
+    art:{
+      label:"Картини та дзеркала", tagline:"Гарантія рівня. Надійне кріплення.",
+      included:["Гарантія рівня на всі предмети","До 5 предметів за один візит","Встановлення анкерів і кріплень"],
+      youProvide:["Фурнітура, анкери, кронштейни","Галерея >5 шт. — $70/год після 2год"],
+      options:[
+        {label:"Картини / дзеркала до 5 шт.",sub:"Макс. 18 кг на предмет",price:150,time:"до 2год"},
+        {label:"Карнизи / жалюзі (1-е вікно)",price:150,time:"1.5–2.5год"},
+      ],
+      addon:{label:"Кожне наступне вікно",price:30,time:"~30 хв"},
+      example:{desc:"3 картини + 1 велике дзеркало",price:150},
+      wa:"Добрий день! Потрібно повісити картини/дзеркала.",
+    },
+    painting:{
+      label:"Фарбування", tagline:"Професійна обробка. Без проливів.", badge:"Можливо в той же день",
+      included:["Професійна підготовка і плівки","Гарантія без проливів","Чіткі краї та обробка","В той же день для невеликих робіт"],
+      youProvide:["Вся фарба, ґрунтовка та інструменти","Конструктивний ремонт — за окремим кошторисом"],
+      surfaces:[
+        {id:"w1",label:"Стіни — 1 шар (той же колір)",price:2.25},
+        {id:"w2",label:"Стіни — 2 шари (зміна кольору)",price:3.00},
+        {id:"cs",label:"Стеля гладка (2 шари)",price:2.50},
+        {id:"ct",label:"Стеля фактурна (2 шари)",price:3.25},
+        {id:"cg",label:"Стеля напівглянцева (2 шари)",price:4.00},
+      ],
+      addons:[
+        {id:"sand",label:"+ Шліфування / підготовка",price:0.80},
+        {id:"wall",label:"+ Зняття шпалер",price:1.60},
+        {id:"mold",label:"+ Обробка плісняви",price:2.00},
+      ],
+      trim:[
+        {label:"Плінтуси",price:"$4.50/п.ф"},
+        {label:"Лиштви прості",price:"$5.00/п.ф"},
+        {label:"Лиштви профільні",price:"$5.75/п.ф"},
+        {label:"Карнизна ліпнина",price:"$6.75/п.ф"},
+      ],
+      minimum:500,
+      example:{desc:"Вітальня 300 кв.ф, 1 шар стіни",price:675},
+      wa:"Добрий день! Мені потрібне фарбування.",
+    },
+    flooring:{
+      label:"Підлогові покриття", tagline:"Чиста укладка. Сміття вивозимо.",
+      included:["Чиста укладка","Вивіз сміття та упаковки","120–250 кв.ф/день","Рівна і горизонтальна укладка"],
+      youProvide:["Покриття, підкладка і пороги","Нівелювання — розрахунок на місці"],
+      surfaces:[
+        {id:"lam",label:"Ламінат click-lock",price:4.25},
+        {id:"lvp",label:"LVP / Вініловий клік",price:5.00},
+      ],
+      addons:[
+        {id:"demo",label:"+ Демонтаж старого покриття",price:2.00},
+        {id:"under",label:"+ Укладка підкладки",price:0.75},
+      ],
+      extras:[
+        {label:"Поріг переходу",price:"$45/шт"},
+        {label:"Зняття і встановлення плінтуса",price:"$2.50/п.ф"},
+        {label:"Підрізка дверей",price:"$45–65/двері"},
+        {label:"Локальне нівелювання",price:"$2.50–5.00/кв.ф"},
+      ],
+      minimum:500,
+      example:{desc:"300 кв.ф LVP + демонтаж старого",price:2100},
+      wa:"Добрий день! Мені потрібна укладка підлоги.",
+    },
+    plumbing:{
+      label:"Сантехніка", tagline:"Без течей. Якісні матеріали.", badge:"Без дозволів",
+      included:["Лише косметична заміна","Дозволи не потрібні","Гарантія якості"],
+      youProvide:["Прилад, змішувач або запчастини","Нові підводки → рефф. ліцензованого C-36"],
+      options:[
+        {label:"Заміна змішувача",sub:"Кухня або ванна",price:195,time:"1.5–2.5год"},
+        {label:"Заміна душової лійки",price:150,time:"< 1год"},
+        {label:"Ремонт бачка / клапана унітазу",price:150,time:"~1год"},
+        {label:"Перегерметизація ванни / душу",sub:"Зняття старого герметика включено",price:215,time:"2–3год"},
+      ],
+      example:{desc:"Заміна кухонного змішувача",price:195},
+      wa:"Добрий день! Мені потрібна сантехніка.",
+    },
+    electrical:{
+      label:"Електрика", tagline:"Безпечна проводка. Лише заміна.", badge:"Відповідність нормам",
+      included:["Лише аналогічна заміна","Лише існуючі коробки","Налаштування додатків для розумних пристроїв"],
+      youProvide:["Прилад, пристрій або вимикач","Роботи зі щитком → рефф. ліцензованого C-10"],
+      options:[
+        {label:"Заміна світильника",sub:"1 прилад (існуюча коробка)",price:175,time:"1–2год"},
+        {label:"Розетки / вимикачі (перші 3)",price:150,time:"1–2год"},
+        {label:"Розумний дзвінок / замок + налаштування",price:195,time:"1.5–2.5год"},
+      ],
+      addon:{label:"Кожна додаткова розетка/вимикач",price:20,time:"~15 хв"},
+      example:{desc:"2 світильники + 3 розетки",price:325},
+      wa:"Добрий день! Мені потрібна електрика.",
+    },
+  },
+  included:"✅ Включено", youProvide:"📦 Ви надаєте",
+  pricingHdr:"Ціни", svcHdr:"Послуга", priceHdr:"Ціна", timeHdr:"Час",
+  popularTag:"Популярне", rates:"Тарифи", addons:"Доп. роботи",
+  trim:"Молдинги та плінтуси", extras:"Доп. роботи",
+  minimum:"⚡ Мінімум:", minNote:"· Виїзд на кошторис $75 → зараховується",
+  example:"💡 Типовий приклад", waQuote:"💬 Написати у WhatsApp", callNow:"📞 Зателефонувати",
+  calcTitle:"Калькулятор", laborOnly:"лише робота",
+  lFt:"Довжина (фут)", wFt:"Ширина (фут)", sqftOr:"Або введіть кв.ф. напряму", sqftPH:"Кв. футів",
+  surfaceType:"Тип поверхні", addonsPH:"Доп. роботи", calcBtn:"Розрахувати →",
+  calcResult:"Орієнтовна вартість", calcWA:"💬 Надіслати кошторис у WhatsApp",
+  minApplied:"⚡ Застосовано мінімум $", applied:"",
+  comboTitle:"Замов 2+ послуги — зеконом 20%",
+  comboSub:"Згадайте комбо при дзвінку або повідомленні",
+  comboSave:"Економія", comboCTA:"Отримати знижку 20% →",
+  faqTitle:"Часті запитання",
+  faqs:[
+    {q:"Як швидко ви відповідаєте?",a:"Протягом 10 хвилин. Працюємо 8:00–20:00 щодня. Терміновий виклик: 213-361-1700."},
+    {q:"Безкоштовна оцінка?",a:"Так, 100% безкоштовно. Прозорі ціни без прихованих платежів."},
+    {q:"Є ліцензія і страховка?",a:"Так. Повна ліцензія і страховка. Всі роботи гарантовані."},
+    {q:"Гарантія?",a:"100%. Якщо незадоволені — переробимо безкоштовно протягом 7 днів."},
+    {q:"Працюєте у вихідні?",a:"Так. Телефонуйте 213-361-1700 для запису у вечірній та вихідний час."},
+    {q:"Як оплатити?",a:"Готівка, Venmo, PayPal, всі картки. Оплата після виконання роботи."},
+  ],
+  readyTitle:"Готові записатися?", readySub:"Безкоштовний кошторис за 2 хвилини. Без спаму.",
+  readyWA:"💬 Написати у WhatsApp", readyCall:"📞 213-361-1700",
+},
+}; /* end T */
+
+/* ─── ANIMATED NUMBER ─────────────────────────────────────────── */
+function AnimNum({ value }) {
+  const [d, setD] = useState(value);
+  const prev = useRef(value);
+  useEffect(() => {
+    const from=prev.current, to=value; prev.current=to;
+    if(from===to) return;
+    let step=0;
+    const timer=setInterval(()=>{
+      step++;
+      const t=step/20, e=t<.5?2*t*t:-1+(4-2*t)*t;
+      setD(Math.round(from+(to-from)*e));
+      if(step>=20){setD(to);clearInterval(timer);}
+    },14);
+    return ()=>clearInterval(timer);
+  },[value]);
+  return <span>${d.toLocaleString()}</span>;
+}
+
+/* ─── NAV BAR ─────────────────────────────────────────────────── */
+function NavBar({ lang, setLang, isMobile }) {
+  const t=T[lang];
+  const homeUrl=`/?lang=${lang}`;
+  return (
+    <div style={{position:"sticky",top:0,zIndex:100,background:C.dark,
+      borderBottom:"1px solid rgba(212,175,55,0.15)",
+      padding:isMobile?"10px 16px":"13px 28px",
+      display:"flex",alignItems:"center",justifyContent:"space-between",
+      boxShadow:"0 2px 16px rgba(0,0,0,0.35)"}}>
+      {/* Logo */}
+      <a href={homeUrl} style={{display:"flex",alignItems:"center",gap:8,textDecoration:"none"}}>
+        <span style={{width:9,height:9,borderRadius:"50%",background:C.goldL,display:"inline-block",flexShrink:0}}/>
+        <span style={{fontFamily:"Georgia,serif",fontWeight:400,fontSize:isMobile?15:18,
+          color:C.cream,letterSpacing:"0.02em"}}>{t.navLogo}</span>
+      </a>
+      {/* Right controls */}
+      <div style={{display:"flex",alignItems:"center",gap:isMobile?6:8}}>
+        <a href={homeUrl} style={{padding:isMobile?"6px 12px":"7px 16px",borderRadius:8,
+          border:`1px solid rgba(212,175,55,0.35)`,color:C.goldL,
+          fontSize:isMobile?11:12,fontFamily:"sans-serif",fontWeight:600,
+          textDecoration:"none",whiteSpace:"nowrap",transition:"opacity 150ms"}}
+          onMouseEnter={e=>e.currentTarget.style.opacity=".75"}
+          onMouseLeave={e=>e.currentTarget.style.opacity="1"}>
+          {t.navHome}
+        </a>
+        {t.langs.map(l=>(
+          <button key={l.code} onClick={()=>setLang(l.code)} style={{
+            padding:isMobile?"6px 10px":"7px 13px",borderRadius:8,
+            background:"transparent",border:`1px solid rgba(212,175,55,0.2)`,
+            color:"#7a6a4a",fontSize:isMobile?11:12,fontFamily:"sans-serif",
+            fontWeight:700,textTransform:"uppercase",transition:"all 150ms"}}
+            onMouseEnter={e=>{e.currentTarget.style.color=C.goldL;e.currentTarget.style.borderColor="rgba(212,175,55,0.5)";}}
+            onMouseLeave={e=>{e.currentTarget.style.color="#7a6a4a";e.currentTarget.style.borderColor="rgba(212,175,55,0.2)";}}>
+            {l.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── SQFT CALCULATOR ─────────────────────────────────────────── */
+function SqftCalc({ svc, isMobile, t }) {
+  const [L,setL]=useState(""); const [W,setW]=useState("");
+  const [sqft,setSqft]=useState(""); const [surf,setSurf]=useState(svc.surfaces[0].id);
+  const [addons,setAddons]=useState([]); const [result,setResult]=useState(null);
+  useEffect(()=>{ if(L&&W) setSqft(String(Math.round(parseFloat(L)*parseFloat(W)))); },[L,W]);
+  const toggleAddon=id=>setAddons(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]);
+  const surfObj=svc.surfaces.find(s=>s.id===surf);
+  const addonRate=addons.reduce((sum,aid)=>{const a=svc.addons.find(x=>x.id===aid);return sum+(a?a.price:0);},0);
+  const rate=surfObj?surfObj.price+addonRate:0;
+  const liveTotal=sqft&&parseFloat(sqft)?Math.max(Math.round(parseFloat(sqft)*rate),svc.minimum):null;
+  function calc(){ if(!liveTotal) return; setResult({total:liveTotal,sf:parseFloat(sqft),surf:surfObj,isMin:liveTotal===svc.minimum}); }
+  return (
+    <div style={{background:C.goldBg,border:`1px solid ${C.goldBorder}`,borderRadius:16,padding:20,marginTop:20}}>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+        <span style={{fontSize:18}}>🧮</span>
+        <span style={{fontWeight:700,fontSize:15,color:C.text}}>{t.calcTitle}</span>
+        <span style={{marginLeft:"auto",fontSize:11,color:C.light}}>{t.laborOnly}</span>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:10}}>
+        {[[t.lFt,L,setL],[t.wFt,W,setW]].map(([lbl,val,set])=>(
+          <div key={lbl}>
+            <div style={{fontSize:11,color:C.light,marginBottom:4}}>{lbl}</div>
+            <input type="number" value={val} onChange={e=>set(e.target.value)} placeholder="0"
+              style={{width:"100%",padding:"11px 12px",border:`1px solid ${C.border}`,borderRadius:8,
+                fontSize:15,color:C.text,background:C.card,boxSizing:"border-box"}} />
+          </div>
+        ))}
+      </div>
+      <div style={{fontSize:11,color:C.light,marginBottom:4}}>{t.sqftOr}</div>
+      <input type="number" value={sqft} onChange={e=>setSqft(e.target.value)} placeholder={t.sqftPH}
+        style={{width:"100%",padding:"13px 14px",border:`2px solid ${C.goldL}`,borderRadius:10,
+          fontSize:18,fontWeight:700,color:C.text,background:C.card,boxSizing:"border-box",marginBottom:14}} />
+      <div style={{fontSize:11,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>{t.surfaceType}</div>
+      <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:14}}>
+        {svc.surfaces.map(s=>(
+          <button key={s.id} onClick={()=>setSurf(s.id)} style={{
+            padding:"7px 11px",borderRadius:20,border:`1px solid ${surf===s.id?C.goldL:C.border}`,
+            background:surf===s.id?C.goldBg:C.card,fontSize:12,
+            color:surf===s.id?C.gold:C.mid,fontWeight:surf===s.id?700:400}}>
+            {s.label.split("—")[0].trim()} <strong style={{color:C.gold}}>·${s.price}/sf</strong>
+          </button>
+        ))}
+      </div>
+      <div style={{fontSize:11,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>{t.addonsPH}</div>
+      <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:16}}>
+        {svc.addons.map(a=>(
+          <button key={a.id} onClick={()=>toggleAddon(a.id)} style={{
+            padding:"7px 11px",borderRadius:20,border:`1px solid ${addons.includes(a.id)?C.goldL:C.border}`,
+            background:addons.includes(a.id)?C.goldBg:C.card,fontSize:12,
+            color:addons.includes(a.id)?C.gold:C.light}}>
+            {addons.includes(a.id)?"✓ ":"+ "}{a.label} <strong style={{color:C.gold}}>+${a.price}/sf</strong>
+          </button>
+        ))}
+      </div>
+      {liveTotal&&(
+        <div style={{padding:"12px 14px",background:C.card,borderRadius:10,border:`1px solid ${C.goldBorder}`,marginBottom:12,textAlign:"center"}}>
+          <div style={{fontSize:13,color:C.mid}}>{parseFloat(sqft).toLocaleString()} sqft × ${rate.toFixed(2)}/sf</div>
+          <div style={{fontSize:32,fontWeight:800,color:C.gold,lineHeight:1.2}}>{fmt(liveTotal)}</div>
+          {liveTotal===svc.minimum&&<div style={{fontSize:11,color:C.light}}>⚡ min ${svc.minimum}</div>}
+        </div>
+      )}
+      <button onClick={calc} disabled={!liveTotal} style={{
+        width:"100%",padding:14,borderRadius:10,border:"none",
+        background:liveTotal?`linear-gradient(135deg,${C.goldL},${C.gold})`:C.border,
+        color:liveTotal?C.dark:C.light,fontWeight:700,fontSize:15,
+        boxShadow:liveTotal?"0 4px 16px rgba(212,175,55,0.35)":"none"}}>
+        {t.calcBtn}
+      </button>
+      {result&&(
+        <div style={{marginTop:14,padding:18,background:C.card,borderRadius:14,border:`1px solid ${C.goldBorder}`,textAlign:"center"}}>
+          <div style={{fontSize:11,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:4}}>{t.calcResult}</div>
+          <div style={{fontSize:44,fontWeight:800,color:C.gold,lineHeight:1}}><AnimNum value={result.total}/></div>
+          {result.isMin&&<div style={{fontSize:11,color:C.light,marginTop:4}}>{t.minApplied}{svc.minimum}{t.applied}</div>}
+          <div style={{fontSize:13,color:C.mid,marginTop:6}}>{result.sf.toLocaleString()} sqft · {result.surf.label.split("—")[0].trim()}</div>
+          <a href={wa(svc.wa+` ~${result.sf} sqft, est: ${fmt(result.total)}`)} target="_blank" rel="noreferrer"
+            style={{display:"block",marginTop:14,padding:"13px",background:"linear-gradient(135deg,#25D366,#128C7E)",
+              borderRadius:10,color:"#fff",fontWeight:700,fontSize:14,textDecoration:"none"}}>
+            {t.calcWA}
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── SERVICE PANEL ───────────────────────────────────────────── */
+function SvcPanel({ svcId, isMobile, t }) {
+  const svc=t.svcs[svcId], svcType=t.svcType[svcId];
+  const ROW=(items,keyField)=>items.map((item,i)=>(
+    <div key={i} style={{display:"grid",gridTemplateColumns:"1fr auto auto",
+      padding:isMobile?"12px 14px":"13px 16px",
+      background:i%2===0?C.card:"#faf8f4",
+      borderBottom:i<items.length-1?`1px solid ${C.border}`:"none"}}>
+      <div>
+        <div style={{fontSize:isMobile?13:14,fontWeight:600,color:C.text,display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
+          {item.label}
+          {item.popular&&<span style={{fontSize:10,color:C.gold,background:C.goldBg,padding:"2px 6px",borderRadius:8}}>{t.popularTag}</span>}
+        </div>
+        {item.sub&&<div style={{fontSize:11,color:C.light,marginTop:2}}>{item.sub}</div>}
+      </div>
+      <div style={{textAlign:"right",minWidth:70}}>
+        <span style={{fontWeight:800,fontSize:isMobile?15:16,color:C.gold}}>{item.hourly?"$70/hr":fmt(item.price)}</span>
+      </div>
+      <div style={{textAlign:"right",minWidth:isMobile?50:65,fontSize:11,color:C.light,paddingLeft:isMobile?8:14}}>{item.time}</div>
+    </div>
+  ));
+  const KV_ROW=(items)=>items.map((item,i)=>(
+    <div key={i} style={{display:"grid",gridTemplateColumns:"1fr auto",padding:"11px 16px",
+      background:i%2===0?C.card:"#faf8f4",borderBottom:i<items.length-1?`1px solid ${C.border}`:"none"}}>
+      <span style={{fontSize:13,color:C.mid}}>{item.label}</span>
+      <span style={{fontWeight:700,fontSize:13,color:C.gold}}>{item.price}</span>
+    </div>
+  ));
+  const TABLE_HDR=(cols)=>(
+    <div style={{display:"grid",gridTemplateColumns:cols,background:"#f5f0e8",
+      padding:"10px 16px",borderBottom:`1px solid ${C.border}`}}>
+      {[t.svcHdr,t.priceHdr,t.timeHdr].map((h,i)=>(
+        <div key={i} style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase",
+          textAlign:i>0?"right":"left",minWidth:i===1?70:i===2?60:0}}>
+          {i===2&&isMobile?"":h}
+        </div>
+      ))}
+    </div>
+  );
+  return (
+    <div>
+      {/* Header */}
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12,marginBottom:20}}>
+        <div>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
+            <span style={{fontSize:isMobile?30:36}}>{t.svcIcon[svcId]}</span>
+            <div>
+              <h2 style={{margin:0,fontWeight:800,fontSize:isMobile?20:24,color:C.text}}>{svc.label}</h2>
+              <div style={{fontSize:13,color:C.mid}}>{svc.tagline}</div>
+            </div>
+          </div>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            {svc.badge&&<span style={{display:"inline-block",padding:"4px 12px",background:C.greenBg,
+              border:"1px solid rgba(30,126,52,0.2)",borderRadius:20,fontSize:11,fontWeight:700,color:C.green}}>{svc.badge}</span>}
+            {t.svcPopular[svcId]&&<span style={{display:"inline-block",padding:"4px 12px",background:C.goldBg,
+              border:`1px solid ${C.goldBorder}`,borderRadius:20,fontSize:11,fontWeight:700,color:C.gold}}>⭐ {t.popularTag}</span>}
+          </div>
+        </div>
+        <div style={{textAlign:"right"}}>
+          <div style={{fontSize:isMobile?30:36,fontWeight:800,color:C.gold,lineHeight:1}}>{t.svcBase[svcId]}</div>
+          <div style={{fontSize:12,color:C.light}}>{t.svcNote[svcId]}</div>
+        </div>
+      </div>
+
+      {/* Included / You Provide */}
+      <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:12,marginBottom:20}}>
+        <div style={{background:C.greenBg,border:"1px solid rgba(30,126,52,0.15)",borderRadius:12,padding:16}}>
+          <div style={{fontWeight:700,fontSize:11,color:C.green,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>{t.included}</div>
+          {svc.included.map((item,i)=>(
+            <div key={i} style={{fontSize:13,color:C.mid,marginBottom:6,display:"flex",gap:6}}>
+              <span style={{color:C.green,flexShrink:0}}>·</span>{item}
+            </div>
+          ))}
+        </div>
+        <div style={{background:"rgba(176,48,32,0.04)",border:"1px solid rgba(176,48,32,0.12)",borderRadius:12,padding:16}}>
+          <div style={{fontWeight:700,fontSize:11,color:C.red,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>{t.youProvide}</div>
+          {svc.youProvide.map((item,i)=>(
+            <div key={i} style={{fontSize:13,color:C.mid,marginBottom:6,display:"flex",gap:6}}>
+              <span style={{color:C.red,flexShrink:0}}>·</span>{item}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Fixed price table */}
+      {(svcType==="fixed"||svcType==="fixed_plus")&&(
+        <div style={{marginBottom:20}}>
+          <div style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:10}}>{t.pricingHdr}</div>
+          <div style={{borderRadius:12,overflow:"hidden",border:`1px solid ${C.border}`}}>
+            {TABLE_HDR("1fr auto auto")}
+            {ROW(svc.options)}
+            {svc.addon&&(
+              <div style={{display:"grid",gridTemplateColumns:"1fr auto auto",padding:"11px 16px",
+                background:C.goldBg,borderTop:`1px dashed ${C.goldBorder}`}}>
+                <div style={{fontSize:13,color:C.mid}}>+ {svc.addon.label}</div>
+                <div style={{textAlign:"right",minWidth:70,fontWeight:700,fontSize:14,color:C.gold}}>+${svc.addon.price}</div>
+                <div style={{textAlign:"right",minWidth:isMobile?50:65,fontSize:11,color:C.light,paddingLeft:8}}>{svc.addon.time}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* SqFt table */}
+      {svcType==="sqft"&&(
+        <div style={{marginBottom:8}}>
+          <div style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>{t.rates}</div>
+          <div style={{borderRadius:12,overflow:"hidden",border:`1px solid ${C.border}`,marginBottom:12}}>
+            <div style={{background:"#f5f0e8",padding:"10px 16px",borderBottom:`1px solid ${C.border}`,
+              display:"grid",gridTemplateColumns:"1fr auto"}}>
+              <span style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase"}}>{t.svcHdr}</span>
+              <span style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase"}}>{t.priceHdr}</span>
+            </div>
+            {svc.surfaces.map((s,i)=>(
+              <div key={i} style={{display:"grid",gridTemplateColumns:"1fr auto",padding:"12px 16px",
+                background:i%2===0?C.card:"#faf8f4",borderBottom:i<svc.surfaces.length-1?`1px solid ${C.border}`:"none"}}>
+                <span style={{fontSize:13,color:C.text}}>{s.label}</span>
+                <span style={{fontWeight:800,fontSize:15,color:C.gold}}>${s.price}/sf</span>
+              </div>
+            ))}
+          </div>
+          {svc.addons&&<>
+            <div style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>{t.addons}</div>
+            <div style={{borderRadius:12,overflow:"hidden",border:`1px solid ${C.border}`,marginBottom:12}}>
+              {svc.addons.map((a,i)=>(
+                <div key={i} style={{display:"grid",gridTemplateColumns:"1fr auto",padding:"11px 16px",
+                  background:i%2===0?C.card:"#faf8f4",borderBottom:i<svc.addons.length-1?`1px solid ${C.border}`:"none"}}>
+                  <span style={{fontSize:13,color:C.mid}}>+ {a.label}</span>
+                  <span style={{fontWeight:700,fontSize:13,color:C.gold}}>+${a.price}/sf</span>
+                </div>
+              ))}
+            </div>
+          </>}
+          {svc.trim&&<>
+            <div style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>{t.trim}</div>
+            <div style={{borderRadius:12,overflow:"hidden",border:`1px solid ${C.border}`,marginBottom:12}}>{KV_ROW(svc.trim)}</div>
+          </>}
+          {svc.extras&&<>
+            <div style={{fontSize:11,fontWeight:700,color:C.light,textTransform:"uppercase",letterSpacing:1,marginBottom:8}}>{t.extras}</div>
+            <div style={{borderRadius:12,overflow:"hidden",border:`1px solid ${C.border}`,marginBottom:12}}>{KV_ROW(svc.extras)}</div>
+          </>}
+          <div style={{background:C.goldBg,border:`1px solid ${C.goldBorder}`,borderRadius:10,padding:"11px 14px",marginBottom:4}}>
+            <span style={{fontSize:13,color:C.mid}}>{t.minimum} </span>
+            <strong style={{color:C.gold}}>${svc.minimum}</strong>
+            <span style={{fontSize:11,color:C.light}}> {t.minNote}</span>
+          </div>
+        </div>
+      )}
+
+      {/* Example */}
+      <div style={{background:"linear-gradient(135deg,rgba(212,175,55,0.06),rgba(212,175,55,0.13))",
+        border:`1px solid ${C.goldBorder}`,borderRadius:14,padding:16,margin:"20px 0"}}>
+        <div style={{fontSize:11,fontWeight:700,color:C.gold,textTransform:"uppercase",letterSpacing:1,marginBottom:6}}>{t.example}</div>
+        <div style={{fontSize:14,color:C.mid,marginBottom:6}}>{svc.example.desc}</div>
+        <div style={{fontSize:isMobile?26:28,fontWeight:800,color:C.gold}}>{fmt(svc.example.price)}</div>
+      </div>
+
+      {svcType==="sqft"&&<SqftCalc svc={svc} isMobile={isMobile} t={t}/>}
+
+      {/* CTAs */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginTop:24}}>
+        <a href={wa(svc.wa)} target="_blank" rel="noreferrer"
+          style={{display:"block",padding:isMobile?"14px 8px":"15px 10px",textAlign:"center",
+            background:"linear-gradient(135deg,#25D366,#128C7E)",borderRadius:12,color:"#fff",
+            fontWeight:700,fontSize:isMobile?13:14,textDecoration:"none",
+            boxShadow:"0 4px 14px rgba(37,211,102,0.3)"}}>
+          {t.waQuote}
+        </a>
+        <a href="tel:12133611700"
+          style={{display:"block",padding:isMobile?"14px 8px":"15px 10px",textAlign:"center",
+            background:C.card,border:`2px solid ${C.goldL}`,borderRadius:12,color:C.gold,
+            fontWeight:700,fontSize:isMobile?13:14,textDecoration:"none"}}>
+          {t.callNow}
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ─── COMBO BLOCK ─────────────────────────────────────────────── */
+function ComboBlock({ isMobile, t }) {
+  return (
+    <div style={{marginTop:48,padding:isMobile?"28px 20px":"36px 32px",
+      background:`linear-gradient(135deg,${C.dark},#2d2419)`,borderRadius:20}}>
+      <div style={{textAlign:"center",marginBottom:24}}>
+        <div style={{fontSize:30,marginBottom:8}}>🎁</div>
+        <h3 style={{fontWeight:800,fontSize:isMobile?20:24,color:C.cream,margin:"0 0 8px"}}>{t.comboTitle}</h3>
+        <p style={{fontSize:13,color:"#8a7a5a",margin:0}}>{t.comboSub}</p>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr 1fr":"repeat(4,1fr)",gap:10,marginBottom:22}}>
+        {COMBOS.map((c,i)=>(
+          <div key={i} style={{background:"rgba(255,255,255,0.04)",border:`1px solid ${C.goldBorder}`,borderRadius:14,padding:16}}>
+            {c.svcs.map((s,j)=>(<div key={j} style={{fontSize:isMobile?11:12,color:C.cream,marginBottom:3}}>{s}</div>))}
+            <div style={{marginTop:10,display:"flex",alignItems:"baseline",gap:6,flexWrap:"wrap"}}>
+              <span style={{fontSize:isMobile?18:22,fontWeight:800,color:C.goldL}}>{fmt(c.price)}</span>
+              <span style={{fontSize:12,color:"#5a4a30",textDecoration:"line-through"}}>{fmt(c.orig)}</span>
+            </div>
+            <div style={{fontSize:11,color:"#5a9a5a",marginTop:4}}>{t.comboSave} {fmt(c.save)}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{textAlign:"center"}}>
+        <a href={wa("Hi! I want to book 2+ services for 20% combo discount.")} target="_blank" rel="noreferrer"
+          style={{display:"inline-block",padding:"14px 28px",
+            background:`linear-gradient(135deg,${C.goldL},${C.gold})`,borderRadius:12,
+            color:C.dark,fontWeight:800,fontSize:isMobile?14:15,textDecoration:"none",
+            boxShadow:"0 8px 24px rgba(212,175,55,0.4)"}}>
+          {t.comboCTA}
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ─── MAIN PAGE ───────────────────────────────────────────────── */
+function PricingPage() {
+  const [lang,setLang]=useState(()=>{
+    const p=new URLSearchParams(window.location.search);
+    const l=p.get('lang');
+    return T[l]?l:'en';
+  });
+  const [active,setActive]=useState("tv");
+  const [isMobile,setIsMobile]=useState(false);
+  const [openFaq,setOpenFaq]=useState(null);
+  const contentRef=useRef(null);
+
+  useEffect(()=>{
+    const check=()=>setIsMobile(window.innerWidth<768);
+    check(); window.addEventListener("resize",check);
+    return ()=>window.removeEventListener("resize",check);
+  },[]);
+
+  useEffect(()=>{
+    const url=new URL(window.location.href);
+    url.searchParams.set('lang',lang);
+    window.history.replaceState({},'',url.toString());
+    document.documentElement.lang=T[lang].htmlLang;
+  },[lang]);
+
+  const t=T[lang];
+  const svcIds=t.svcOrder;
+
+  function selectSvc(id){
+    setActive(id);
+    setTimeout(()=>contentRef.current?.scrollIntoView({behavior:"smooth",block:"start"}),50);
+  }
+
+  return (
+    <div style={{minHeight:"100vh",background:C.bg}}>
+      <NavBar lang={lang} setLang={setLang} isMobile={isMobile}/>
+
+      {/* ── Hero ── */}
+      <div style={{background:`linear-gradient(135deg,${C.dark} 0%,#2d2010 100%)`,
+        padding:isMobile?"40px 20px 32px":"52px 24px 40px",textAlign:"center"}}>
+        <div style={{fontSize:11,fontWeight:700,letterSpacing:3,color:C.gold,
+          textTransform:"uppercase",marginBottom:10}}>{t.heroTag}</div>
+        <h1 style={{fontFamily:"Georgia,serif",fontWeight:400,fontSize:isMobile?28:42,
+          color:C.cream,margin:"0 0 10px",lineHeight:1.2}}>
+          {t.heroTitle.split('\n').map((line,i,arr)=>(
+            <span key={i}>{line}{i<arr.length-1&&<br/>}</span>
+          ))}
+        </h1>
+        <p style={{fontSize:isMobile?13:15,color:"#8a7a5a",margin:"0 0 6px",lineHeight:1.5}}>{t.heroSub}</p>
+        <div style={{display:"flex",gap:isMobile?10:20,justifyContent:"center",flexWrap:"wrap",marginTop:14}}>
+          {t.trust.map(item=>(<span key={item} style={{fontSize:isMobile?12:13,color:"#7a6a4a"}}>{item}</span>))}
+        </div>
+      </div>
+
+      {/* ── Content ── */}
+      <div style={{maxWidth:920,margin:"0 auto",padding:isMobile?"20px 16px 0":"28px 24px 0"}}>
+
+        {/* Icon grid */}
+        <div style={{display:"grid",gridTemplateColumns:isMobile?"repeat(4,1fr)":"repeat(7,1fr)",
+          gap:isMobile?8:10,marginBottom:isMobile?20:28}}>
+          {svcIds.map(id=>(
+            <div key={id} onClick={()=>selectSvc(id)} style={{
+              padding:isMobile?"10px 4px":"14px 8px",textAlign:"center",
+              background:active===id?C.goldBg:C.card,
+              border:`1px solid ${active===id?C.goldL:C.border}`,
+              borderRadius:12,cursor:"pointer",transition:"all 0.2s",
+              boxShadow:active===id?"0 2px 12px rgba(212,175,55,0.2)":"none"}}>
+              <div style={{fontSize:isMobile?20:22}}>{t.svcIcon[id]}</div>
+              <div style={{fontSize:isMobile?9:11,fontWeight:700,
+                color:active===id?C.gold:C.text,marginTop:4,lineHeight:1.2}}>{t.svcs[id].label}</div>
+              <div style={{fontSize:isMobile?11:12,fontWeight:800,color:C.gold,marginTop:3}}>{t.svcBase[id]}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tabs */}
+        <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch",
+          marginBottom:20,marginLeft:isMobile?-16:0,marginRight:isMobile?-16:0,
+          paddingLeft:isMobile?16:0,paddingRight:isMobile?16:0}}>
+          <div style={{display:"flex",gap:0,borderBottom:`2px solid ${C.border}`,minWidth:"max-content"}}>
+            {svcIds.map(id=>(
+              <button key={id} onClick={()=>selectSvc(id)} style={{
+                padding:isMobile?"12px 14px":"14px 18px",border:"none",
+                borderBottom:active===id?`3px solid ${C.goldL}`:"3px solid transparent",
+                marginBottom:-2,background:"transparent",
+                fontSize:isMobile?12:13,fontWeight:active===id?700:500,
+                color:active===id?C.gold:C.mid,whiteSpace:"nowrap",transition:"all 0.2s"}}>
+                {t.svcIcon[id]} {t.svcs[id].label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Service panel */}
+        <div ref={contentRef} style={{background:C.card,borderRadius:20,
+          padding:isMobile?"20px 16px":"32px",
+          border:`1px solid ${C.border}`,
+          boxShadow:"0 4px 24px rgba(0,0,0,0.05)",marginBottom:isMobile?20:32}}>
+          <SvcPanel key={`${active}-${lang}`} svcId={active} isMobile={isMobile} t={t}/>
+        </div>
+
+        {/* Combo */}
+        <ComboBlock isMobile={isMobile} t={t}/>
+
+        {/* FAQ */}
+        <div style={{marginTop:40}}>
+          <h3 style={{fontWeight:800,fontSize:isMobile?18:20,color:C.text,margin:"0 0 16px"}}>{t.faqTitle}</h3>
+          <div style={{display:"flex",flexDirection:"column",gap:8}}>
+            {t.faqs.map((f,i)=>(
+              <div key={i} style={{background:C.card,border:`1px solid ${C.border}`,borderRadius:12,overflow:"hidden"}}>
+                <button onClick={()=>setOpenFaq(openFaq===i?null:i)} style={{
+                  width:"100%",padding:"15px 18px",background:"transparent",border:"none",
+                  textAlign:"left",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <span style={{fontWeight:700,fontSize:isMobile?13:14,color:C.text}}>{f.q}</span>
+                  <span style={{color:C.gold,fontSize:18,flexShrink:0,marginLeft:8,
+                    transform:openFaq===i?"rotate(180deg)":"rotate(0)",transition:"transform 0.2s"}}>›</span>
+                </button>
+                {openFaq===i&&(
+                  <div style={{padding:"0 18px 15px",fontSize:13,color:C.mid,lineHeight:1.6}}>{f.a}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Final CTA */}
+        <div style={{marginTop:40,padding:isMobile?"28px 20px":"36px",textAlign:"center",
+          background:`linear-gradient(135deg,#2d2419,${C.dark})`,borderRadius:20,marginBottom:40}}>
+          <h3 style={{fontFamily:"Georgia,serif",fontWeight:400,fontSize:isMobile?22:28,
+            color:C.cream,margin:"0 0 8px"}}>{t.readyTitle}</h3>
+          <p style={{fontSize:13,color:"#8a7a5a",margin:"0 0 24px"}}>{t.readySub}</p>
+          <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+            <a href={wa("Hi! I'd like to get a quote for handyman services.")} target="_blank" rel="noreferrer"
+              style={{padding:isMobile?"14px 22px":"15px 28px",
+                background:"linear-gradient(135deg,#25D366,#128C7E)",borderRadius:12,color:"#fff",
+                fontWeight:700,fontSize:isMobile?14:15,textDecoration:"none",
+                boxShadow:"0 6px 20px rgba(37,211,102,0.3)"}}>
+              {t.readyWA}
+            </a>
+            <a href="tel:12133611700"
+              style={{padding:isMobile?"14px 22px":"15px 28px",
+                background:"transparent",border:`2px solid ${C.goldL}`,
+                borderRadius:12,color:C.goldL,fontWeight:700,
+                fontSize:isMobile?14:15,textDecoration:"none"}}>
+              {t.readyCall}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<PricingPage/>);
+</script>
+</body>
+</html>
