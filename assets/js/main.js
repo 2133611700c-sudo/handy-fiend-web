@@ -1375,16 +1375,8 @@ function bootstrapLang(){
     localStorage.setItem('hf_lang',urlLang);
     return urlLang;
   }
-
-  const saved=normalizeLang(localStorage.getItem('hf_lang')||'');
-  if(saved&&LANG_ORDER.includes(saved))return saved;
-
-  // Always default to English for first-time visitors (not browser language)
-  const detected='en';
-  localStorage.setItem('hf_lang',detected);
-
-  // No auto-redirect - always start with English
-  return detected;
+  // Always English unless user explicitly chose a language via URL
+  return 'en';
 }
 
 let lang=bootstrapLang();
