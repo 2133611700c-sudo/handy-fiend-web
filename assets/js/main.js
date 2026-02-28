@@ -141,7 +141,7 @@ const T={
     heroAccent:"Instant Help",
     heroSub:"Describe your project and get AI-powered guidance on pricing, timeline, and next steps—instantly.",
     aiPowered:"AI Powered",
-    aiSearchPlaceholder:"Ask about pricing, repairs, painting, cabinets, estimates...",
+    aiSearchPlaceholder:"I'm an artificial intelligence that will help and answer all your questions as a marketer",
     aiBadge:"Smart",
     aiSubmit:"Ask",
     chipPricing:"Pricing",
