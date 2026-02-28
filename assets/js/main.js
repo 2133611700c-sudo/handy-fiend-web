@@ -1972,38 +1972,104 @@ document.getElementById('langBtn').addEventListener('click',()=>{
   const searchBar=document.getElementById('searchBarWrapper');
   const searchInput=document.getElementById('aiSearchInput');
   const submitBtn=document.getElementById('submitBtn');
+  const photoBtn=document.getElementById('photoBtn');
+  const photoInput=document.getElementById('photoInput');
+  const photoPreviewRow=document.getElementById('photoPreviewRow');
 
   if(!searchInput||!submitBtn||!searchBar) return;
 
-  // Focus state
-  searchInput.addEventListener('focus',()=>{
-    searchBar.classList.add('active');
-  });
+  // Collected photos as [{dataUrl, name}]
+  let selectedPhotos=[];
 
-  // Blur state
-  searchInput.addEventListener('blur',()=>{
-    if(!searchInput.value){
-      searchBar.classList.remove('active');
-    }
-  });
+  // Focus/blur/input states
+  searchInput.addEventListener('focus',()=>{ searchBar.classList.add('active'); });
+  searchInput.addEventListener('blur',()=>{ if(!searchInput.value&&!selectedPhotos.length) searchBar.classList.remove('active'); });
+  searchInput.addEventListener('input',()=>{ searchBar.classList[searchInput.value?'add':'remove']('active'); });
 
-  // Input state
-  searchInput.addEventListener('input',()=>{
-    if(searchInput.value){
+  // ── Photo button → open file picker ──
+  if(photoBtn&&photoInput){
+    photoBtn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      photoInput.click();
+    });
+
+    photoInput.addEventListener('change',()=>{
+      const files=Array.from(photoInput.files||[]).slice(0,6);
+      if(!files.length) return;
       searchBar.classList.add('active');
-    }else{
-      searchBar.classList.remove('active');
-    }
-  });
+      files.forEach(file=>{
+        if(selectedPhotos.length>=6) return;
+        const reader=new FileReader();
+        reader.onload=(ev)=>{
+          const dataUrl=ev.target.result;
+          const photoObj={dataUrl:dataUrl,name:file.name};
+          selectedPhotos.push(photoObj);
+          addThumb(photoObj);
+          photoBtn.classList.add('has-photos');
+        };
+        reader.readAsDataURL(file);
+      });
+      photoInput.value=''; // reset so same file can be re-added
+    });
+  }
 
-  // Submit handler
-  function handleSubmit(){
+  function addThumb(photoObj){
+    if(!photoPreviewRow) return;
+    const wrap=document.createElement('div');
+    wrap.className='photo-thumb';
+    const img=document.createElement('img');
+    img.src=photoObj.dataUrl;
+    img.alt='';
+    const rm=document.createElement('button');
+    rm.className='photo-thumb-remove';
+    rm.innerHTML='×';
+    rm.title='Remove photo';
+    rm.addEventListener('click',()=>{
+      selectedPhotos=selectedPhotos.filter(p=>p!==photoObj);
+      wrap.remove();
+      if(!selectedPhotos.length) photoBtn.classList.remove('has-photos');
+    });
+    wrap.appendChild(img);
+    wrap.appendChild(rm);
+    photoPreviewRow.appendChild(wrap);
+  }
+
+  // ── Submit: send query + photos to /api/ai-intake ──
+  async function handleSubmit(){
     const query=searchInput.value.trim();
-    if(query){
-      track('ai_search_submit',{query:query,language:lang});
-      // Route to AI intake (to be implemented)
-      // window.location.href=`/api/ai-intake?q=${encodeURIComponent(query)}&lang=${lang}`;
-      console.log('AI Search Query:',query,'Language:',lang);
+    if(!query&&!selectedPhotos.length) return;
+
+    // Visual feedback
+    submitBtn.disabled=true;
+    const origText=submitBtn.textContent;
+    submitBtn.textContent='...';
+
+    track('ai_search_submit',{query:query,language:lang,photos:selectedPhotos.length});
+
+    try{
+      const resp=await fetch('/api/ai-intake',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({query:query,photos:selectedPhotos,lang:lang})
+      });
+      const data=await resp.json().catch(()=>({}));
+      if(data.success!==false){
+        // Success: clear the bar
+        searchInput.value='';
+        selectedPhotos=[];
+        if(photoPreviewRow) photoPreviewRow.innerHTML='';
+        if(photoBtn) photoBtn.classList.remove('has-photos');
+        searchBar.classList.remove('active');
+        submitBtn.textContent='✓';
+        setTimeout(()=>{ submitBtn.textContent=origText; submitBtn.disabled=false; },1800);
+      } else {
+        submitBtn.textContent=origText;
+        submitBtn.disabled=false;
+      }
+    }catch(err){
+      console.error('[AI_INTAKE]',err);
+      submitBtn.textContent=origText;
+      submitBtn.disabled=false;
     }
   }
 
