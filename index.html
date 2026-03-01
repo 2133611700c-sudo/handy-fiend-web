@@ -159,7 +159,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Hero offer headline -->
   <div class="hero-headline">
     <p class="hero-offer-eyebrow">Los Angeles · Licensed &amp; Insured</p>
-    <h1 class="hero-offer-title" id="heroOfferTitle">BUNDLE &amp; SAVE 15%</h1>
+    <h1 class="hero-offer-title" id="heroOfferTitle">BUNDLE &amp; SAVE 20%</h1>
     <p class="hero-offer-sub" id="heroOfferSub">Book 2+ Services Today</p>
   </div>
   <div class="ai-search-floating-wrapper">
@@ -208,40 +208,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li data-i18n="serviceElectrical">Electrical</li>
       </ul>
     </section>
-  <div class="top-blocks">
-    <!-- COMBO INTERACTIVE CALCULATOR -->
-    <section class="combo-calc" id="comboCalc">
-      <div class="cc-head">
-        <span class="cc-icon">🎁</span>
-        <div>
-          <div class="cc-title" data-i18n="comboTitle">Pick 2 Services — Save 20%</div>
-          <div class="cc-sub" data-i18n="comboSub">Book any combo, get instant discount</div>
-        </div>
-      </div>
-      <div class="cc-selects">
-        <select class="cc-sel" id="ccSel1">
-          <option value="">Service 1…</option>
-        </select>
-        <span class="cc-plus">+</span>
-        <select class="cc-sel" id="ccSel2">
-          <option value="">Service 2…</option>
-        </select>
-      </div>
-      <div class="cc-err" id="ccErr">Please pick 2 different services</div>
-      <div class="cc-result" id="ccResult">
-        <div class="cc-row1">
-          <span class="cc-original" id="ccOriginal"></span>
-          <span class="cc-discounted" id="ccDiscounted"></span>
-          <span class="cc-save" id="ccSave"></span>
-        </div>
-        <div class="cc-ctas">
-          <a class="cc-wa" id="ccWa" href="#" target="_blank">💬 Book via WhatsApp</a>
-          <a class="cc-call" href="tel:+12133611700">📞 Call</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="rc" id="calcBox">
+  <div class="rc" id="calcBox">
     <div class="cb">
       <div class="ch">
         <div class="ci">📐</div>
@@ -296,6 +263,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="number" id="hoursInput" min="1" max="24" step="0.5" placeholder="2" inputmode="decimal">
         </div>
         <div class="abadge" id="hrBadge" style="display:none"></div>
+
+        <!-- KITCHEN CABINET PAINTING -->
+        <div id="kitchenWrap" style="display:none">
+          <div class="iblk">
+            <span class="ilbl" id="lDoorType"></span>
+            <select id="doorTypeSel"></select>
+          </div>
+          <div class="iblk">
+            <span class="ilbl" id="lDoorQtyK"></span>
+            <input type="number" id="doorQtyK" min="0" placeholder="20" inputmode="numeric">
+          </div>
+          <div class="irow">
+            <div class="iblk">
+              <span class="ilbl" id="lDrawerS"></span>
+              <input type="number" id="drawerSmallQty" min="0" placeholder="0" inputmode="numeric">
+            </div>
+            <div class="iblk">
+              <span class="ilbl" id="lDrawerL"></span>
+              <input type="number" id="drawerLargeQty" min="0" placeholder="0" inputmode="numeric">
+            </div>
+          </div>
+          <div class="iblk">
+            <span class="ilbl" id="lEndPanels"></span>
+            <input type="number" id="endPanelQty" min="0" placeholder="0" inputmode="numeric">
+          </div>
+          <div class="agroup" id="kitchenAddonGroup"></div>
+        </div>
+
+        <!-- FURNITURE PAINTING -->
+        <div id="furnWrap" style="display:none">
+          <div class="iblk">
+            <span class="ilbl" id="lPieceType"></span>
+            <select id="pieceTypeSel"></select>
+          </div>
+          <div class="iblk">
+            <span class="ilbl" id="lPieceQty"></span>
+            <input type="number" id="pieceQty" min="1" placeholder="1" inputmode="numeric">
+          </div>
+        </div>
+
+        <!-- FIXED-PRICE SERVICES -->
+        <div id="fixedWrap" style="display:none">
+          <div id="fixedCards"></div>
+          <div class="iblk" id="fixedExtraWrap" style="display:none">
+            <span class="ilbl" id="lFixedExtra"></span>
+            <input type="number" id="fixedExtraQty" min="0" placeholder="0" inputmode="numeric">
+          </div>
+        </div>
+
         <button class="ccbtn" id="calcBtn"></button>
         <div class="cres" id="calcRes">
           <div class="rlbl" id="resLbl"></div>
@@ -322,13 +338,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <input type="checkbox" id="smsMktConsent" style="margin-top:2px;width:18px;height:18px">
               <span id="smsConsent"></span>
             </label>
-            <button id="smsSendBtn" style="padding:12px;background:#3a3a3a;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;transition:opacity 200ms"></button>
+            <button id="smsSendBtn" style="padding:12px;background:linear-gradient(135deg,#1B2B4B 0%,#2B4A8C 100%);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;transition:opacity 200ms;box-shadow:0 4px 14px rgba(27,43,75,.35)"></button>
           </div>
         </div>
       </div>
     </div>
   </div><!-- /.rc -->
-  </div><!-- /.top-blocks -->
 
   <div class="grid" id="servGrid"></div>
   <a class="calc-anchor" href="#calcBox" id="calcAnchorBtn">📐 <span id="calcAnchorTxt">Get Estimate</span></a>
@@ -551,7 +566,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <p id="leadPhotosStatus" style="margin:8px 0 0;font-size:12px;color:#2e7d32;display:none;font-weight:700"></p>
       </div>
 
-      <button type="submit" style="padding:16px;background:var(--ink);color:#fff;border:none;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;transition:opacity 200ms" data-event="lead_submit">
+      <button type="submit" style="padding:16px;background:linear-gradient(135deg,#1B2B4B 0%,#2B4A8C 100%);color:#fff;border:none;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;transition:all 200ms;box-shadow:0 8px 28px rgba(27,43,75,.40)" data-event="lead_submit">
         <span data-i18n="leadFormBtn">Get Your Quote in 2 Min</span>
       </button>
 
@@ -952,5 +967,6 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
   </div>
 </footer>
 
+<script src="assets/js/service-calculator-modal.js"></script>
 </body>
 </html>
