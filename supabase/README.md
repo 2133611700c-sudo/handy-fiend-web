@@ -17,6 +17,8 @@ Run in Supabase SQL editor:
 2. `supabase/sql/002_rls_policies.sql`
 3. `supabase/sql/003_storage_private_bucket.sql`
 4. `supabase/sql/004_analytics_views.sql`
+5. `supabase/sql/005_conversations_patch.sql`
+6. `supabase/sql/006_leads_schema_sync.sql` (required for legacy projects with missing columns)
 
 ## Runtime flow
 
