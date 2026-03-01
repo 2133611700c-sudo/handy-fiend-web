@@ -1,0 +1,14 @@
+slot,channel,task,owner,agent_pipeline,done
+H0-H1,Facebook,Publish before/after same-project post + CTA to site/phone,Sergey,P->G->C->D,no
+H0-H1,Nextdoor,Publish business post with local offer and availability,Sergey,P->G->C->D,no
+H1-H2,GBP,Publish update + upload 3 photos,Sergey,P->G->C->D,no
+H1-H2,Website/Telegram,Submit test lead and verify one-tap callback flow,Codex,P->G->C->D,no
+H2-H4,Facebook Groups,Share adapted post to 5 local groups (no duplicate opener),Sergey,P->G->C->D,no
+H4-H6,Nextdoor,Publish neighborhood-specific case post,Sergey,P->G->C->D,no
+H6-H8,GBP,Add 3 Q&A entries with service intent,Sergey,P->G->C->D,no
+H8-H24,Inbound Ops,Maintain response SLA under 15 min for all inquiries,Sergey,P->G->C->D,no
+H8-H24,Inbound Ops,Trigger +3h follow-up for silent leads,Sergey,P->G->C->D,no
+H24-H30,Facebook,Publish second creative with different hook,Sergey,P->G->C->D,no
+H30-H36,Nextdoor,Publish second offer post with urgency slots,Sergey,P->G->C->D,no
+H36-H40,GBP,Publish second update with immediate availability,Sergey,P->G->C->D,no
+H40-H48,All,Repost top performer and keep SLA loop,Sergey,P->G->C->D,no

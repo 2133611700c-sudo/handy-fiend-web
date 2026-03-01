@@ -1,0 +1,115 @@
+===============================
+TELEGRAM INTEGRATION - DEPLOYMENT CHECKLIST
+===============================
+
+✅ COMPLETED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. api/telegram-notify.js — Created ✓
+2. api/submit-lead.js — Modified to send Telegram notifications ✓
+3. TELEGRAM_SETUP.md — Complete setup guide written ✓
+4. Non-blocking architecture implemented (async notifications) ✓
+5. HTML formatting with escaping for safety ✓
+
+🔴 ACTION REQUIRED — USER MUST DO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: Add Environment Variables to Vercel
+───────────────────────────────────────────
+Go to: https://vercel.com/dashboard
+  → Select your project
+  → Settings → Environment Variables
+  → Add two new variables:
+
+  Variable 1:
+  Name:  TELEGRAM_BOT_TOKEN
+  Value: 8560889035:AAFeE9Y84T4oK-Lexq0BEOdPMsUPlYFk6d4
+
+  Variable 2:
+  Name:  TELEGRAM_CHAT_ID
+  Value: 5593654628
+
+  → Set both to: Production + Preview + Development
+  → Click Save
+
+STEP 2: Deploy to Production
+────────────────────────────
+Run in terminal:
+  cd /Users/sergiikuropiatnyk/handy-friend-landing-v6
+  vercel deploy --prod
+
+Or: Push to GitHub and Vercel will auto-deploy
+
+STEP 3: Test
+────────────
+1. Go to https://handyandfriend.com
+2. Fill form:
+   - Name: Test User
+   - Email: test@example.com
+   - Phone: 2133361-1700
+   - Service: TV Mounting
+   - Message: Testing
+3. Click "Get Free Quote"
+4. Check Telegram (@HandyFriendLeadsBot)
+   → Should receive formatted message with lead details within 1-2 seconds
+
+STEP 4: Verify Success
+──────────────────────
+Check that message includes:
+  ✓ Lead name, phone, email, service
+  ✓ Message content
+  ✓ Lead ID
+  ✓ Timestamp (Los Angeles PT)
+  ✓ Action buttons (Call, WhatsApp, Email)
+
+===============================
+INTEGRATION DETAILS
+===============================
+
+Telegram Message Flow:
+  Customer form submit → Validation → Email sent → Telegram notification (async) → Response
+
+Features:
+  • HTML formatted with emojis, bold text, inline buttons
+  • Non-blocking (doesn't slow down main response)
+  • Works with all email providers (Resend, SendGrid, or demo)
+  • Each lead gets unique ID for tracking
+  • Timezone-aware (Los Angeles PT)
+  • Safe HTML escaping to prevent injection
+
+Cost: FREE (Telegram Bot API is fully free tier)
+
+Files Modified:
+  • api/submit-lead.js — Added notifyViaTelegram() calls
+  • api/telegram-notify.js — New standalone endpoint
+
+No other files affected. Form, validation, reCAPTCHA all unchanged.
+
+===============================
+TROUBLESHOOTING
+===============================
+
+No message in Telegram?
+  → Verify env vars are set in Vercel dashboard
+  → Check Vercel logs for [TELEGRAM_ERROR] or [TELEGRAM_SENT]
+  → Confirm bot token hasn't been regenerated
+  → Ensure Chat ID is correct (use @userinfobot to verify)
+
+Vercel logs location:
+  https://vercel.com/dashboard → Deployments → Latest
+
+For detailed setup guide, see: TELEGRAM_SETUP.md
+
+===============================
+QUICK REFERENCE
+===============================
+
+Bot Token:     8560889035:AAFeE9Y84T4oK-Lexq0BEOdPMsUPlYFk6d4
+Chat ID:       5593654628
+Bot Name:      @HandyFriendLeadsBot
+Owner:         Sergey (ru)
+Status:        Ready to deploy
+Estimated time to activate: 5-10 minutes
+
+═════════════════════════════════════════════════════════════════
+Once deployed, every lead will get instant Telegram notification!
+═════════════════════════════════════════════════════════════════

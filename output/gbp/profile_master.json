@@ -1,0 +1,66 @@
+{
+  "business_name": "Handy & Friend",
+  "primary_category": "Handyman",
+  "secondary_categories": [
+    "TV mounting service",
+    "Furniture assembly service",
+    "Plumber",
+    "Electrician",
+    "Painter"
+  ],
+  "phone": "+1 213-361-1700",
+  "website": "https://handyandfriend.com",
+  "email": "2133611700c@gmail.com",
+  "service_area_zip_codes": [
+    "90038",
+    "90046",
+    "90048",
+    "90069",
+    "90210",
+    "90028",
+    "90036",
+    "90401",
+    "90403",
+    "90211"
+  ],
+  "hours": {
+    "monday": "08:00-20:00",
+    "tuesday": "08:00-20:00",
+    "wednesday": "08:00-20:00",
+    "thursday": "08:00-20:00",
+    "friday": "08:00-20:00",
+    "saturday": "09:00-18:00",
+    "sunday": "09:00-16:00"
+  },
+  "attributes": [
+    "Onsite services",
+    "Same-week availability",
+    "Labor-only pricing",
+    "Appointments required"
+  ],
+  "services": [
+    "Furniture Assembly",
+    "TV Mounting",
+    "Drywall Patch",
+    "Interior Painting",
+    "Faucet Installation",
+    "Garbage Disposal Installation",
+    "Light Fixture Installation",
+    "Outlet and Switch Replacement",
+    "Door and Lock Repair",
+    "Curtain and Blinds Installation",
+    "Shelf and Wall Art Installation",
+    "Smart Home Device Setup",
+    "Minor Plumbing Repairs",
+    "Toilet Repair and Install",
+    "Caulking and Sealing",
+    "Appliance Hookup",
+    "Cabinet and Hinge Repair",
+    "Power Washing",
+    "Move-in/Move-out Fix List",
+    "Post-job cleanup"
+  ],
+  "service_descriptions": [],
+  "business_description_short": "Local Los Angeles handyman team for home repairs, installs, and assembly with transparent labor-only pricing.",
+  "business_description_long": "Handy & Friend provides reliable handyman services across Los Angeles, Hollywood, West Hollywood, Beverly Hills, and Santa Monica. We handle furniture assembly, TV mounting, drywall and paint touch-ups, fixture installs, plumbing and electrical minor repairs, and final cleanup. We focus on clear communication, labor-only pricing, and same-week scheduling for homeowners, renters, and small businesses."
+}

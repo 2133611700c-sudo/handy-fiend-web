@@ -1,0 +1,8 @@
+Platform: thumbtack
+Placement: plc_tt_001
+Title: Handyman Pro Profile Intro
+
+Labor-only handyman services, fast response, same-week availability in Los Angeles.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=thumbtack&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_tt_001

@@ -1,0 +1,1096 @@
+{
+  "generatedAt": "2026-02-27T04:21:47.067Z",
+  "count": 109,
+  "assets": [
+    {
+      "assetId": "asset_345b050b594b",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/333.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "345b050b594bb954a7fb43cbc6afdc06571cd98d",
+      "size": 7323518,
+      "updatedAt": "2026-02-23T20:47:27.318Z"
+    },
+    {
+      "assetId": "asset_61853af44f29",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/4.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "61853af44f294465f143906eff993fea70c8a87b",
+      "size": 2324928,
+      "updatedAt": "2026-02-20T06:56:17.473Z"
+    },
+    {
+      "assetId": "asset_3b3bad515583",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/a_digital_graphic_design_logo_for_handy_fiend_is_d.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "3b3bad5155830b0ccdbad7e648408d23b615244b",
+      "size": 2107420,
+      "updatedAt": "2026-02-23T22:43:33.007Z"
+    },
+    {
+      "assetId": "asset_664448ea3a25",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/a_digital_graphic_design_logo_for_handy_friend_f.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "664448ea3a25315efbdfe981d9215c5b9327b687",
+      "size": 1938642,
+      "updatedAt": "2026-02-23T22:54:39.190Z"
+    },
+    {
+      "assetId": "asset_0b27d02e1bc9",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/a_logo_for_handy_fiend_is_depicted_in_the_center_o.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "0b27d02e1bc95243de59ee9904995508c1303725",
+      "size": 1998590,
+      "updatedAt": "2026-02-23T22:42:12.238Z"
+    },
+    {
+      "assetId": "asset_9771b80a53b0",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/ART.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "9771b80a53b0f5eb1e8d6420d51337a7a1bedcce",
+      "size": 1625300,
+      "updatedAt": "2026-02-20T21:57:21.574Z"
+    },
+    {
+      "assetId": "asset_3412d686f9c3",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Electrical.png",
+      "type": "real_photo",
+      "serviceTag": "electrical",
+      "rightsStatus": "owner_archive",
+      "hash": "3412d686f9c3f1dc7a3322e491e25797f7a9242a",
+      "size": 8784911,
+      "updatedAt": "2026-02-20T22:23:52.746Z"
+    },
+    {
+      "assetId": "asset_2b79285c5994",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/electrical2.png",
+      "type": "real_photo",
+      "serviceTag": "electrical",
+      "rightsStatus": "owner_archive",
+      "hash": "2b79285c59948454fb7cf15389d6d6d32b841374",
+      "size": 2731583,
+      "updatedAt": "2026-02-23T22:16:16.187Z"
+    },
+    {
+      "assetId": "asset_598d64395417",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Flooring.png",
+      "type": "real_photo",
+      "serviceTag": "flooring",
+      "rightsStatus": "owner_archive",
+      "hash": "598d64395417ed0af1d1ad91e0d0c6bf0e576185",
+      "size": 7625679,
+      "updatedAt": "2026-02-20T22:12:29.107Z"
+    },
+    {
+      "assetId": "asset_6b7baf51baef",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/floring.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "6b7baf51baeff3e5f49380855ea962f06499b564",
+      "size": 2667281,
+      "updatedAt": "2026-02-23T22:14:10.152Z"
+    },
+    {
+      "assetId": "asset_c3c7826c849e",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/furnitire.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "c3c7826c849ec2bb64ae9d257a56ed9f2bbee88f",
+      "size": 2776791,
+      "updatedAt": "2026-02-23T22:13:03.237Z"
+    },
+    {
+      "assetId": "asset_61211025df37",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Furniture.png",
+      "type": "real_photo",
+      "serviceTag": "furniture_assembly",
+      "rightsStatus": "owner_archive",
+      "hash": "61211025df37a312370cf9103f7c72e74a91afe5",
+      "size": 1620475,
+      "updatedAt": "2026-02-20T22:03:38.930Z"
+    },
+    {
+      "assetId": "asset_14b47c5fcbae",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_66by1x66by1x66by.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "14b47c5fcbae8798c5458a6fb49c176f23917ddd",
+      "size": 6636573,
+      "updatedAt": "2026-01-11T03:40:43.644Z"
+    },
+    {
+      "assetId": "asset_ad9cdacdc7ee",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_b7rnolb7rnolb7rn.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "ad9cdacdc7eec06ddea1e4b5e4c8813576c45656",
+      "size": 7944564,
+      "updatedAt": "2026-02-23T21:12:25.222Z"
+    },
+    {
+      "assetId": "asset_70e44c4d1427",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_eu80b4eu80b4eu80.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "70e44c4d1427d9d36a2816e78e8900e27c926f6a",
+      "size": 7863077,
+      "updatedAt": "2026-01-23T11:18:03.686Z"
+    },
+    {
+      "assetId": "asset_e8890e583b99",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_jpv0q7jpv0q7jpv0.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "e8890e583b99dbd5ea89fc377013f8a70bfb07f3",
+      "size": 6732820,
+      "updatedAt": "2026-02-20T06:07:56.380Z"
+    },
+    {
+      "assetId": "asset_49164570ddfd",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_nw68nmnw68nmnw68.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "49164570ddfdbe3dc381c8aaaaa8da20db04da93",
+      "size": 7152790,
+      "updatedAt": "2026-02-20T06:18:09.019Z"
+    },
+    {
+      "assetId": "asset_49e66c3ca991",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_qeus7kqeus7kqeus.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "49e66c3ca99109e96605d87ca221ca1e0bcc605a",
+      "size": 1861085,
+      "updatedAt": "2026-02-20T20:36:31.161Z"
+    },
+    {
+      "assetId": "asset_7a01ee631eff",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_qlzenrqlzenrqlze.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "7a01ee631effa994beb1036ab990ac56b263f6d3",
+      "size": 1861578,
+      "updatedAt": "2026-02-20T21:42:12.101Z"
+    },
+    {
+      "assetId": "asset_a9cbdf5e4c6a",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_r7k0ijr7k0ijr7k0.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "a9cbdf5e4c6ab3c6682af08f391b603cccbdfa48",
+      "size": 2186662,
+      "updatedAt": "2026-02-25T21:55:58.804Z"
+    },
+    {
+      "assetId": "asset_dfd722e42fdc",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Gemini_Generated_Image_v0a420v0a420v0a4.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "dfd722e42fdc39e7f89545c9fbb0fc640b21410d",
+      "size": 5290758,
+      "updatedAt": "2026-01-05T06:35:08.541Z"
+    },
+    {
+      "assetId": "asset_9063a9d104d3",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Handy & Friend.jpg",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "9063a9d104d34d543d8c7c1e72e9342e7dc03ac5",
+      "size": 245411,
+      "updatedAt": "2026-02-25T21:42:52.669Z"
+    },
+    {
+      "assetId": "asset_1b2054242c01",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/image1212.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "1b2054242c01ce591d44e3ea27c8b36e620a61b9",
+      "size": 2278519,
+      "updatedAt": "2026-02-20T20:41:06.604Z"
+    },
+    {
+      "assetId": "asset_ad8aa6f94cbe",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/image1313.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "ad8aa6f94cbed8aa45e310ae56c7fae641cf0099",
+      "size": 2787284,
+      "updatedAt": "2026-02-20T20:53:08.539Z"
+    },
+    {
+      "assetId": "asset_92d7fda9e980",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/image3.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "92d7fda9e980c35e8f5c757634a66de0b64d2545",
+      "size": 2425155,
+      "updatedAt": "2026-02-20T06:56:10.083Z"
+    },
+    {
+      "assetId": "asset_afdb65d0c0ec",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/image6.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "afdb65d0c0ecf52bafd34d4fd2cd85b310bb3033",
+      "size": 1870189,
+      "updatedAt": "2026-02-20T20:16:33.108Z"
+    },
+    {
+      "assetId": "asset_a5e69275920d",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/kitchen 2.png",
+      "type": "real_photo",
+      "serviceTag": "painting",
+      "rightsStatus": "owner_archive",
+      "hash": "a5e69275920ded56bd35da4ad2ee8ea85f248758",
+      "size": 2658929,
+      "updatedAt": "2026-02-23T22:09:24.333Z"
+    },
+    {
+      "assetId": "asset_7781220444bc",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/kitchen.png",
+      "type": "real_photo",
+      "serviceTag": "painting",
+      "rightsStatus": "owner_archive",
+      "hash": "7781220444bccb71cbaaade44973e345bd019909",
+      "size": 7948440,
+      "updatedAt": "2026-02-23T21:14:42.032Z"
+    },
+    {
+      "assetId": "asset_fa51f422e5ad",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/messenginfo-main/public/images/messenginfo-logo.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "fa51f422e5ad2bcde22c0faada45ef547a241585",
+      "size": 85332,
+      "updatedAt": "2026-02-03T08:47:21.000Z"
+    },
+    {
+      "assetId": "asset_78851f39d5a3",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/paint.png",
+      "type": "mockup",
+      "serviceTag": "painting",
+      "rightsStatus": "owner_archive",
+      "hash": "78851f39d5a3e9b415531c17fdd164b33cb33f0e",
+      "size": 2549639,
+      "updatedAt": "2026-02-23T22:10:29.731Z"
+    },
+    {
+      "assetId": "asset_de4968f3fe18",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Painting.png",
+      "type": "mockup",
+      "serviceTag": "painting",
+      "rightsStatus": "owner_archive",
+      "hash": "de4968f3fe18db60892801544457a9b0559131ba",
+      "size": 1614971,
+      "updatedAt": "2026-02-20T22:04:28.182Z"
+    },
+    {
+      "assetId": "asset_bbd35714ecba",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Plumbing.png",
+      "type": "real_photo",
+      "serviceTag": "plumbing",
+      "rightsStatus": "owner_archive",
+      "hash": "bbd35714ecba1d279a5081b82f5a965e8c0d7fc0",
+      "size": 8077176,
+      "updatedAt": "2026-02-20T22:14:25.580Z"
+    },
+    {
+      "assetId": "asset_c6d634f0052c",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/plumbing22.png",
+      "type": "real_photo",
+      "serviceTag": "plumbing",
+      "rightsStatus": "owner_archive",
+      "hash": "c6d634f0052ce72023d1b21e5bb4056052c3e29a",
+      "size": 2539949,
+      "updatedAt": "2026-02-23T22:15:18.162Z"
+    },
+    {
+      "assetId": "asset_a8e73554dc43",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/site.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "a8e73554dc43e2499d3cb6b0d8e2a5e4af6affa5",
+      "size": 2074390,
+      "updatedAt": "2026-02-23T21:19:03.533Z"
+    },
+    {
+      "assetId": "asset_14c10c4ea9df",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/TotpGeneration/packages/Otp.NET.1.4.0/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "14c10c4ea9df447719395a195e1fc0724187d302",
+      "size": 819,
+      "updatedAt": "2023-04-08T14:04:30.000Z"
+    },
+    {
+      "assetId": "asset_54e2a2b89ed9",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/TV Mounting.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "54e2a2b89ed96d65e047a956b5c65c71b4d2d4e6",
+      "size": 1780789,
+      "updatedAt": "2026-02-20T22:02:49.061Z"
+    },
+    {
+      "assetId": "asset_266483d36038",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/configuration-editing/images/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "266483d36038bd716e74c1a0ab226e206dc04eb7",
+      "size": 2825,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_4ab0c325bb73",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/css-language-features/icons/css.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "4ab0c325bb73ac6e5da5acca45edc2a0b6564520",
+      "size": 3719,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_1950a0c78642",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/debug-auto-launch/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "1950a0c7864253b77d7f2de0a72f1472128545fc",
+      "size": 7191,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_9e30af56edb0",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/debug-server-ready/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "9e30af56edb006a1129c28d253e0da2e3bf17cf0",
+      "size": 8309,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_18168ed1b3a5",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/emmet/images/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "18168ed1b3a57620522a9f1a43917a74724345da",
+      "size": 11294,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_c440e9a70b7e",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/extension-editing/images/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "c440e9a70b7ed50da6b6685b28dec1e6d40ff057",
+      "size": 2007,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_ff00c0876098",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/git/resources/icons/git.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "ff00c08760983e0e037aaf6ab4e004f4d147276a",
+      "size": 2383,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_31d0b21cfc64",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/github-authentication/images/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "31d0b21cfc64385303a286b08a405c8b8b1dad1b",
+      "size": 3658,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_9a29969f3cbb",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/github-authentication/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "9a29969f3cbbc762f05d4ce21c9b6ad716bd5ccf",
+      "size": 3818,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_07c63fdc8018",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/github/images/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "07c63fdc80180c2d9fba75808f2ce9661f1b939c",
+      "size": 3657,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_8eccc3e4b3ba",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/grunt/images/grunt.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "8eccc3e4b3bac87834f93eb858232401e266d074",
+      "size": 33256,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_ac1d7e1bdea7",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/gulp/images/gulp.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "ac1d7e1bdea7ac54cf0191af7b4d374e3c131142",
+      "size": 6347,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_7ec68bb6aa6e",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/html-language-features/icons/html.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "7ec68bb6aa6e7f552172e35c1a28e442d13b2575",
+      "size": 2336,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_a1b21d2906d4",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ipynb/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "a1b21d2906d4a99861aef1699e58056762a536b9",
+      "size": 29977,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_c5a8311bf276",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/jake/images/cowboy_hat.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "c5a8311bf2766e95747764023d721d788f6c1b46",
+      "size": 42668,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_7a340f066751",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/json-language-features/icons/json.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "7a340f066751258aa0419f8a248573a3780db5a5",
+      "size": 4433,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_634c077c2d3a",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-language-features/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "634c077c2d3a03687058a8c93040a411af2e6625",
+      "size": 903,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_8b88cab8ab92",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/media-preview/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "8b88cab8ab9273de8b9b33de3a71641ea278aa39",
+      "size": 1889,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_6c3e456f2309",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/merge-conflict/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "6c3e456f2309f52e2155ecb3123b377ed3ef321a",
+      "size": 2439,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_5829ec37d9c4",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion/resources/logo.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "5829ec37d9c487c5d6952de456b662fdf9b9b979",
+      "size": 8177,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_ef498526b7fe",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/logo.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "ef498526b7fed4862c92e2529ca3b63c4d6df829",
+      "size": 8192,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_1762207fb508",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/auto-attach.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "1762207fb5082b8072d72f7d9a2a1a71e17687e6",
+      "size": 27905,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_b5e98bdc3e4f",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/conditional-exception-breakpoints.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "b5e98bdc3e4fcfc1cf646838bdf2c8bd143d49b3",
+      "size": 6175,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_ad45fdfa9d74",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/exclude-caller.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "ad45fdfa9d74fe957b9f1c3eb93d647cc478cff7",
+      "size": 7473,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_b694bdfef20c",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/flame-chart.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "b694bdfef20c5b32a6809d118a49d1f9a57c644a",
+      "size": 24840,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_1e6f71a4d480",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/instrumentation-breakpoints.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "1e6f71a4d480c665f19e1857cd1593802558b5f9",
+      "size": 6809,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_5db0e816be5f",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/instrumentation-breakpoints2.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "5db0e816be5f3defddf67d2b28959f803d9c4b9e",
+      "size": 27275,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_7f7774424292",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/logo-with-text.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "7f77744242929d43573b60dc20df7555d5a6af5e",
+      "size": 10615,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_5f6fbc5fa696",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/network-view.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "5f6fbc5fa696cffdeb7697544a07e951afc981aa",
+      "size": 13091,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_c498d72df3c2",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/pretty-print.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "c498d72df3c226b420734ed3bd4a1641dd9dfe31",
+      "size": 8214,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_72dea9086e3b",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/returnvalue.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "72dea9086e3baf9c1903f986e5acaf264444a30b",
+      "size": 221039,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_632c40d094f7",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/top-level-await.png",
+      "type": "mockup",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "632c40d094f70cfa44643db9320afacb0d47fe3b",
+      "size": 35622,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_0c834a0bafdb",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/wasm-dwarf.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "0c834a0bafdb5ce80d89a57d53c541ff42c4df14",
+      "size": 95452,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_2ef20e669bba",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/web-worker.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "2ef20e669bba29fd83cf7273b0d0ac77970ad521",
+      "size": 22318,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_65dd7eb84f3e",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/resources/readme/webview2.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "65dd7eb84f3ea65568bd5d74da2d1661e2d08e7f",
+      "size": 60735,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_3bd4dab6fc82",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.vscode-js-profile-table/resources/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "3bd4dab6fc82475c77c6c1d2d329557fe9fffc8b",
+      "size": 4462,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_8d00fd55be37",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/notebook-renderers/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "8d00fd55be37d3b789f2be1d83ea97b36f6e766f",
+      "size": 10640,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_1c6c0bbac6b3",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/npm/images/npm_icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "1c6c0bbac6b327badf74c67000cc5226a0bb1373",
+      "size": 523,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_c78f6973c0db",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/php-language-features/icons/logo.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "c78f6973c0db41b7bf048ced42265c4336be0ee0",
+      "size": 9210,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_f96ef03afdb7",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/references-view/media/demo.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "f96ef03afdb7e896bc3f1c7ccf9f603410238046",
+      "size": 412116,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_3e8b568eafe3",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/references-view/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "3e8b568eafe3bc9c505c2daa4ec6744560f540c5",
+      "size": 5762,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_97e63180d929",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/search-result/images/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "97e63180d9296c66763d7a3d6f91c401b52f3149",
+      "size": 2901,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_8c31abadca3d",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/simple-browser/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "8c31abadca3df5705e815c85834a0ceb811fa639",
+      "size": 1787,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_f097afd80262",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/terminal-suggest/dist/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "f097afd80262b00849dc12f41aad547beb9e6c28",
+      "size": 2272,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_5c2202a773c1",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/theme-seti/icons/seti-circular-128x128.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "5c2202a773c18973095c5ca10a1169857a73a6f4",
+      "size": 4814,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_322712ed83e2",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-language-features/media/icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "322712ed83e245823c6580de4e56a6c8be0a4554",
+      "size": 6203,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_393feb2c9ff7",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/media/opacity-background.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "393feb2c9ff7c0f594919f27fdaac5d0bfcd29c1",
+      "size": 173,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_3526815516fd",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/browser/parts/editor/media/back-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "3526815516fd6c9b23ea9142d248d2c80eb3acfd",
+      "size": 254,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_36ad134aae94",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/browser/parts/editor/media/forward-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "36ad134aae9453feea5262c13232cbb6889861e2",
+      "size": 267,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_6a5f8fef3aa1",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/continue-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "6a5f8fef3aa16d8890c6f36d1758b34971e2ed31",
+      "size": 668,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_0e8a2f6d361f",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/pause-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "0e8a2f6d361fa84d76c8d48e4b14575e691d800d",
+      "size": 299,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_5717d692e973",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/restart-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "5717d692e97358e23439c6028f867f4ef319a0d0",
+      "size": 1276,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_fc804bb5098f",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/run-with-debugging-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "fc804bb5098fe1a306ad1cd87baad749e5ede08e",
+      "size": 1418,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_09b36d738d05",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/stepinto-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "09b36d738d055d837bfb55763f49f34b0add569e",
+      "size": 700,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_daa06c6a2ab8",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/stepout-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "daa06c6a2ab87ac5aaef5add6b95682c5fd96cdd",
+      "size": 701,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_7d1bf9a0071c",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/stepover-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "7d1bf9a0071ce5224b569a119f522d0f0f914de1",
+      "size": 914,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_a3a7f8d3ddcc",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/debug/browser/media/stop-tb.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "a3a7f8d3ddccac6cc7c123bdd607c5b91da7eed8",
+      "size": 310,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_7413c721fc9c",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/extensions/browser/media/theme-icon.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "7413c721fc9cf151bfc291bad8d5d61f38929de9",
+      "size": 7594,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_1a815bc346ae",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/dark-hc.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "1a815bc346aec65d1ca4a2c4c6729163a6faa0ad",
+      "size": 10615,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_af2781303283",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/dark.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "af2781303283b4194f99ab372033725572e24fee",
+      "size": 10566,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_6a92dabf31aa",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/light-hc.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "6a92dabf31aa80db8e544584298d834614fe39cf",
+      "size": 10615,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_87d20932b089",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/light.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "87d20932b0893e1b562626267a82ddae7910a643",
+      "size": 10154,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_f5a94cd36426",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/colab.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "f5a94cd3642641647c73a340310e678a363a1657",
+      "size": 2473,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_9353aceb18a6",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/default.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "9353aceb18a63cf68f9564396a42e77e257111e5",
+      "size": 2476,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_fc10326ce510",
+      "filePath": "/Users/sergiikuropiatnyk/Downloads/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/welcomeGettingStarted/common/media/notebookThemes/jupyter.png",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "fc10326ce510f1dd905cf26e42d23ddc37a5c93e",
+      "size": 2489,
+      "updatedAt": "2025-12-17T14:37:38.000Z"
+    },
+    {
+      "assetId": "asset_a17103371e9c",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/art.jpg",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "a17103371e9c3b0bff455409b91a18bc6d81634c",
+      "size": 234009,
+      "updatedAt": "2026-02-26T21:58:41.668Z"
+    },
+    {
+      "assetId": "asset_5f7556dac4ae",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/electrical.jpeg",
+      "type": "real_photo",
+      "serviceTag": "electrical",
+      "rightsStatus": "owner_archive",
+      "hash": "5f7556dac4aeeb0bad87ec596e1ea76bf706dbdd",
+      "size": 327977,
+      "updatedAt": "2026-02-26T21:58:41.938Z"
+    },
+    {
+      "assetId": "asset_5d5b2a460aa1",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/flooring.jpeg",
+      "type": "real_photo",
+      "serviceTag": "flooring",
+      "rightsStatus": "owner_archive",
+      "hash": "5d5b2a460aa1444d9611c273a5220d85a6adeae2",
+      "size": 283913,
+      "updatedAt": "2026-02-26T21:58:41.784Z"
+    },
+    {
+      "assetId": "asset_d12e082bee2d",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/furniture.jpg",
+      "type": "real_photo",
+      "serviceTag": "furniture_assembly",
+      "rightsStatus": "owner_archive",
+      "hash": "d12e082bee2dd68a6cbfaaccf43a9261f395db67",
+      "size": 174260,
+      "updatedAt": "2026-02-26T21:58:41.626Z"
+    },
+    {
+      "assetId": "asset_141545e82f12",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/og.jpg",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "141545e82f12f096c4f476e9424e0491fc7c5ef9",
+      "size": 73309,
+      "updatedAt": "2026-02-23T07:21:28.976Z"
+    },
+    {
+      "assetId": "asset_ed520217a513",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/painting.jpg",
+      "type": "mockup",
+      "serviceTag": "painting",
+      "rightsStatus": "owner_archive",
+      "hash": "ed520217a513d00a871f2c03a88cc5b75e9d4160",
+      "size": 163239,
+      "updatedAt": "2026-02-26T21:58:41.707Z"
+    },
+    {
+      "assetId": "asset_fb15840b34ce",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/plumbing.jpeg",
+      "type": "real_photo",
+      "serviceTag": "plumbing",
+      "rightsStatus": "owner_archive",
+      "hash": "fb15840b34ce83ffd5e7b93e6534e93a7121e5b2",
+      "size": 239575,
+      "updatedAt": "2026-02-26T21:58:41.861Z"
+    },
+    {
+      "assetId": "asset_f8d20020f841",
+      "filePath": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/assets/img/tv-mounting.jpg",
+      "type": "real_photo",
+      "serviceTag": "general",
+      "rightsStatus": "owner_archive",
+      "hash": "f8d20020f84131cc7643518e51a03421c1e493ce",
+      "size": 201306,
+      "updatedAt": "2026-02-26T21:58:41.584Z"
+    }
+  ]
+}

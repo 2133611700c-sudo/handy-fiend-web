@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Handy & Friend Control Tower</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #11243a;
+      --muted: #5b6777;
+      --ok: #0a8f4d;
+      --warn: #c77b00;
+      --bad: #b42318;
+      --line: #e5e7eb;
+      --accent: #0d6efd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 38%);
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    h1 { margin: 0 0 6px; font-size: 30px; }
+    .sub { color: var(--muted); margin: 0 0 18px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.04);
+    }
+    .card h2 { margin: 0 0 8px; font-size: 18px; }
+    .pill { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; font-weight: 700; }
+    .ok { color: var(--ok); background: #e8f7ef; }
+    .warn { color: var(--warn); background: #fff7e6; }
+    .bad { color: var(--bad); background: #fdecec; }
+    .meta { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.4; }
+    .meta a { color: var(--accent); text-decoration: none; }
+    .meta a:hover { text-decoration: underline; }
+    .runbook { margin-top: 16px; }
+    .runbook h3 { margin: 0 0 8px; }
+    ol { margin: 0; padding-left: 18px; line-height: 1.5; }
+    .kpi { margin-top: 12px; padding: 10px; border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Handy & Friend Control Tower</h1>
+    <p class="sub">Truth-first leadgen dashboard: only validated sources + operational execution.</p>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Thumbtack</h2>
+        <span class="pill ok">API Exists</span>
+        <p class="meta">Partner API + OAuth + webhooks. Access request required.<br>
+          <a href="https://developers.thumbtack.com/docs" target="_blank">Docs</a> •
+          <a href="https://developers.thumbtack.com/request-access" target="_blank">Request access</a>
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Taskrabbit</h2>
+        <span class="pill warn">Limited Public Access</span>
+        <p class="meta">Home services API is not generally public yet in docs. Delivery API exists by approval.<br>
+          <a href="https://developer.taskrabbit.com/docs/getting-started" target="_blank">Getting started</a>
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Nextdoor</h2>
+        <span class="pill ok">API Exists</span>
+        <p class="meta">Publish API and Conversion/Ads API are available with token/access flow.<br>
+          <a href="https://developer.nextdoor.com/" target="_blank">Developer portal</a>
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Craigslist</h2>
+        <span class="pill bad">Restricted</span>
+        <p class="meta">No universal open posting API. Bulk interface is gated to specific high-volume cases.<br>
+          <a href="https://www.craigslist.org/about/bulk_posting_interface" target="_blank">Bulk posting</a>
+        </p>
+      </section>
+    </div>
+
+
+    <section class="card runbook">
+      <h3>Asset + Placement Registries</h3>
+      <ol>
+        <li>Creative assets registry: <code>/docs/creative-assets.json</code></li>
+        <li>Placement registry: <code>/docs/placements.csv</code></li>
+        <li>Free post templates: <code>/docs/PLATFORM_POST_TEMPLATES_FREE.md</code></li>
+        <li>Agent prompts: <code>/docs/AGENT_PROMPTS_GROWTH.md</code></li>
+      </ol>
+      <div class="kpi">
+        Use <code>placement_id</code> in every URL to track lead source into Telegram and submit-lead attribution.
+      </div>
+    </section>
+
+    <section class="card runbook">
+      <h3>Daily 60-Minute Leadgen Runbook (No Ad Spend)</h3>
+      <ol>
+        <li>Check inbound leads in Telegram and reply via one-tap panel within 3 minutes.</li>
+        <li>Publish one before/after case on Facebook page with direct CTA to site form.</li>
+        <li>Post one local service offer in compliant community thread (no unsolicited DM spam).</li>
+        <li>Answer 10 local intent comments with short qualification script (ZIP + service + timing).</li>
+        <li>Push one SEO update on site copy (city + service keyword on target section).</li>
+        <li>Log lead source quality in a sheet (platform, response time, booked yes/no).</li>
+      </ol>
+      <div class="kpi">
+        KPI targets: response SLA under 3 min, 10 qualified conversations/day, 2 bookings/day baseline.
+      </div>
+    </section>
+  </div>
+</body>
+</html>

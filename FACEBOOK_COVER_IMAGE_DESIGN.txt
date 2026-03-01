@@ -1,0 +1,190 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                     FACEBOOK COVER IMAGE - DESIGN TEMPLATE                      ║
+║                 Ready to Create in Canva, Adobe, or Figma                        ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+SPECIFICATIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+Dimensions: 1200px × 628px (Facebook standard)
+Format: JPG or PNG
+File Size: Under 8MB (preferably 1-3MB)
+Color Mode: RGB
+DPI: 72 (for web)
+
+═══════════════════════════════════════════════════════════════════════════════
+LAYOUT STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+[LEFT SIDE - 40%]
+Background: Gradient or dark brown (#2A1F14)
+Content: Large service icons or photos (tool icons, home symbols)
+
+[CENTER - 20%]
+Background: Brand color gold (#B8892C)
+Content: Vertical divider line
+
+[RIGHT SIDE - 40%]
+Background: Dark charcoal (#3a3a3a) 
+Content: Main text
+
+═══════════════════════════════════════════════════════════════════════════════
+TEXT CONTENT (Exact Layout)
+═══════════════════════════════════════════════════════════════════════════════
+
+MAIN HEADLINE (Top Right):
+Font: Bold, Large (48-52px)
+Text: "Handy & Friend"
+Color: White or Gold (#B8892C)
+Position: Top right quadrant
+
+SUBHEADLINE (Middle Right):
+Font: Medium, Medium size (24-28px)
+Text: "Same-Day Service • Free Quote • Licensed & Insured"
+Color: White
+Position: Center right
+
+PHONE NUMBER (Bottom Right):
+Font: Bold, Large (32-36px)
+Text: "213-361-1700"
+Color: Gold (#B8892C)
+Position: Bottom right corner
+
+═══════════════════════════════════════════════════════════════════════════════
+QUICK CREATE OPTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+OPTION 1: CANVA (Easiest - Free)
+1. Go to Canva.com
+2. Sign up (free account)
+3. Search template: "Facebook Cover"
+4. Choose dark/professional template
+5. Edit:
+   - Delete default text
+   - Add "Handy & Friend" in gold
+   - Add "Same-Day Service • Free Quote • Licensed & Insured"
+   - Add "213-361-1700"
+   - Add service icons (free icon library)
+6. Download as JPG
+7. Done!
+
+OPTION 2: ADOBE EXPRESS (Free)
+1. Go to express.adobe.com
+2. Create new design
+3. Choose "Facebook Cover" size
+4. Add:
+   - Dark background
+   - "Handy & Friend" headline
+   - Phone number
+   - Service icons
+5. Download as JPG
+
+OPTION 3: AI-GENERATED (Fastest)
+Use: DALL-E, Midjourney, or Canva AI
+Prompt: "Professional dark facebook cover for handyman business named Handy & Friend. Include phone 213-361-1700, gold accents, tools, home repair icons. 1200x628px"
+
+═══════════════════════════════════════════════════════════════════════════════
+COLOR PALETTE
+═══════════════════════════════════════════════════════════════════════════════
+
+Primary Background:
+Dark Brown: #2A1F14 (website hero color)
+or Dark Charcoal: #3a3a3a
+
+Accent Color:
+Gold: #B8892C (website brand color)
+
+Text:
+White: #FFFFFF (main text)
+Light Gray: #e5dfd5 (secondary text)
+
+Alternative (Modern Dark):
+Charcoal: #2b2b2b
+Gold: #d4a240
+White: #ffffff
+
+═══════════════════════════════════════════════════════════════════════════════
+DESIGN TIPS FOR MAXIMUM IMPACT
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ DO:
+- Use LARGE, READABLE text (test on phone size)
+- Keep 20% margin from edges (Facebook hides important content on edges)
+- Use 2-3 colors maximum (gold, dark, white)
+- Add subtle service icons (wrench, hammer, paint brush)
+- Include phone number prominently
+- Use professional, clean fonts
+
+✗ DON'T:
+- Use too many colors or gradients
+- Place important text near edges
+- Use thin fonts (hard to read small)
+- Make it too "busy" with images
+- Use low contrast (text must be readable)
+- Add watermarks or logos that distract
+
+═══════════════════════════════════════════════════════════════════════════════
+INSTANT COVER IMAGE (Text-Based ASCII Art Version)
+═══════════════════════════════════════════════════════════════════════════════
+
+If you need to create instantly without design software, here's the concept:
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  🔧 🪛 🔨                     ███████              Handy & Friend           │
+│  ⚡ 💧 🎨                     ███████              Same-Day Service          │
+│  🛋️ 📺 🏠                     ███████              Free Quote               │
+│                               ███████              Licensed & Insured       │
+│  Dark Brown                   Gold                 White Text               │
+│  Background                   Divider              Right Aligned            │
+│                                                    213-361-1700             │
+│                                                    (Gold, Large)            │
+│                                                                              │
+│  [Service icons on left]      [Brand gold line]   [Main content right]    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+RECOMMENDED TOOLS (Ranked by Ease)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. ⭐⭐⭐ CANVA (Easiest, Free)
+   - Drag & drop interface
+   - Pre-made templates
+   - Free stock images
+   - No design experience needed
+   - URL: canva.com
+
+2. ⭐⭐ Adobe Express (Very Easy, Free)
+   - Professional quality
+   - Fewer options than Canva
+   - Good for simple designs
+   - URL: express.adobe.com
+
+3. ⭐ Figma (Advanced)
+   - Full design control
+   - Steeper learning curve
+   - Free tier available
+   - URL: figma.com
+
+4. ⭐ Photoshop (Professional)
+   - Requires subscription ($20/month)
+   - Highest control
+   - Complex interface
+   - URL: adobe.com/photoshop
+
+═══════════════════════════════════════════════════════════════════════════════
+QUICK SAVE: SIMPLE TEXT VERSION (If no time for design)
+═══════════════════════════════════════════════════════════════════════════════
+
+Just use website background with overlay text:
+
+Background: Use website hero image (/assets/img/og.jpg)
+Overlay Text (dark transparent box):
+- "Handy & Friend"
+- "213-361-1700"
+- "Same-Day Service"
+
+This is fastest (5 minutes), and it's professional!
+
+═══════════════════════════════════════════════════════════════════════════════

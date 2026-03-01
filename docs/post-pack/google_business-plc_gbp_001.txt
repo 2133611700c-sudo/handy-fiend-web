@@ -1,0 +1,8 @@
+Platform: google_business
+Placement: plc_gbp_001
+Title: Book This Week - Handy & Friend
+
+Same-week availability in Los Angeles. Send project photos for a quick estimate.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=google_business&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_gbp_001

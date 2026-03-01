@@ -1,0 +1,8 @@
+Platform: taskrabbit
+Placement: plc_tr_001
+Title: Tasker Bio Intro
+
+Skilled handyman for assembly, mounting, patching, fixture swaps, and home fixes.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=taskrabbit&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_tr_001

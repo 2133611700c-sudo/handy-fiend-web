@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-02-27T04:21:47.186Z",
+  "count": 7,
+  "manifest": [
+    {
+      "platform": "facebook",
+      "placementId": "plc_fb_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/facebook-plc_fb_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=facebook&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_fb_001"
+    },
+    {
+      "platform": "nextdoor",
+      "placementId": "plc_nd_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/nextdoor-plc_nd_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=nextdoor&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_nd_001"
+    },
+    {
+      "platform": "craigslist",
+      "placementId": "plc_cl_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/craigslist-plc_cl_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=craigslist&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_cl_001"
+    },
+    {
+      "platform": "yelp",
+      "placementId": "plc_yp_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/yelp-plc_yp_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=yelp&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_yp_001"
+    },
+    {
+      "platform": "thumbtack",
+      "placementId": "plc_tt_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/thumbtack-plc_tt_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=thumbtack&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_tt_001"
+    },
+    {
+      "platform": "taskrabbit",
+      "placementId": "plc_tr_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/taskrabbit-plc_tr_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=taskrabbit&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_tr_001"
+    },
+    {
+      "platform": "google_business",
+      "placementId": "plc_gbp_001",
+      "file": "/Users/sergiikuropiatnyk/handy-friend-landing-v6/docs/post-pack/google_business-plc_gbp_001.txt",
+      "url": "https://handyandfriend.com/?utm_source=google_business&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_gbp_001"
+    }
+  ]
+}

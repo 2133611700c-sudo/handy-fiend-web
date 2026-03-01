@@ -1,0 +1,8 @@
+Platform: yelp
+Placement: plc_yp_001
+Title: Handyman Services - Fast Quote
+
+Request a quote with photos and preferred contact method.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=yelp&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_yp_001

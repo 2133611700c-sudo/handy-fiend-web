@@ -1,0 +1,82 @@
+[
+  {
+    "question": "Do you provide same-day or same-week service?",
+    "answer": "We prioritize same-week bookings and can often provide urgent slots based on technician availability."
+  },
+  {
+    "question": "Do you bring your own tools?",
+    "answer": "Yes. Our team arrives with professional tools for standard handyman tasks."
+  },
+  {
+    "question": "Can you install customer-provided parts?",
+    "answer": "Yes, we can install customer-provided fixtures and hardware."
+  },
+  {
+    "question": "Do you charge for materials?",
+    "answer": "Our model is labor-only pricing; any materials are approved by you first."
+  },
+  {
+    "question": "What areas do you serve?",
+    "answer": "We cover Los Angeles including Hollywood, West Hollywood, Beverly Hills, and Santa Monica."
+  },
+  {
+    "question": "Do you do TV mounting on drywall and concrete?",
+    "answer": "Yes, we mount TVs on common wall types with proper anchors and safety checks."
+  },
+  {
+    "question": "Can you assemble IKEA furniture?",
+    "answer": "Yes, furniture assembly is one of our core services."
+  },
+  {
+    "question": "Do you handle small plumbing jobs?",
+    "answer": "Yes, we handle minor plumbing repairs and fixture replacements."
+  },
+  {
+    "question": "Do you install faucets and garbage disposals?",
+    "answer": "Yes, we install faucets, disposals, and related kitchen/bath hardware."
+  },
+  {
+    "question": "Do you do electrical work like outlets and light fixtures?",
+    "answer": "We perform minor electrical tasks such as outlet, switch, and fixture replacement."
+  },
+  {
+    "question": "Can you patch and paint walls after repairs?",
+    "answer": "Yes, we can patch and blend paint for common wall damage."
+  },
+  {
+    "question": "Do you offer cleanup after work?",
+    "answer": "Yes, post-job cleanup is included so the space is ready to use."
+  },
+  {
+    "question": "How do I get a quote?",
+    "answer": "Send photos and scope by call or WhatsApp and we will provide a clear estimate."
+  },
+  {
+    "question": "Do you work on weekends?",
+    "answer": "Yes, weekend appointments are available."
+  },
+  {
+    "question": "Can I book via WhatsApp?",
+    "answer": "Yes, message us at WhatsApp for faster scheduling."
+  },
+  {
+    "question": "Do you service apartments and condos?",
+    "answer": "Yes, we work in homes, apartments, and condos."
+  },
+  {
+    "question": "Can you handle punch-list tasks before move-in?",
+    "answer": "Yes, we handle move-in and move-out punch-list repairs."
+  },
+  {
+    "question": "Do you provide recurring maintenance?",
+    "answer": "Yes, we can set recurring maintenance visits for rental units and small offices."
+  },
+  {
+    "question": "How long does a typical visit take?",
+    "answer": "Most visits run 1-4 hours depending on task count and complexity."
+  },
+  {
+    "question": "What payment methods do you accept?",
+    "answer": "We accept common digital and card payment options; confirm at booking."
+  }
+]

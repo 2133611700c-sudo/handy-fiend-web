@@ -1,0 +1,8 @@
+placementId,platform,city,url,status,createdAt,lastRefreshAt
+plc_fb_001,facebook,Los Angeles,https://www.facebook.com/professional_dashboard/tools/,logged_in_ready_post,,
+plc_nd_001,nextdoor,Los Angeles,https://business.nextdoor.com/en-us/getting-started/business-page,ready_claim_flow,,
+plc_cl_001,craigslist,Los Angeles,https://post.craigslist.org/k/iGt6rTnWHp95jRsn9Uz8wk/VG3Rp?s=pn,on_hold_free_mode,,
+plc_yp_001,yelp,Los Angeles,,pending_login,,
+plc_tt_001,thumbtack,Los Angeles,https://www.taskrabbit.com/become-a-tasker,onboarding_gate,,
+plc_tr_001,taskrabbit,Los Angeles,https://www.taskrabbit.com/become-a-tasker,onboarding_gate,,
+plc_gbp_001,google_business,Los Angeles,,pending_login,,

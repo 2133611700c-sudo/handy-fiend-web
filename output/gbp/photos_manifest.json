@@ -1,0 +1,482 @@
+[
+  {
+    "asset_id": "gbp_asset_01",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 1",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_02",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 2",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_03",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 3",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_04",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 4",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_05",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 5",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_06",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 6",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_07",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 7",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_08",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 8",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_09",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 9",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_10",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 10",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_11",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 11",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_12",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 12",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_13",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 13",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_14",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 14",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_15",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 15",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_16",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 16",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_17",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 17",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_18",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 18",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_19",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 19",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_20",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 20",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_21",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 21",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_22",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 22",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_23",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 23",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_24",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 24",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_25",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 25",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_26",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 26",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_27",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 27",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_28",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 28",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_29",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 29",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_30",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 30",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_31",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 31",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_32",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 32",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_33",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 33",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_34",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 34",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_35",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 35",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_36",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 36",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_37",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 37",
+    "style": "natural daylight, realistic",
+    "use_case": "cover",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_38",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 38",
+    "style": "in-home action, documentary style",
+    "use_case": "post",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_39",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 39",
+    "style": "clean close-up with tools",
+    "use_case": "service",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  },
+  {
+    "asset_id": "gbp_asset_40",
+    "prompt": "Realistic photo of a handyman completing home improvement task in Los Angeles, warm natural lighting, trustworthy professional look, no text overlays, image 40",
+    "style": "local LA residential context",
+    "use_case": "qa",
+    "compliance_checks": [
+      "No misleading claims",
+      "No fake badges",
+      "No medical/sensitive content",
+      "No copyrighted logos"
+    ]
+  }
+]

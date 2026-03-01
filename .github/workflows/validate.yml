@@ -48,3 +48,15 @@ jobs:
           grep -q 'User-agent'      robots.txt          && echo "✅ robots.txt" || echo "⚠️  robots.txt empty"
           grep -q 'sitemap'         sitemap.xml         && echo "✅ sitemap"   || echo "⚠️  sitemap empty"
           echo "✅ SEO checks done"
+
+      - name: Validate factory scripts syntax
+        run: |
+          node --check ops/build-asset-inventory.mjs
+          node --check ops/build-post-pack.mjs
+          node --check ops/factory-guard.mjs
+          echo "✅ Factory scripts syntax OK"
+
+      - name: Run mandatory factory guard (release gate)
+        run: |
+          node ops/factory-guard.mjs
+          echo "✅ Factory guard passed"

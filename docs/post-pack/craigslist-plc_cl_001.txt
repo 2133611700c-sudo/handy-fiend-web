@@ -1,0 +1,10 @@
+Platform: craigslist
+Placement: plc_cl_001
+Title: Handyman Los Angeles - Same Week Availability - Labor Only
+
+Reliable handyman in Los Angeles for small and medium home projects.
+Services: TV mounting, furniture assembly, faucet replacement, outlet/switch replacement, patch & paint, flooring touch-ups.
+Labor only. No markup on materials. Fast response.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=craigslist&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_cl_001

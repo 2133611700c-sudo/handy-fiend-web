@@ -1,2 +1,11 @@
 # handy-friend-web
-Official web application for Handy&amp;Friend. Cabinet Refinishing &amp; Handyman services in LA
+Official web application for Handy&Friend. Cabinet Refinishing & Handyman services in LA.
+
+## Factory stability
+Use the deterministic operations protocol:
+
+- `/docs/FACTORY_ZERO_DOWNTIME_PROTOCOL.md`
+- `node ops/build-asset-inventory.mjs`
+- `node ops/build-post-pack.mjs`
+- `node ops/factory-guard.mjs`
+- `GET /api/factory-health`

@@ -1,0 +1,10 @@
+Platform: facebook
+Placement: plc_fb_001
+Title: Need a handyman this week in Los Angeles?
+
+Handy & Friend provides labor-only handyman services with fast response.
+No markup on materials. Same-week slots available.
+Send photos for a quick estimate.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=facebook&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_fb_001

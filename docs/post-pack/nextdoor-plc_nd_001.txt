@@ -1,0 +1,10 @@
+Platform: nextdoor
+Placement: plc_nd_001
+Title: Local Handyman - Same-Week Availability
+
+Hi neighbors, Handy & Friend is available this week in Los Angeles.
+We handle assembly, painting, plumbing/electrical basics, and home fixes.
+Transparent labor-only pricing and quick communication.
+
+CTA: Call/Text 213-361-1700
+Site: https://handyandfriend.com/?utm_source=nextdoor&utm_campaign=organic_wave1&utm_content=post_a&placement_id=plc_nd_001

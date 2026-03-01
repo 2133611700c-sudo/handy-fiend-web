@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Handyman Search Hero</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* HERO SECTION — Premium Wrapper */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .hero-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0d0f1a 100%);
+      padding: 40px 20px;
+    }
+
+    /* Animated gradient background */
+    .hero-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(184, 134, 11, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      animation: gradientShift 8s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    /* Abstract shapes for premium feel */
+    .hero-wrapper::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(184, 134, 11, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      bottom: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* HERO HEADLINE */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .hero-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeInDown 0.8s ease-out 0.1s both;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #d4af37;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+
+    .hero-headline h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-headline h1 .accent {
+      background: linear-gradient(135deg, #d4af37 0%, #ffdd57 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subheadline {
+      font-size: clamp(16px, 2.2vw, 20px);
+      font-weight: 400;
+      color: #b8b8b8;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* AI SEARCH BAR — Main Focal Point */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .ai-search-container {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    /* AI Label above bar */
+    .ai-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #d4af37;
+    }
+
+    .ai-label::before {
+      content: '✨';
+      font-size: 14px;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Main search bar wrapper */
+    .ai-search-bar-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 12px 20px;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        0 0 1px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: text;
+    }
+
+    .ai-search-bar-wrapper:hover {
+      box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.35),
+        0 0 2px rgba(212, 175, 55, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border-color: rgba(212, 175, 55, 0.3);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    .ai-search-bar-wrapper.active {
+      box-shadow:
+        0 28px 100px rgba(212, 175, 55, 0.2),
+        0 0 4px rgba(212, 175, 55, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(255, 255, 255, 0.99);
+    }
+
+    /* Search icon (left) */
+    .search-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
+      color: #888;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Input field */
+    .ai-search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a1a;
+      font-family: inherit;
+      padding: 8px 0;
+      min-width: 0;
+    }
+
+    .ai-search-input::placeholder {
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    .ai-search-input:focus {
+      outline: none;
+    }
+
+    /* AI badge (middle) */
+    .ai-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.06));
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      margin: 0 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #b8860b;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .ai-badge::before {
+      content: '⚡';
+      font-size: 13px;
+    }
+
+    /* CTA Button (right) */
+    .search-submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, #d4af37 0%, #ffdd57 100%);
+      border: none;
+      border-radius: 40px;
+      color: #1a1410;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s ease-out;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+      text-transform: uppercase;
+    }
+
+    .search-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(212, 175, 55, 0.5);
+      background: linear-gradient(135deg, #ffdd57 0%, #ffd700 100%);
+    }
+
+    .search-submit-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+    }
+
+    .search-submit-btn::before {
+      content: '→';
+      font-size: 16px;
+      opacity: 0.8;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* PROMO CHIPS — Below search bar */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .promo-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .promo-chip {
+      padding: 8px 16px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #d4af37;
+      cursor: pointer;
+      transition: all 0.25s ease-out;
+      white-space: nowrap;
+    }
+
+    .promo-chip:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: rgba(212, 175, 55, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .promo-chip::before {
+      margin-right: 6px;
+    }
+
+    .promo-chip:nth-child(1)::before { content: '💰'; }
+    .promo-chip:nth-child(2)::before { content: '🎨'; }
+    .promo-chip:nth-child(3)::before { content: '🔧'; }
+    .promo-chip:nth-child(4)::before { content: '🏠'; }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* TRUST SIGNALS */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #999;
+    }
+
+    .trust-item-icon {
+      font-size: 18px;
+    }
+
+    .trust-item-text {
+      font-weight: 600;
+      color: #ccc;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* SECONDARY CTA */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    .secondary-cta {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(212, 175, 55, 0.08);
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .secondary-cta p {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .secondary-cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .secondary-cta-btn {
+      padding: 10px 20px;
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 28px;
+      color: #d4af37;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease-out;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .secondary-cta-btn:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* ANIMATIONS */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════ */
+    /* MOBILE RESPONSIVENESS */
+    /* ═══════════════════════════════════════════════════════════════ */
+
+    @media (max-width: 768px) {
+      .hero-wrapper {
+        min-height: auto;
+        padding: 60px 20px 40px;
+      }
+
+      .hero-content {
+        gap: 36px;
+      }
+
+      .hero-headline h1 {
+        font-size: 28px;
+      }
+
+      .hero-subheadline {
+        font-size: 15px;
+      }
+
+      .ai-search-bar-wrapper {
+        padding: 10px 12px;
+        flex-direction: column;
+        gap: 10px;
+        border-radius: 24px;
+      }
+
+      .search-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 0;
+        margin-bottom: 8px;
+        order: -1;
+      }
+
+      .ai-search-input {
+        text-align: center;
+        padding: 8px 4px;
+        width: 100%;
+      }
+
+      .ai-badge {
+        display: none;
+      }
+
+      .search-submit-btn {
+        width: 100%;
+        padding: 12px 16px;
+        justify-content: center;
+      }
+
+      .promo-chips {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .promo-chip {
+        width: 100%;
+        text-align: center;
+      }
+
+      .trust-row {
+        gap: 24px;
+        flex-direction: column;
+      }
+
+      .secondary-cta-group {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .secondary-cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-wrapper::after {
+        width: 400px;
+        height: 400px;
+      }
+
+      .hero-headline h1 {
+        font-size: 24px;
+      }
+
+      .hero-subheadline {
+        font-size: 14px;
+      }
+
+      .ai-search-bar-wrapper {
+        padding: 8px 10px;
+      }
+
+      .ai-label {
+        font-size: 11px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<section class="hero-wrapper">
+  <div class="hero-content">
+
+    <!-- Headline Section -->
+    <div class="hero-headline">
+      <div class="hero-eyebrow">Handyman Services in Los Angeles</div>
+      <h1>
+        Get <span class="accent">Instant Help</span> For Any Home Project
+      </h1>
+      <p class="hero-subheadline">
+        Describe your project and get AI-powered guidance on pricing, timeline, and next steps—instantly.
+      </p>
+    </div>
+
+    <!-- AI Search Bar -->
+    <div class="ai-search-container">
+      <div class="ai-label">⚡ AI Powered</div>
+
+      <div class="ai-search-bar-wrapper" id="searchBarWrapper">
+        <div class="search-icon">🔍</div>
+        <input
+          type="text"
+          class="ai-search-input"
+          id="aiSearchInput"
+          placeholder="Ask about pricing, repairs, painting, cabinets, estimates..."
+          aria-label="Ask AI about home services"
+        >
+        <div class="ai-badge">Smart</div>
+        <button class="search-submit-btn" id="submitBtn" aria-label="Ask AI">Ask</button>
+      </div>
+
+      <!-- Promo Chips -->
+      <div class="promo-chips">
+        <div class="promo-chip">Pricing</div>
+        <div class="promo-chip">Cabinet Paint</div>
+        <div class="promo-chip">Repairs</div>
+        <div class="promo-chip">Kitchen Update</div>
+      </div>
+    </div>
+
+    <!-- Trust Signals -->
+    <div class="trust-row">
+      <div class="trust-item">
+        <div class="trust-item-icon">⚡</div>
+        <div class="trust-item-text">Instant Response</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-icon">✅</div>
+        <div class="trust-item-text">Accurate Estimates</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-icon">🎯</div>
+        <div class="trust-item-text">Clear Next Steps</div>
+      </div>
+    </div>
+
+    <!-- Secondary CTA -->
+    <div class="secondary-cta">
+      <p>Prefer to speak directly?</p>
+      <div class="secondary-cta-group">
+        <a href="tel:+12133611700" class="secondary-cta-btn">📞 Call Now</a>
+        <a href="https://wa.me/12133611700" class="secondary-cta-btn">💬 WhatsApp</a>
+        <a href="#pricing" class="secondary-cta-btn">💲 View Pricing</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Interactive states for premium feel
+  const searchBar = document.getElementById('searchBarWrapper');
+  const searchInput = document.getElementById('aiSearchInput');
+  const submitBtn = document.getElementById('submitBtn');
+
+  searchInput.addEventListener('focus', () => {
+    searchBar.classList.add('active');
+  });
+
+  searchInput.addEventListener('blur', () => {
+    if (!searchInput.value) {
+      searchBar.classList.remove('active');
+    }
+  });
+
+  searchInput.addEventListener('input', () => {
+    if (searchInput.value) {
+      searchBar.classList.add('active');
+    } else {
+      searchBar.classList.remove('active');
+    }
+  });
+
+  // Handle submit
+  submitBtn.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      console.log('AI Search Query:', query);
+      // TODO: Route to /api/ai-intake
+      // window.location.href = `/api/ai-intake?q=${encodeURIComponent(query)}`;
+    }
+  });
+
+  // Enter key to submit
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      submitBtn.click();
+    }
+  });
+
+  // Promo chip interaction
+  document.querySelectorAll('.promo-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const text = chip.textContent.trim();
+      searchInput.value = `Tell me about ${text}`;
+      searchInput.focus();
+    });
+  });
+</script>
+
+</body>
+</html>

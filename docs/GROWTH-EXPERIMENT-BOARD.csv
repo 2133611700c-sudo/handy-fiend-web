@@ -1,0 +1,10 @@
+experiment_id,channel,task,kpi,target_14d,status,owner
+EXP-01,GBP,Daily GBP updates with before/after,GBP calls,20% up,active,Sergey
+EXP-02,Facebook,1 post/day with CTA,DM leads,15+,active,Sergey
+EXP-03,Instagram,1 reel/day,Profile visits,500+/reel avg,active,Sergey
+EXP-04,Referral,24h follow-up for review + referral,New reviews,5+,active,Sergey
+EXP-05,Community,Answer local group questions,Inbound DMs,10+,active,Sergey
+EXP-06,Website,UTM + clickID attribution complete,Trackable leads,100%,active,Codex
+EXP-07,Telegram,Lead source shown in notifications,Operator clarity,100%,active,Codex
+EXP-08,48H Sprint,2 leads in 48h from free channels,Leads,2 in 48h,active,Sergey
+EXP-09,SLA,Respond under 15 minutes all inbound,Response SLA,<15m,active,Sergey
