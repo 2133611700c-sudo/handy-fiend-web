@@ -193,6 +193,7 @@ const T={
     aiSearchPlaceholder:"Ask AI: price my project",
     aiBadge:"Smart",
     aiSubmit:"Get Estimate",
+    aiHelperText:"AI assistant — answers questions and calculates prices instantly",
     chipPricing:"Pricing",
     chipCabinet:"Cabinet Paint",
     chipRepairs:"Repairs",
@@ -476,9 +477,29 @@ const T={
 
   es:{
     lang:"ES",
+    heroEyebrow:"Servicios de Handyman en Los Ángeles",
     heroH:"Handyman Premium\nLos Ángeles",
+    heroAccent:"Ayuda al Instante",
     heroSub:"Solo mano de obra · Sin margen en materiales · Misma semana",
+    aiPowered:"Con IA",
     heroOfferTitle:"COMBO & AHORRA 20%",
+    heroOfferSub:"Reserva 2+ Servicios Hoy",
+    aiSearchPlaceholder:"Pregunta a IA: cotiza mi proyecto",
+    aiBadge:"Inteligente",
+    aiSubmit:"Obtener Estimado",
+    aiHelperText:"Asistente IA — responde preguntas y calcula precios al instante",
+    chipPricing:"Precios",
+    chipCabinet:"Pintura de Gabinetes",
+    chipRepairs:"Reparaciones",
+    chipKitchen:"Cocina",
+    trustInstant:"Respuesta Instantánea",
+    trustAccurate:"Estimados Precisos",
+    trustSteps:"Pasos Claros",
+    secondaryCta:"¿Prefieres hablar directamente?",
+    callNow:"Llama Ahora",
+    whatsApp:"WhatsApp",
+    viewPricing:"Ver Precios",
+    heroFullPricing:"💲 Precios Completos",
     gridLbl:"",
     base:[],
     svcs:[
@@ -760,6 +781,7 @@ const T={
     aiSearchPlaceholder:"ИИ: оцените мой проект",
     aiBadge:"Умный",
     aiSubmit:"Считать смету",
+    aiHelperText:"ИИ-помощник — отвечает на вопросы и рассчитывает стоимость",
     chipPricing:"Цены",
     chipCabinet:"Покраска шкафов",
     chipRepairs:"Ремонт",
@@ -1052,6 +1074,7 @@ const T={
     aiSearchPlaceholder:"ШІ: оцініть мій проект",
     aiBadge:"Розумна",
     aiSubmit:"Розрахувати",
+    aiHelperText:"ШІ-помічник — відповідає на питання та розраховує вартість",
     chipPricing:"Ціни",
     chipCabinet:"Фарбування шаф",
     chipRepairs:"Ремонт",
@@ -2912,3 +2935,38 @@ if (document.readyState === 'loading') {
 } else {
   initLightbox();
 }
+
+/* ─── SPINNER +/- BUTTONS FOR NUMBER INPUTS ─────────────────── */
+function initSpinners(){
+  document.querySelectorAll('#calcBox input[type=number]').forEach(function(inp){
+    if(inp.parentElement.classList.contains('num-row')) return;
+    var row=document.createElement('div');
+    row.className='num-row';
+    inp.parentElement.insertBefore(row,inp);
+    var minus=document.createElement('button');
+    minus.type='button';minus.className='num-btn';minus.textContent='\u2212';
+    minus.setAttribute('aria-label','Decrease');
+    minus.addEventListener('click',function(){
+      var step=parseFloat(inp.step)||1;
+      var mn=parseFloat(inp.min);
+      var val=parseFloat(inp.value)||0;
+      var nv=Math.round((val-step)*100)/100;
+      if(!isNaN(mn)&&nv<mn) nv=mn;
+      inp.value=nv;inp.dispatchEvent(new Event('input',{bubbles:true}));
+    });
+    var plus=document.createElement('button');
+    plus.type='button';plus.className='num-btn';plus.textContent='+';
+    plus.setAttribute('aria-label','Increase');
+    plus.addEventListener('click',function(){
+      var step=parseFloat(inp.step)||1;
+      var mx=parseFloat(inp.max);
+      var val=parseFloat(inp.value)||0;
+      var nv=Math.round((val+step)*100)/100;
+      if(!isNaN(mx)&&nv>mx) nv=mx;
+      inp.value=nv;inp.dispatchEvent(new Event('input',{bubbles:true}));
+    });
+    row.appendChild(minus);row.appendChild(inp);row.appendChild(plus);
+  });
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initSpinners);}
+else{initSpinners();}
