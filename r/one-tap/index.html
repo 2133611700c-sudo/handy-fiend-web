@@ -3,29 +3,134 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>HandyMans One-Tap Reply</title>
+  <title>Handy & Friend One-Tap Reply</title>
   <style>
-    body{font-family:Arial,sans-serif;background:#f7f5f1;color:#2a2a2a;margin:0;padding:20px}
-    .card{max-width:680px;margin:0 auto;background:#fff;border:1px solid #e6dfd2;border-radius:14px;padding:20px}
-    h1{font-size:22px;margin:0 0 8px;color:#3a3125}
-    p{margin:6px 0 0;line-height:1.5}
-    .meta{background:#f7f5f1;border-radius:10px;padding:12px;margin:14px 0;font-size:14px}
-    textarea{width:100%;min-height:110px;border:1px solid #d9d1c0;border-radius:10px;padding:12px;font-size:14px;box-sizing:border-box}
-    .grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
-    a.btn,button.btn{display:inline-block;text-align:center;text-decoration:none;border:none;cursor:pointer;padding:12px 14px;border-radius:10px;font-weight:700;font-size:14px}
-    .b1{background:#2f4f4f;color:#fff}
-    .b2{background:#4e342e;color:#fff}
-    .b3{background:#1f6f43;color:#fff}
-    .b4{background:#7a5c1f;color:#fff}
-    .hint{font-size:12px;color:#6b6457;margin-top:10px}
+    :root {
+      --bg: #f6f3ed;
+      --card: #ffffff;
+      --text: #2a2a2a;
+      --muted: #6a645a;
+      --line: #ded6c8;
+      --cta: #2f4f4f;
+      --cta-2: #4e342e;
+      --cta-3: #1f6f43;
+      --cta-4: #7a5c1f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      padding: 14px;
+    }
+    .card {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0;
+      color: #362d22;
+    }
+    .sub {
+      color: var(--muted);
+      margin: 6px 0 12px;
+      line-height: 1.4;
+    }
+    .meta {
+      background: #f8f5ef;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+    .template-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 10px 0 12px;
+    }
+    .template {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 13px;
+      color: #3e382f;
+    }
+    .template:hover { border-color: #b9ae99; }
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      border: 1px solid #d9d1c0;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 14px;
+      line-height: 1.45;
+      resize: vertical;
+    }
+    .grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+    a.btn, button.btn {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      padding: 11px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      transition: opacity .15s ease;
+    }
+    a.btn:hover, button.btn:hover { opacity: .92; }
+    .b1 { background: var(--cta); }
+    .b2 { background: var(--cta-2); }
+    .b3 { background: var(--cta-3); }
+    .b4 { background: var(--cta-4); }
+    .b5 { background: #3f4652; }
+    .disabled {
+      opacity: .45;
+      pointer-events: none;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+    @media (max-width: 640px) {
+      .template-row, .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>HandyMans One-Tap Reply</h1>
-    <p>Open SMS/Call/WhatsApp for this lead without searching contacts.</p>
+    <h1>Handy & Friend One-Tap Reply</h1>
+    <p class="sub">Send a clean response in seconds. Edit text if needed, then open your preferred channel.</p>
 
     <div class="meta" id="meta">Loading lead context...</div>
+
+    <strong>Quick templates</strong>
+    <div class="template-row">
+      <button class="template" type="button" id="tplConfirm">Confirm call window</button>
+      <button class="template" type="button" id="tplAddress">Ask for address</button>
+      <button class="template" type="button" id="tplPhotos">Ask for photos</button>
+      <button class="template" type="button" id="tplMaterials">Materials reminder</button>
+    </div>
 
     <label for="msg"><strong>Message</strong></label>
     <textarea id="msg"></textarea>
@@ -35,10 +140,11 @@
       <button class="btn b2" id="smsAndroid">Open SMS Android</button>
       <a class="btn b3" id="whatsapp" href="#">Open WhatsApp</a>
       <a class="btn b4" id="call" href="#">Open Call</a>
-      <button class="btn" id="copyBtn">Copy Text</button>
+      <button class="btn b5" id="copyBtn">Copy Text</button>
+      <button class="btn b5" id="copyOpenWa">Copy + Open WhatsApp</button>
     </div>
 
-    <p class="hint">If SMS app doesn't open, copy the text and call/WhatsApp manually.</p>
+    <p class="hint">Tip: If SMS does not launch from Telegram browser, use "Copy Text" then send manually.</p>
   </div>
 
   <script>
@@ -56,57 +162,93 @@
     const waEl = document.getElementById('whatsapp');
     const callEl = document.getElementById('call');
     const copyBtn = document.getElementById('copyBtn');
-
-    msgEl.value = initialText;
+    const copyOpenWaBtn = document.getElementById('copyOpenWa');
+    const tplConfirm = document.getElementById('tplConfirm');
+    const tplAddress = document.getElementById('tplAddress');
+    const tplPhotos = document.getElementById('tplPhotos');
+    const tplMaterials = document.getElementById('tplMaterials');
 
     const cleanPhone = String(phone).replace(/[^\d+]/g, '');
     const waPhone = cleanPhone.replace(/\D/g, '');
+    const hasPhone = Boolean(waPhone);
 
-    metaEl.innerHTML = `<strong>Lead:</strong> ${escapeHtml(leadId)}<br><strong>Phone:</strong> ${escapeHtml(cleanPhone)}<br><strong>Lang:</strong> ${escapeHtml(lang)} · <strong>Action:</strong> ${escapeHtml(action)}`;
+    const defaultTemplates = {
+      confirm: "Hi! Thanks for your request. We can help. What time works best today for a quick confirmation call?",
+      address: "Thanks! Please share your full address and parking details so we can plan the visit window.",
+      photos: "Could you send 2-4 photos of the area? It helps us prepare tools and confirm the estimate.",
+      materials: "Quick note: labor is separate from materials. If you already have materials, we can start faster."
+    };
+
+    msgEl.value = initialText || defaultTemplates.confirm;
+    metaEl.innerHTML = `<strong>Lead:</strong> ${escapeHtml(leadId || "-")}<br><strong>Phone:</strong> ${escapeHtml(cleanPhone || "-")}<br><strong>Lang:</strong> ${escapeHtml(lang)} · <strong>Action:</strong> ${escapeHtml(action)}`;
+
+    function setMessage(text) {
+      msgEl.value = text;
+      refreshLinks();
+    }
 
     function buildLinks() {
-      const text = encodeURIComponent(msgEl.value || '');
+      const text = encodeURIComponent(msgEl.value || "");
+      const smsPhone = cleanPhone || "";
       return {
-        ios: `sms:${cleanPhone}&body=${text}`,
-        android: `sms:${cleanPhone}?body=${text}`,
+        ios: `sms:${smsPhone}&body=${text}`,
+        android: `sms:${smsPhone}?body=${text}`,
         wa: `https://wa.me/${waPhone}?text=${text}`,
-        call: `tel:${cleanPhone}`
+        call: `tel:${smsPhone}`
       };
     }
 
-    function openLink(url) {
-      window.location.href = url;
+    function refreshLinks() {
+      const links = buildLinks();
+      waEl.href = links.wa;
+      callEl.href = links.call;
     }
 
+    function disableNoPhone(el) {
+      if (!hasPhone) el.classList.add("disabled");
+    }
+
+    disableNoPhone(smsIosBtn);
+    disableNoPhone(smsAndroidBtn);
+    disableNoPhone(waEl);
+    disableNoPhone(callEl);
+    disableNoPhone(copyOpenWaBtn);
+
     smsIosBtn.addEventListener('click', () => {
-      const links = buildLinks();
-      openLink(links.ios);
+      if (!hasPhone) return;
+      window.location.href = buildLinks().ios;
     });
 
     smsAndroidBtn.addEventListener('click', () => {
-      const links = buildLinks();
-      openLink(links.android);
+      if (!hasPhone) return;
+      window.location.href = buildLinks().android;
     });
+
+    tplConfirm.addEventListener('click', () => setMessage(defaultTemplates.confirm));
+    tplAddress.addEventListener('click', () => setMessage(defaultTemplates.address));
+    tplPhotos.addEventListener('click', () => setMessage(defaultTemplates.photos));
+    tplMaterials.addEventListener('click', () => setMessage(defaultTemplates.materials));
 
     copyBtn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(msgEl.value || '');
         copyBtn.textContent = 'Copied';
-        setTimeout(() => { copyBtn.textContent = 'Copy Text'; }, 1200);
-      } catch (err) {
-        alert('Copy failed, select text manually.');
+        setTimeout(() => { copyBtn.textContent = 'Copy Text'; }, 1100);
+      } catch (_) {
+        alert('Copy failed. Please copy manually.');
       }
     });
 
-    msgEl.addEventListener('input', () => {
-      const links = buildLinks();
-      waEl.href = links.wa;
-      callEl.href = links.call;
+    copyOpenWaBtn.addEventListener('click', async () => {
+      if (!hasPhone) return;
+      try {
+        await navigator.clipboard.writeText(msgEl.value || '');
+      } catch (_) {}
+      window.location.href = buildLinks().wa;
     });
 
-    const initialLinks = buildLinks();
-    waEl.href = initialLinks.wa;
-    callEl.href = initialLinks.call;
+    msgEl.addEventListener('input', refreshLinks);
+    refreshLinks();
 
     function escapeHtml(s) {
       return String(s || '')
@@ -118,3 +260,4 @@
   </script>
 </body>
 </html>
+
