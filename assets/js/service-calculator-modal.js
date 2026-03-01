@@ -109,9 +109,11 @@ const ServiceCalcModal = {
       if (e.target === modal) this.close();
     });
 
-    // Service card click handlers
+    // Service card click handlers (skip image clicks for lightbox)
     document.querySelectorAll('[data-svc-calc]').forEach(card => {
       card.addEventListener('click', (e) => {
+        // Skip if clicking on image (let lightbox handle it)
+        if (e.target.closest('.sph')) return;
         e.preventDefault();
         const svc = card.getAttribute('data-svc-calc');
         this.open(svc);
