@@ -7,6 +7,8 @@
  * Body: { query: string, photos: [{dataUrl, name}], lang: string }
  */
 
+const { restInsert, logLeadEvent } = require('./_lib/supabase-admin.js');
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -15,7 +17,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-  const { query = '', photos = [], lang = 'en' } = req.body || {};
+  const { query = '', photos = [], lang = 'en', leadId = '' } = req.body || {};
   const safePhotos = Array.isArray(photos) ? photos.slice(0, 6) : [];
 
   if (!query && !safePhotos.length) {
@@ -25,7 +27,16 @@ export default async function handler(req, res) {
   let aiResponse = null;
 
   try {
-    // 1. Call DeepSeek AI (only if API key configured)
+    // 1. Store user message for analytics if we have lead context.
+    if (leadId && query) {
+      await restInsert('ai_conversations', {
+        lead_id: String(leadId),
+        message_role: 'user',
+        message_text: String(query).slice(0, 8000)
+      }, { returning: false });
+    }
+
+    // 2. Call DeepSeek AI (only if API key configured)
     if (process.env.DEEPSEEK_API_KEY) {
       try {
         aiResponse = await callDeepSeekAI(query, lang);
@@ -36,7 +47,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // 2. Send to Telegram (async, don't wait)
+    // 3. Send to Telegram (async, don't wait)
     if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
       const text = buildMessage({ query, lang, photoCount: safePhotos.length, aiResponse });
       sendText(text).catch(err => console.error('[AI_INTAKE] Telegram msg failed:', err.message));
@@ -49,7 +60,16 @@ export default async function handler(req, res) {
       }
     }
 
-    // 3. Return AI response to client immediately (don't wait for Telegram)
+    if (leadId) {
+      await logLeadEvent(String(leadId), 'ai_summary_saved', {
+        source: 'ai_intake',
+        has_query: Boolean(query),
+        has_ai_response: Boolean(aiResponse),
+        photo_count: safePhotos.length
+      });
+    }
+
+    // 4. Return AI response to client immediately (don't wait for Telegram)
     return res.status(200).json({
       success: true,
       aiResponse,
@@ -57,6 +77,12 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('[AI_INTAKE_ERROR]', err.message);
+    if (leadId) {
+      await logLeadEvent(String(leadId), 'validation_failed', {
+        stage: 'ai_intake',
+        error: String(err.message || 'ai_intake_error').slice(0, 240)
+      });
+    }
     return res.status(500).json({ success: false, error: err.message });
   }
 }
