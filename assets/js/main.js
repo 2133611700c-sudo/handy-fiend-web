@@ -2869,3 +2869,46 @@ document.addEventListener('click', function(e) {
   const msg = encodeURIComponent('Hi! Interested in COMBO: ' + p.label + ' (Save $' + p.save + ')');
   window.open('https://wa.me/12133611700?text=' + msg, '_blank');
 });
+
+/* ═══════════════════════════════════════════════
+   LIGHTBOX IMAGE VIEWER
+═══════════════════════════════════════════════ */
+function initLightbox(){
+  const overlay = document.getElementById('lightboxOverlay');
+  const img = document.getElementById('lightboxImg');
+  const closeBtn = document.getElementById('lightboxClose');
+  if (!overlay || !img || !closeBtn) return;
+
+  // Click on service image to open lightbox
+  document.addEventListener('click', function(e) {
+    const sph = e.target.closest('.sph');
+    if (!sph) return;
+    const imgElement = sph.querySelector('img');
+    if (!imgElement) return;
+    img.src = imgElement.src;
+    overlay.classList.add('active');
+  });
+
+  // Close lightbox
+  function closeLightbox() {
+    overlay.classList.remove('active');
+  }
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+}
+
+// Initialize lightbox
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLightbox);
+} else {
+  initLightbox();
+}
