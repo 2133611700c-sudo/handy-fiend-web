@@ -3,9 +3,9 @@
  * HandyMans one-tap customer reply workflow.
  */
 
-const { templatesEN } = require('./telegram-templates.js');
-const { loadLeadContext, saveLeadContext, sanitizePhone } = require('./lead-context-store.js');
-const { getReplyTemplate, normalizeLang, templateKeyForAction } = require('./reply-templates.js');
+const { templatesEN } = require('./_lib/telegram-templates.js');
+const { loadLeadContext, saveLeadContext, sanitizePhone } = require('./_lib/lead-context-store.js');
+const { getReplyTemplate, normalizeLang, templateKeyForAction } = require('./_lib/reply-templates.js');
 
 const COMMANDS = [
   { command: 'start', description: 'Start HandyMans assistant' },

@@ -9,7 +9,7 @@
  * Get free Telegram bot at: https://t.me/BotFather
  */
 
-const { saveLeadContext } = require('./lead-context-store.js');
+const { saveLeadContext } = require('./_lib/lead-context-store.js');
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');

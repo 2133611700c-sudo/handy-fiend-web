@@ -9,7 +9,8 @@
  * Get free key at: https://resend.com/signup
  */
 
-const { saveLeadContext } = require('./lead-context-store.js');
+const { saveLeadContext } = require('./_lib/lead-context-store.js');
+const { restInsert, logLeadEvent } = require('./_lib/supabase-admin.js');
 
 export default async function handler(req, res) {
   // CORS headers
@@ -44,10 +45,10 @@ export default async function handler(req, res) {
   const normalizedAttribution = normalizeAttribution(attribution);
 
   // Basic validation
-  if (!name || !phone) {
+  if (!name || (!phone && !email)) {
     return res.status(400).json({
       success: false,
-      error: 'Missing required fields: name, phone'
+      error: 'Missing required fields: name, phone or email'
     });
   }
 
@@ -139,6 +140,49 @@ export default async function handler(req, res) {
 
   console.log('[LEAD_CAPTURED]', JSON.stringify(leadData));
   saveLeadContext(leadData).catch((err) => console.error('[LEAD_CONTEXT_ASYNC_ERROR]', err.message));
+
+  // Persist lead into Supabase CRM (server-only path).
+  const leadRecord = {
+    id: leadId,
+    source: leadData.source || 'direct',
+    status: (!phone && !email) ? 'partial' : 'new',
+    full_name: String(name || '').slice(0, 160),
+    phone: String(phone || '').slice(0, 40),
+    email: String(email || '').slice(0, 160),
+    city: '',
+    zip: String(zip || '').slice(0, 20),
+    service_type: String(service || 'Not specified').slice(0, 120),
+    problem_description: String(message || '').slice(0, 4000),
+    budget_range: '',
+    preferred_date: '',
+    lead_score: 0,
+    ai_summary_short: buildShortSummary({ service, zip, message }),
+    ai_summary_full: buildFullSummary({ service, message, preferredContact, source: leadData.source }),
+    assigned_to: '',
+    next_action_at: null,
+    last_contact_at: null,
+    source_details: leadData.sourceDetails || {}
+  };
+
+  const supabaseLeadInsert = await restInsert('leads', leadRecord, { returning: false });
+  if (supabaseLeadInsert.ok) {
+    await logLeadEvent(leadId, 'lead_created', {
+      service_type: leadRecord.service_type,
+      zip: leadRecord.zip || null,
+      source: leadRecord.source,
+      has_email: Boolean(email),
+      has_phone: Boolean(phone)
+    });
+    await logLeadEvent(leadId, 'ai_summary_saved', {
+      ai_summary_short: leadRecord.ai_summary_short
+    });
+  } else if (!supabaseLeadInsert.skipped) {
+    console.error('[SUPABASE_LEAD_INSERT_ERROR]', supabaseLeadInsert.error, supabaseLeadInsert.details || '');
+    await logLeadEvent(leadId, 'validation_failed', {
+      stage: 'create_lead',
+      error: supabaseLeadInsert.error || 'lead_insert_failed'
+    });
+  }
 
   // Build email HTML
   const subjectLine = _subject || `New Quote Request: ${service || 'General'} from ${name}`;
@@ -376,11 +420,23 @@ ${email ? `<a href="tel:${phone}">📞 Call</a> • <a href="https://wa.me/${pho
     .then(data => {
       if (data.ok) {
         console.log('[TELEGRAM_SENT]', data.result.message_id, 'Lead ID:', leadId);
+        logLeadEvent(leadId, 'telegram_sent', {
+          message_id: data.result.message_id || null
+        }).catch(() => {});
       } else {
         console.error('[TELEGRAM_ERROR]', data.error_code, data.description);
+        logLeadEvent(leadId, 'telegram_failed', {
+          error_code: data.error_code || null,
+          description: String(data.description || '').slice(0, 240)
+        }).catch(() => {});
       }
     })
-    .catch(err => console.error('[TELEGRAM_FETCH_ERROR]', err.message));
+    .catch(err => {
+      console.error('[TELEGRAM_FETCH_ERROR]', err.message);
+      logLeadEvent(leadId, 'telegram_failed', {
+        error: String(err.message || 'telegram_fetch_error').slice(0, 240)
+      }).catch(() => {});
+    });
 }
 
 /**
@@ -436,4 +492,21 @@ function escapeHtml(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function buildShortSummary({ service, zip, message }) {
+  const pieces = [];
+  if (service) pieces.push(String(service));
+  if (zip) pieces.push(`ZIP ${String(zip)}`);
+  if (message) pieces.push(String(message).slice(0, 90));
+  return pieces.join(' · ').slice(0, 200);
+}
+
+function buildFullSummary({ service, message, preferredContact, source }) {
+  return [
+    `Service: ${String(service || 'Not specified')}`,
+    `Preferred contact: ${String(preferredContact || 'call')}`,
+    `Source: ${String(source || 'direct')}`,
+    `Problem: ${String(message || 'No message')}`
+  ].join(' | ').slice(0, 1200);
 }
