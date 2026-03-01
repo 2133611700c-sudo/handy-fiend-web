@@ -60,13 +60,13 @@ const P={
 const SVC_IMG={
   kitch:'assets/img/kitch.webp',
   furnp:'assets/img/furnp.webp',
-  paint:'assets/img/painting.jpg',
-  floor:'assets/img/flooring.jpeg',
-  tv:   'assets/img/tv-mounting.jpg',
-  fur:  'assets/img/furniture.jpg',
-  art:  'assets/img/art.jpg',
-  plumb:'assets/img/plumbing.jpeg',
-  elec: 'assets/img/electrical.jpeg'
+  paint:'assets/img/painting.webp',
+  floor:'assets/img/flooring.webp',
+  tv:   'assets/img/tv-mounting.webp',
+  fur:  'assets/img/furniture.webp',
+  art:  'assets/img/art.webp',
+  plumb:'assets/img/plumbing.webp',
+  elec: 'assets/img/electrical.webp'
 };
 
 /* ═══════════════════════════════════════════════
