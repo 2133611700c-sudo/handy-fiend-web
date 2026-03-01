@@ -164,27 +164,28 @@ export default async function handler(req, res) {
     source_details: leadData.sourceDetails || {}
   };
 
-  const supabaseLeadInsert = await restInsert('leads', leadRecord, { returning: false });
+  const supabaseLeadInsert = await insertLeadWithSchemaFallback(leadRecord);
   if (supabaseLeadInsert.ok) {
-    await logLeadEvent(leadId, 'lead_created', {
+    await safeLogLeadEvent(leadId, 'lead_created', {
       service_type: leadRecord.service_type,
       zip: leadRecord.zip || null,
       source: leadRecord.source,
       has_email: Boolean(email),
       has_phone: Boolean(phone)
     });
-    await logLeadEvent(leadId, 'ai_summary_saved', {
+    await safeLogLeadEvent(leadId, 'ai_summary_saved', {
       ai_summary_short: leadRecord.ai_summary_short
     });
   } else if (!supabaseLeadInsert.skipped) {
     console.error('[SUPABASE_LEAD_INSERT_ERROR]', supabaseLeadInsert.error, supabaseLeadInsert.details || '');
-    await logLeadEvent(leadId, 'validation_failed', {
+    await safeLogLeadEvent(leadId, 'validation_failed', {
       stage: 'create_lead',
       error: supabaseLeadInsert.error || 'lead_insert_failed'
     });
   }
 
   // Build email HTML
+  const safePhoneDigits = String(phone || '').replace(/\D/g, '');
   const subjectLine = _subject || `New Quote Request: ${service || 'General'} from ${name}`;
   const emailHtml = `
 <!DOCTYPE html>
@@ -249,7 +250,7 @@ export default async function handler(req, res) {
     <div style="display:flex;gap:10px;margin-bottom:12px">
       <a href="tel:${phone}" style="background:#b88924;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">📞 Call Now</a>
       ${email ? `<a href="mailto:${email}" style="background:#3a3a3a;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">📧 Reply Email</a>` : ''}
-      <a href="https://wa.me/${phone.replace(/\D/g, '')}" style="background:#25d366;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">💬 WhatsApp</a>
+      <a href="https://wa.me/${safePhoneDigits}" style="background:#25d366;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">💬 WhatsApp</a>
     </div>
     <p style="margin:0;font-size:11px;color:#999">
       Lead ID: ${leadId} · Received: ${new Date().toLocaleString('en-US', {timeZone: 'America/Los_Angeles'})} PT
@@ -353,6 +354,41 @@ export default async function handler(req, res) {
   });
 }
 
+async function insertLeadWithSchemaFallback(leadRecord) {
+  const payload = { ...leadRecord };
+  let attempt = await restInsert('leads', payload, { returning: false });
+  const dropped = [];
+
+  // Handle partial Supabase schemas by removing unknown columns one-by-one.
+  while (!attempt.ok && !attempt.skipped) {
+    const missingColumn = getMissingColumnFromPostgrestDetails(attempt.details);
+    if (!missingColumn || !(missingColumn in payload)) break;
+    delete payload[missingColumn];
+    dropped.push(missingColumn);
+    attempt = await restInsert('leads', payload, { returning: false });
+  }
+
+  if (dropped.length) {
+    console.warn('[SUPABASE_SCHEMA_FALLBACK]', JSON.stringify({ dropped }));
+  }
+
+  return attempt;
+}
+
+function getMissingColumnFromPostgrestDetails(details) {
+  const text = String(details || '');
+  const match = text.match(/'([^']+)' column/);
+  return match ? match[1] : '';
+}
+
+async function safeLogLeadEvent(leadId, eventType, eventPayload) {
+  try {
+    await logLeadEvent(leadId, eventType, eventPayload);
+  } catch (err) {
+    console.error('[LEAD_EVENT_LOG_ERROR]', eventType, err?.message || err);
+  }
+}
+
 /**
  * Send lead notification via Telegram Bot (fire and forget, doesn't block main response)
  */
@@ -362,6 +398,7 @@ function notifyViaTelegram(leadData) {
   }
 
   const { leadId, name, phone, email, zip, preferredContact, service, message, attachments, attribution } = leadData;
+  const safePhoneDigits = String(phone || '').replace(/\D/g, '');
 
   const telegramMessage = `🔧 <b>NEW LEAD!</b>
 
@@ -382,7 +419,7 @@ ${escapeHtml(message || '—')}
 <b>CTX:</b> <code>CTX:${leadId}:${phone}</code>
 <b>Time:</b> ${new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PT
 
-${email ? `<a href="tel:${phone}">📞 Call</a> • <a href="https://wa.me/${phone.replace(/\D/g, '')}">💬 WhatsApp</a> • <a href="mailto:${email}">📧 Email</a>` : `<a href="tel:${phone}">📞 Call</a> • <a href="https://wa.me/${phone.replace(/\D/g, '')}">💬 WhatsApp</a>`}`;
+${email ? `<a href="tel:${phone}">📞 Call</a> • <a href="https://wa.me/${safePhoneDigits}">💬 WhatsApp</a> • <a href="mailto:${email}">📧 Email</a>` : `<a href="tel:${phone}">📞 Call</a> • <a href="https://wa.me/${safePhoneDigits}">💬 WhatsApp</a>`}`;
 
   // Create interactive buttons
   const replyMarkup = {
@@ -400,7 +437,7 @@ ${email ? `<a href="tel:${phone}">📞 Call</a> • <a href="https://wa.me/${pho
         { text: '⏱ Связь через 15 мин', callback_data: `cb15_${leadId}` },
         { text: '❌ Отказ', callback_data: `decline_${leadId}` }
       ],
-      [{ text: '📍 WhatsApp', url: `https://wa.me/${phone.replace(/\D/g, '')}` }]
+      [{ text: '📍 WhatsApp', url: `https://wa.me/${safePhoneDigits}` }]
     ]
   };
 
