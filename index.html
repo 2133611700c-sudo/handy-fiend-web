@@ -166,7 +166,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hbg"></div>
   <!-- Hero offer headline -->
   <div class="hero-headline">
-    <p class="hero-offer-eyebrow">Los Angeles · Licensed &amp; Insured</p>
+    <p class="hero-offer-eyebrow">Los Angeles · Professional &amp; Insured</p>
     <h1 class="hero-offer-title" id="heroOfferTitle">BUNDLE &amp; SAVE 20%</h1>
     <p class="hero-offer-sub" id="heroOfferSub">Book 2+ Services Today</p>
   </div>
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <svg class="rev-glogo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         </div>
         <div class="rev-stars">⭐⭐⭐⭐⭐</div>
-        <p class="rev-text" data-i18n="review3">"Perfect furniture assembly! Licensed, insured, and super reliable. Will call again!"</p>
+        <p class="rev-text" data-i18n="review3">"Perfect furniture assembly! Professional, insured, and super reliable. Will call again!"</p>
         <div class="rev-date">Feb 2026</div>
       </div>
     </div>
@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div style="background:var(--ink);padding:48px 18px;text-align:center">
   <div style="max-width:800px;margin:0 auto">
     <h2 style="color:#fff;font-size:28px;font-weight:700;font-family:var(--fs);margin-bottom:16px" data-i18n="finalCtaTitle">Don't Wait—Book Your Handyman Today</h2>
-    <p style="color:rgba(255,255,255,0.80);font-size:16px;margin-bottom:24px" data-i18n="finalCtaSub">Limited slots available this week. Professional service, guaranteed satisfaction.</p>
+    <p style="color:rgba(255,255,255,0.80);font-size:16px;margin-bottom:24px" data-i18n="finalCtaSub">Professional service, guaranteed satisfaction. 500+ happy customers in LA.</p>
 
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <a href="https://wa.me/12133611700?text=I%20want%20to%20book%20a%20service%20this%20week" style="display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:#25D366;color:#fff;border-radius:999px;font-weight:700;text-decoration:none;transition:opacity 200ms" data-event="final_cta_whatsapp" data-i18n="finalCtaWhatsApp">
@@ -728,17 +728,12 @@ async function handleLeadSubmit(e) {
 
     const photoFiles = attachmentFiles;
     if (photoFiles.length > 0) {
-      const preparedPhotos = await preparePhotosForTelegram(photoFiles);
+      const preparedPhotos = await preparePhotosForUpload(photoFiles);
       if (preparedPhotos.length > 0) {
-        sendLeadPhotosToTelegram({
+        uploadLeadPhotos({
           leadId,
-          name,
-          phone,
-          service,
-          message,
-          attribution: collectLeadAttribution(),
           photos: preparedPhotos
-        }).catch(err => console.log('Telegram photos failed:', err));
+        }).catch(err => console.log('Lead photo upload failed:', err));
       }
     }
   } catch (err) {
@@ -771,7 +766,7 @@ function collectLeadAttribution() {
     lang: (document.documentElement.lang || 'en').toLowerCase()
   };
 }
-async function preparePhotosForTelegram(files) {
+async function preparePhotosForUpload(files) {
   const prepared = [];
   for (const file of files) {
     try {
@@ -788,24 +783,16 @@ async function preparePhotosForTelegram(files) {
   return prepared;
 }
 
-async function sendLeadPhotosToTelegram(payload) {
-  const { leadId, name, phone, service, message, attribution, photos } = payload;
-  for (let i = 0; i < photos.length; i += 1) {
-    const body = {
+async function uploadLeadPhotos(payload) {
+  const { leadId, photos } = payload;
+  await fetch('/api/upload-lead-photos', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
       leadId,
-      name,
-      phone,
-      service,
-      message: i === 0 ? message : '',
-      attribution: i === 0 ? attribution : null,
-      photos: [photos[i]]
-    };
-    await fetch('/api/telegram-lead-assets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-  }
+      photos
+    })
+  });
 }
 
 function compressImage(file, maxWidth, quality) {
@@ -922,6 +909,21 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
           <a href="tel:+12133611700" style="color:#B8892C;text-decoration:none;font-weight:700">📞 Call 213-361-1700</a><br>
           <a href="https://wa.me/12133611700" style="color:#25D366;text-decoration:none;font-weight:700">💬 WhatsApp Message</a>
         </p>
+      </div>
+
+      <!-- Column 4: Follow Us -->
+      <div>
+        <h3 style="color:#B8892C;font-size:14px;font-weight:700;margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase">Follow Us</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="https://www.facebook.com/profile.php?id=61588215297678" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#1877F2;color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:opacity 200ms" data-event="footer_facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a href="https://g.co/kgs/handyandfriend" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fff;color:#333;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:opacity 200ms" data-event="footer_google">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Google
+          </a>
+        </div>
       </div>
     </div>
 
