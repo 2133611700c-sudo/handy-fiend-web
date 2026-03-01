@@ -2117,6 +2117,18 @@ function renderGrid(){
     card.addEventListener('click',(e)=>{
       // prevent clicks inside the open drawer from re-triggering toggle
       if(e.target.closest('.drawer'))return;
+      // prevent lightbox from opening on service card clicks
+      if(e.target.closest('.sph')) e.stopPropagation();
+      // Scroll to calculator and select this service
+      const calcBox = document.getElementById('calcBox');
+      if(calcBox) {
+        calcBox.scrollIntoView({behavior:'smooth',block:'start'});
+        const sel = document.getElementById('svcSel');
+        if(sel){
+          sel.value = svc.id;
+          sel.dispatchEvent(new Event('change',{bubbles:true}));
+        }
+      }
       toggle(svc.id);
     });
     g.appendChild(card);
@@ -2565,14 +2577,27 @@ document.getElementById('langBtn').addEventListener('click',()=>{
     track('ai_chat_submit',{query:query,language:lang,photos:selectedPhotos.length});
 
     try{
-      // Add user message to history
-      chatHistory.push({role:'user',content:query});
+      // Add user message (and optional photos) to history
+      chatHistory.push({
+        role:'user',
+        content:query,
+        photos:selectedPhotos.map((p,idx)=>({
+          dataUrl:p.dataUrl,
+          name:p.name||('chat_photo_'+(idx+1)+'.jpg')
+        }))
+      });
 
       // Build messages array for API
-      const messages=chatHistory.map(m=>({
-        role:m.role,
-        content:typeof m.content==='string'?m.content:m.content.text||''
-      }));
+      const messages=chatHistory.map(m=>{
+        const row={
+          role:m.role,
+          content:typeof m.content==='string'?m.content:m.content.text||''
+        };
+        if(Array.isArray(m.photos)&&m.photos.length){
+          row.photos=m.photos.slice(0,6);
+        }
+        return row;
+      });
 
       const resp=await fetch('/api/ai-chat',{
         method:'POST',
@@ -2933,9 +2958,12 @@ function initLightbox(){
   if (!overlay || !img || !closeBtn) return;
 
   // Click on service image to open lightbox
+  // Skip service grid cards - only allow lightbox for standalone gallery images
   document.addEventListener('click', function(e) {
     const sph = e.target.closest('.sph');
     if (!sph) return;
+    // Don't open lightbox for service cards in the grid
+    if (sph.closest('.scard')) return;
     const imgElement = sph.querySelector('img');
     if (!imgElement) return;
     img.src = imgElement.src;
