@@ -2308,7 +2308,7 @@ function renderCalculatorUI(){
   const l=L();
   /* hide all mode containers */
   ['roomWrap','sfWrap','areaBadge','bpWrap','flWrap','hrWrap','hrBadge',
-   'kitchenWrap','furnWrap','fixedWrap','linearWrap','linearBadge'].forEach(id=>{
+   'kitchenWrap','furnWrap','fixedWrap','linearWrap'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.style.display='none';
   });
   document.querySelector('.mode').style.display='none';
@@ -2429,10 +2429,11 @@ function updateLinearLength(){
   const svcPrice=+sel.options[sel.selectedIndex].dataset.price||0;
   const unit=document.getElementById('linearUnitSel').value;
   const unitL=L().lLinearUnit||'Unit';
-  if(!l){badge.innerHTML='Enter length';return;}
+  if(!l){badge.innerHTML='Enter length';badge.style.display='block';return;}
   const convLength=unit==='m'?Math.round(l*3.28084*100)/100:l;
   const tot=Math.round(convLength*svcPrice*100)/100;
   badge.innerHTML=`${convLength} ft × $${svcPrice}/ft = <strong>$${tot}</strong>`;
+  badge.style.display='block';
 }
 
 function updateHrBadge(){
