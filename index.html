@@ -60,16 +60,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- Meta Pixel -->
 <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '741929941112529');
-  fbq('track', 'PageView');
+  window.addEventListener('load', function () {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '741929941112529');
+    fbq('track', 'PageView');
+  });
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=741929941112529&ev=PageView&noscript=1"
@@ -167,8 +169,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Hero offer headline -->
   <div class="hero-headline">
     <p class="hero-offer-eyebrow">Los Angeles · Professional &amp; Insured</p>
-    <h1 class="hero-offer-title" id="heroOfferTitle">BUNDLE &amp; SAVE 20%</h1>
-    <p class="hero-offer-sub" id="heroOfferSub">Book 2+ Services Today</p>
+    <h1 class="hero-offer-title" id="heroOfferTitle">Professional Cabinet Painting from $155/door</h1>
+    <p class="hero-offer-sub" id="heroOfferSub">Spray finish that lasts 10+ years. Save 70% vs replacing.</p>
   </div>
 </div>
 
@@ -326,7 +328,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!-- /.rc -->
 
   <div class="grid" id="servGrid"></div>
-  <a class="calc-anchor" href="#calcBox" id="calcAnchorBtn">📐 <span id="calcAnchorTxt">Get Estimate</span></a>
+  <a class="calc-anchor" href="#calcBox" id="calcAnchorBtn">📐 <span id="calcAnchorTxt">Get Free Instant Quote</span></a>
 </div>
 <div class="pb"></div>
 
@@ -357,8 +359,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- MOBILE FAB -->
-<button class="calc-fab" id="calcFab" aria-label="Get Estimate">
-  📐 <span id="calcFabTxt">Get Estimate</span>
+<button class="calc-fab" id="calcFab" aria-label="Get Free Instant Quote">
+  📐 <span id="calcFabTxt">Get Free Instant Quote</span>
 </button>
 
 <!-- MOBILE CALC BOTTOM SHEET -->
@@ -391,10 +393,6 @@ function emitCoreEvent(eventName, params) {
 document.addEventListener('DOMContentLoaded', function() {
   function trackEvent(eventName, eventParams) {
     emitCoreEvent(eventName, eventParams);
-    // If Facebook Pixel is loaded, send conversion events.
-    if (typeof fbq !== 'undefined') {
-      fbq('track', eventName, eventParams);
-    }
   }
 
   // Listen for clicks on elements with data-event
@@ -422,6 +420,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (href.indexOf('tel:') === 0) {
       emitCoreEvent('phone_click', { link_url: href, link_text: linkText });
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'phone_click', { link_url: href });
+      }
       return;
     }
     if (href.indexOf('mailto:') === 0) {
@@ -443,7 +444,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="rev-summary">
         <span class="rev-score">4.9</span>
         <span class="rev-stars-row">⭐⭐⭐⭐⭐</span>
-        <span class="rev-count" data-i18n="testimonialsSub">500+ reviews</span>
+        <span class="rev-count" data-i18n="testimonialsSub">Trusted by local customers across Los Angeles</span>
       </div>
     </div>
 
@@ -505,7 +506,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div style="background:linear-gradient(135deg,#B8892C 0%,#A0752A 100%);padding:64px 18px;text-align:center;margin-top:40px">
   <div style="max-width:600px;margin:0 auto">
     <h2 style="color:#fff;font-size:32px;font-weight:700;font-family:var(--fs);margin-bottom:12px" data-i18n="leadTitle">Ready to Book Your Service?</h2>
-    <p style="color:rgba(255,255,255,0.90);font-size:16px;margin-bottom:32px" data-i18n="leadSub">Get a free quote in 2 minutes. No credit card required.</p>
+    <p style="color:rgba(255,255,255,0.90);font-size:16px;margin-bottom:32px" data-i18n="leadSub">Phone and chat quotes are free. On-site estimates: $75, credited toward your project when you book.</p>
 
     <form id="leadForm" style="background:rgba(255,255,255,0.95);padding:28px;border-radius:16px;display:flex;flex-direction:column;gap:16px" onsubmit="handleLeadSubmit(event)">
       <input type="text" id="leadName" placeholder="Your Name" data-i18n-placeholder="leadNamePlaceholder" required style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit">
@@ -539,8 +540,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <textarea id="leadMessage" placeholder="Brief description of your project..." data-i18n-placeholder="leadProjectPlaceholder" style="padding:14px 16px;border:1px solid var(--st);border-radius:10px;font-size:15px;font-family:inherit;min-height:80px;resize:none"></textarea>
 
       <div id="leadPhotosBox" style="border:2px dashed var(--st);border-radius:10px;padding:16px;text-align:center;cursor:pointer" onclick="document.getElementById('leadPhotos').click()">
-        <input type="file" id="leadPhotos" accept="image/*" multiple required style="display:none">
-        <p style="margin:0;font-size:14px;color:var(--ink2);font-weight:600">📸 Add Photos (Required)</p>
+        <input type="file" id="leadPhotos" accept="image/*" multiple style="display:none">
+        <p style="margin:0;font-size:14px;color:var(--ink2);font-weight:600">📸 Photos (optional — helps us give a more accurate quote)</p>
         <p style="margin:8px 0 0;font-size:12px;color:var(--ink3)">Click to upload photos of the job area</p>
         <p style="margin:6px 0 0;font-size:11px;color:var(--ink3)">Up to 6 photos. Helps us give accurate quotes.</p>
         <p id="leadPhotosStatus" style="margin:8px 0 0;font-size:12px;color:#2e7d32;display:none;font-weight:700"></p>
@@ -558,10 +559,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="formSuccess" style="display:none;background:#fff;padding:28px;border-radius:16px;margin-top:20px;text-align:center">
       <div style="font-size:48px;margin-bottom:12px">✅</div>
       <h3 style="color:var(--ink);font-weight:700;margin-bottom:8px" data-i18n="formSuccessTitle">Quote Request Received!</h3>
-      <p style="color:var(--ink2);font-size:15px;margin-bottom:16px" data-i18n="formSuccessSub">We'll call you within 10 minutes to confirm your booking.</p>
+      <p style="color:var(--ink2);font-size:15px;margin-bottom:16px" data-i18n="formSuccessSub">We respond within 1 hour during business hours (8am-7pm PT).</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 14px">
         <a href="tel:+12133611700" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:#2d2d2d;color:#fff;border-radius:999px;text-decoration:none;font-weight:700">📞 Call</a>
-        <a href="https://wa.me/12133611700?text=Hi%20Handy%20%26%20Friend%2C%20I%20just%20submitted%20a%20quote%20request" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:#25D366;color:#fff;border-radius:999px;text-decoration:none;font-weight:700">💬 WhatsApp</a>
+        <a id="formSuccessWhatsApp" href="https://wa.me/12133611700?text=Hi%20Handy%20%26%20Friend%2C%20I%20just%20submitted%20a%20quote%20request" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:#25D366;color:#fff;border-radius:999px;text-decoration:none;font-weight:700">💬 WhatsApp</a>
       </div>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 14px">
         <a href="/review" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:#1f4f9f;color:#fff;border-radius:999px;text-decoration:none;font-weight:700" data-event="review_click_form_success" data-i18n="formSuccessReviewBtn">⭐ Leave a Google Review</a>
@@ -584,17 +585,17 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="display:grid;gap:16px">
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
         <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ1">How quickly can you respond to my service request?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA1">Most calls are answered within 10 minutes. We're available 8am-8pm daily. For urgent same-day service, call 213-361-1700 directly.</p>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA1">We respond within 1 hour during business hours (8am-7pm PT). For urgent same-day service, call 213-361-1700 directly.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
         <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ2">Do you charge for estimates/quotes?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA2">No! All quotes are 100% free. We provide transparent, upfront pricing. No hidden fees. No credit card required.</p>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA2">Phone and chat quotes are free. On-site estimates: $75, credited toward your project when you book.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
-        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ3">Are you licensed and insured?</summary>
-        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA3">Yes! We are fully licensed and insured. All work is guaranteed. If you're not 100% happy, we'll make it right.</p>
+        <summary style="font-weight:700;color:var(--ink);user-select:none" data-i18n="faqQ3">Are you insured?</summary>
+        <p style="margin-top:12px;color:var(--ink2);line-height:1.6" data-i18n="faqA3">We carry General Liability Insurance. Work terms and service limits are explained before booking.</p>
       </details>
 
       <details style="padding:20px;background:#fff;border-radius:12px;border:1px solid var(--st);cursor:pointer">
@@ -619,7 +620,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div style="background:var(--ink);padding:48px 18px;text-align:center">
   <div style="max-width:800px;margin:0 auto">
     <h2 style="color:#fff;font-size:28px;font-weight:700;font-family:var(--fs);margin-bottom:16px" data-i18n="finalCtaTitle">Don't Wait—Book Your Handyman Today</h2>
-    <p style="color:rgba(255,255,255,0.80);font-size:16px;margin-bottom:24px" data-i18n="finalCtaSub">Professional service, guaranteed satisfaction. 500+ happy customers in LA.</p>
+    <p style="color:rgba(255,255,255,0.80);font-size:16px;margin-bottom:24px" data-i18n="finalCtaSub">Professional service across Los Angeles with clear, upfront scope.</p>
 
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <a href="https://wa.me/12133611700?text=I%20want%20to%20book%20a%20service%20this%20week" style="display:inline-flex;align-items:center;gap:8px;padding:16px 28px;background:#25D366;color:#fff;border-radius:999px;font-weight:700;text-decoration:none;transition:opacity 200ms" data-event="final_cta_whatsapp" data-i18n="finalCtaWhatsApp">
@@ -633,6 +634,30 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <script>
+const serviceFallbackMap = {
+  'tv-mounting': 'TV mounting',
+  'furniture-assembly': 'furniture assembly',
+  'painting': 'painting',
+  'flooring': 'flooring',
+  'plumbing': 'plumbing',
+  'electrical': 'electrical',
+  'mirrors': 'art or mirror hanging',
+  'other': 'a home project'
+};
+
+function buildSafeWaText(formData) {
+  const rawService = (formData && (formData.service || formData.service_type || formData.serviceType || '')).toString().trim();
+  const serviceLabel = serviceFallbackMap[rawService] || rawService || 'a home project';
+  const rooms = ((formData && (formData.rooms || formData.room || '')) || '').toString().trim();
+  return "Hi, I'm interested in " + serviceLabel + (rooms ? ' for ' + rooms : '') + '. Can you help?';
+}
+
+function setSafeWhatsAppLink(anchorId, formData) {
+  const anchor = document.getElementById(anchorId);
+  if (!anchor) return;
+  anchor.href = 'https://wa.me/12133611700?text=' + encodeURIComponent(buildSafeWaText(formData));
+}
+
 async function handleLeadSubmit(e) {
   e.preventDefault();
   const ui = (typeof window.HF_UI === 'function') ? window.HF_UI() : {};
@@ -718,6 +743,7 @@ async function handleLeadSubmit(e) {
     // Hide form, show success
     document.getElementById('leadForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
+    setSafeWhatsAppLink('formSuccessWhatsApp', { service });
 
     console.log('Lead captured:', { name, email, phone, service, leadId });
     emitCoreEvent('form_submit', {
@@ -820,17 +846,6 @@ function compressImage(file, maxWidth, quality) {
     reader.readAsDataURL(file);
   });
 }
-
-// Track form interactions
-document.getElementById('leadForm')?.addEventListener('input', (e) => {
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'ViewContent', {
-      'event_category': 'engagement',
-      'content_name': 'Lead Form - User Started Filling',
-      'content_type': 'form'
-    });
-  }
-});
 
 // Service-specific placeholders
 const servicePlaceholders = {
@@ -1079,9 +1094,23 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
     addMsg('bot', GREET[lang]||GREET.en);
   }
 
+  function stripChatMarkdown(text) {
+    return String(text || '')
+      .replace(/```[\s\S]*?```/g, ' ')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+      .replace(/^\s{0,3}#{1,6}\s+/gm, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
   function addMsg(role, text){
     msgs.push({role: role==='bot'?'assistant':'user', content: text});
-    renderMsg(role, text);
+    renderMsg(role, role === 'bot' ? stripChatMarkdown(text) : text);
   }
 
   function renderMsg(role, text){
@@ -1271,7 +1300,7 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
     }
 
     btn.addEventListener('mousedown', startDrag);
-    btn.addEventListener('touchstart', startDrag);
+    btn.addEventListener('touchstart', startDrag, {passive:true});
     document.addEventListener('mousemove', drag);
     document.addEventListener('touchmove', drag, {passive:false});
     document.addEventListener('mouseup', stopDrag);
@@ -1279,10 +1308,15 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
   })();
 
   // Auto-grow textarea
+  var chatInputPlaceholderTimer = null;
   document.getElementById('hf-chat-input').addEventListener('input', function(){
     this.style.height='';
     this.style.height=Math.min(this.scrollHeight,80)+'px';
-    document.getElementById('hf-chat-input').placeholder = PLACEHOLDER[getLang()]||PLACEHOLDER.en;
+    var self = this;
+    clearTimeout(chatInputPlaceholderTimer);
+    chatInputPlaceholderTimer = setTimeout(function() {
+      self.placeholder = PLACEHOLDER[getLang()]||PLACEHOLDER.en;
+    }, 300);
   });
 
   // Show badge after 4s if user hasn't opened chat
