@@ -323,6 +323,7 @@ export default async function handler(req, res) {
   if (!safeMessages.length) {
     return res.status(400).json({ error: 'No valid messages' });
   }
+  const latestUserText = safeMessages[safeMessages.length - 1]?.content || '';
 
   // Check API key
   if (!process.env.DEEPSEEK_API_KEY) {
@@ -337,15 +338,19 @@ export default async function handler(req, res) {
 
   let rawReply;
   try {
-    // Use resilient AI fallback (handles retries and static fallback)
-    const alexResult = await callAlex(safeMessages, systemPrompt);
-    rawReply = alexResult.reply;
-    if (alexResult.model === 'static_fallback') {
-      console.warn('[AI_CHAT] Using static fallback for DeepSeek API');
-      await pipelineLogEvent(null, 'alex_fallback', {
-        sessionId,
-        reason: 'DeepSeek API down, using static fallback'
-      }).catch(() => {});
+    if (isClearlyOutOfScopeRequest(latestUserText)) {
+      rawReply = getOutOfScopeReply(safeLang);
+    } else {
+      // Use resilient AI fallback (handles retries and static fallback)
+      const alexResult = await callAlex(safeMessages, systemPrompt);
+      rawReply = alexResult.reply;
+      if (alexResult.model === 'static_fallback') {
+        console.warn('[AI_CHAT] Using static fallback for DeepSeek API');
+        await pipelineLogEvent(null, 'alex_fallback', {
+          sessionId,
+          reason: 'DeepSeek API down, using static fallback'
+        }).catch(() => {});
+      }
     }
   } catch (err) {
     console.error('[AI_CHAT] AI error:', err.message);
@@ -717,4 +722,47 @@ function escapeHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function isClearlyOutOfScopeRequest(text) {
+  const t = String(text || '').toLowerCase();
+  if (!t || t.length < 6) return false;
+
+  const supported = [
+    'cabinet', 'kitchen cabinet', 'door spray', 'drawer', 'furniture assembly', 'furniture painting', 'interior painting',
+    'painting', 'flooring', 'lvp', 'laminate', 'tv mounting', 'tv mount', 'mirror', 'art hanging', 'curtain',
+    'plumbing', 'faucet', 'shower head', 'toilet repair', 'electrical', 'light fixture', 'outlet', 'switch',
+    'сантех', 'сантехника', 'электрик', 'электрика', 'монтаж тв', 'шкаф', 'покраск', 'плинтус', 'пол', 'ламинат',
+    'підлог', 'фарбув', 'шаф', 'збірк', 'монтаж', 'розетк', 'сантехн',
+    'pintura', 'gabinete', 'muebles', 'ensamblaje', 'pisos', 'plomería', 'plomeria', 'eléctrica', 'electrica', 'montaje tv'
+  ];
+  if (supported.some((k) => t.includes(k))) return false;
+
+  const requestSignals = [
+    'need', 'quote', 'estimate', 'price', 'cost', 'can you', 'do you', 'help with', 'service',
+    'нужн', 'можете', 'делаете', 'цена', 'стоим', 'смет', 'помочь',
+    'потріб', 'робите', 'ціна', 'кошторис', 'допомог',
+    'necesito', 'pueden', 'hacen', 'precio', 'cotización', 'cotizacion', 'servicio'
+  ];
+  if (!requestSignals.some((k) => t.includes(k))) return false;
+
+  const outOfScope = [
+    'roof', 'roofing', 'hvac', 'ac repair', 'air conditioner', 'heating', 'solar', 'landscaping', 'lawn', 'gardening',
+    'tree trimming', 'pest control', 'moving', 'cleaning service', 'house cleaning', 'car repair', 'auto repair',
+    'legal advice', 'attorney', 'doctor', 'medical', 'tax', 'loan', 'mortgage', 'insurance policy',
+    'крыш', 'кондиционер', 'авто', 'машин', 'юрист', 'медицин', 'налог', 'кредит',
+    'дах', 'авто', 'юрист', 'меди', 'подат', 'кредит',
+    'techo', 'aire acondicionado', 'jardinería', 'jardineria', 'mudanza', 'abogado', 'médic', 'medic', 'impuestos', 'préstamo', 'prestamo'
+  ];
+  return outOfScope.some((k) => t.includes(k));
+}
+
+function getOutOfScopeReply(lang) {
+  const map = {
+    en: "This is outside our service scope. We work only with services published on our website: cabinet painting, furniture painting/assembly, interior painting, flooring, TV/art mounting, minor plumbing, and minor electrical. For other services, we do not provide estimates.",
+    ru: "Это не входит в наш сервис. Мы работаем только с услугами, которые опубликованы на сайте: покраска шкафов и мебели, покраска интерьера, полы, монтаж ТВ/картин, мелкая сантехника и мелкая электрика. По другим услугам мы расчеты не делаем.",
+    uk: "Це не входить у наш сервіс. Ми працюємо тільки з послугами, що опубліковані на сайті: фарбування шаф і меблів, фарбування інтер'єру, підлога, монтаж ТВ/картин, дрібна сантехніка і дрібна електрика. Для інших послуг ми кошториси не робимо.",
+    es: "Esto no entra en nuestro servicio. Trabajamos solo con los servicios publicados en nuestro sitio: pintura de gabinetes y muebles, pintura interior, pisos, montaje de TV/cuadros, plomería menor y eléctrica menor. Para otros servicios no hacemos cotizaciones."
+  };
+  return map[lang] || map.en;
 }
