@@ -424,13 +424,6 @@ export default async function handler(req, res) {
   const hasContact = hasContactCapture(safeMessages) || sessionContext.hasContact;
 
   const dynamicGuardEnabled = String(process.env.ALEX_DYNAMIC_GUARD || 'on').toLowerCase() !== 'off';
-  const dynamicPromptSuffix = dynamicGuardEnabled
-    ? buildDynamicPricingSuffix({
-        lang: safeLang,
-        hasContact: hasContact,
-        userMsgCount
-      })
-    : '';
 
   // ALEX v8: 3-message gate for non-contact users
   let alexV8GatePrompt = '';
@@ -443,12 +436,12 @@ export default async function handler(req, res) {
     ? 'post_contact_exact'
     : (userMsgCount >= 3 ? 'no_contact_hardened' : 'pre_contact_range');
 
-  // ALEX v8: Use simplified prompt focused on rules + gate + dynamic suffix
-  // Don't mix with old PRICING_PROTECTION_PROMPTS or STYLE_OVERRIDES to avoid conflicts
+  // ALEX v8: Self-contained prompt system
+  // NOTE: ALEX v8 base prompt includes all formatting rules (emojis, line limits, pricing guards)
+  // We do NOT add dynamic suffix here since it's included in the base prompt
   const systemPrompt = [
     ALEX_V8_PROMPTS[safeLang]?.base || ALEX_V8_PROMPTS.en.base,
-    alexV8GatePrompt,
-    dynamicPromptSuffix
+    alexV8GatePrompt
   ].filter(Boolean).join('\n\n');
 
   // Check API key
