@@ -12,7 +12,10 @@ const { getClientIp, checkRateLimit } = require('./_lib/rate-limit.js');
 const { createHash } = require('node:crypto');
 const { callAlex } = require('../lib/ai-fallback.js');
 const { createOrMergeLead, logEvent: pipelineLogEvent } = require('../lib/lead-pipeline.js');
-const { ALEX_V8_PROMPTS, hasContactCapture, extractContact, detectLanguage } = require('../lib/alex-v8-system.js');
+const { buildSystemPrompt, getGuardMode, GUARD_MODES } = require('../lib/alex-one-truth.js');
+
+// Legacy support: hasContactCapture, extractContact for lead detection
+const { hasContactCapture, extractContact, detectLanguage } = require('../lib/alex-v8-system.js');
 
 const PHOTO_DEDUP_WINDOW_MS = Number(process.env.TELEGRAM_PHOTO_DEDUP_MS || 10 * 60 * 1000);
 const PHOTO_DEDUP_CACHE = globalThis.__HF_CHAT_PHOTO_DEDUP || new Map();
@@ -423,26 +426,12 @@ export default async function handler(req, res) {
   const userMsgCount = safeMessages.filter((m) => m.role === 'user').length;
   const hasContact = hasContactCapture(safeMessages) || sessionContext.hasContact;
 
-  const dynamicGuardEnabled = String(process.env.ALEX_DYNAMIC_GUARD || 'on').toLowerCase() !== 'off';
+  // ALEX v9: Guard mode determination and prompt building
+  // Determine guard mode based on contact capture and message count
+  const guardMode = getGuardMode({ hasContact, userMsgCount });
 
-  // ALEX v8: 3-message gate for non-contact users
-  let alexV8GatePrompt = '';
-  if (dynamicGuardEnabled && !hasContact && userMsgCount >= 3) {
-    const gateFunc = ALEX_V8_PROMPTS[safeLang]?.v8Gate || ALEX_V8_PROMPTS.en.v8Gate;
-    alexV8GatePrompt = gateFunc(userMsgCount, hasContact) || '';
-  }
-
-  const guardMode = hasContact
-    ? 'post_contact_exact'
-    : (userMsgCount >= 3 ? 'no_contact_hardened' : 'pre_contact_range');
-
-  // ALEX v8: Self-contained prompt system
-  // NOTE: ALEX v8 base prompt includes all formatting rules (emojis, line limits, pricing guards)
-  // We do NOT add dynamic suffix here since it's included in the base prompt
-  const systemPrompt = [
-    ALEX_V8_PROMPTS[safeLang]?.base || ALEX_V8_PROMPTS.en.base,
-    alexV8GatePrompt
-  ].filter(Boolean).join('\n\n');
+  // Build complete system prompt with dynamic guard suffix
+  const systemPrompt = buildSystemPrompt({ guardMode });
 
   // Check API key
   if (!process.env.DEEPSEEK_API_KEY) {
@@ -461,13 +450,17 @@ export default async function handler(req, res) {
       rawReply = getOutOfScopeReply(safeLang);
     } else {
       // Use resilient AI fallback (handles retries and static fallback)
+      // ALEX v9 system prompt handles all guard rules internally
       const alexResult = await callAlex(safeMessages, systemPrompt);
       rawReply = alexResult.reply;
-      if (dynamicGuardEnabled && shouldRegenerateForStrictRange({ guardMode, reply: rawReply })) {
-        const strictPrompt = `${systemPrompt}\n\nCRITICAL OVERRIDE: Re-answer this user now with ranges only. Do not include per-unit prices, multipliers, or exact totals. Keep answer short and ask one CTA question.`;
+
+      // Optional: Retry with stricter guard if needed (safety measure)
+      if (guardMode === GUARD_MODES.PRE_CONTACT_RANGE && shouldRegenerateForStrictRange({ guardMode, reply: rawReply })) {
+        const strictPrompt = `${systemPrompt}\n\nCRITICAL: User has no contact yet. Give RANGES ONLY. No per-unit prices, no math, no lists.`;
         const retry = await callAlex(safeMessages, strictPrompt);
         rawReply = retry.reply;
       }
+
       if (alexResult.model === 'static_fallback') {
         console.warn('[AI_CHAT] Using static fallback for DeepSeek API');
         await pipelineLogEvent(null, 'alex_fallback', {

@@ -9,3 +9,4 @@ Use the deterministic operations protocol:
 - `node ops/build-post-pack.mjs`
 - `node ops/factory-guard.mjs`
 - `GET /api/factory-health`
+- `GET /api/funnel-health?hours=24`
