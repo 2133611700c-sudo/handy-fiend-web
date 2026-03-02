@@ -10,6 +10,8 @@
 const { restInsert, logLeadEvent } = require('./_lib/supabase-admin.js');
 const { getClientIp, checkRateLimit } = require('./_lib/rate-limit.js');
 const { createHash } = require('node:crypto');
+const { callAlex } = require('../lib/ai-fallback.js');
+const { createOrMergeLead, logEvent: pipelineLogEvent } = require('../lib/lead-pipeline.js');
 
 const PHOTO_DEDUP_WINDOW_MS = Number(process.env.TELEGRAM_PHOTO_DEDUP_MS || 10 * 60 * 1000);
 const PHOTO_DEDUP_CACHE = globalThis.__HF_CHAT_PHOTO_DEDUP || new Map();
@@ -335,9 +337,18 @@ export default async function handler(req, res) {
 
   let rawReply;
   try {
-    rawReply = await callDeepSeek(systemPrompt, safeMessages);
+    // Use resilient AI fallback (handles retries and static fallback)
+    const alexResult = await callAlex(safeMessages, systemPrompt);
+    rawReply = alexResult.reply;
+    if (alexResult.model === 'static_fallback') {
+      console.warn('[AI_CHAT] Using static fallback for DeepSeek API');
+      await pipelineLogEvent(null, 'alex_fallback', {
+        sessionId,
+        reason: 'DeepSeek API down, using static fallback'
+      }).catch(() => {});
+    }
   } catch (err) {
-    console.error('[AI_CHAT] DeepSeek error:', err.message);
+    console.error('[AI_CHAT] AI error:', err.message);
     return res.status(502).json({ error: 'AI service temporarily unavailable. Please try again.' });
   }
 
@@ -381,36 +392,8 @@ export default async function handler(req, res) {
   return res.status(200).json({ reply, leadCaptured, leadId });
 }
 
-async function callDeepSeek(systemPrompt, messages) {
-  const response = await fetch('https://api.deepseek.com/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`
-    },
-    body: JSON.stringify({
-      model: 'deepseek-chat',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages
-      ],
-      temperature: 0.7,
-      max_tokens: 600
-    })
-  });
-
-  if (!response.ok) {
-    const err = await response.text().catch(() => '');
-    throw new Error(`DeepSeek ${response.status}: ${err.slice(0, 200)}`);
-  }
-
-  const data = await response.json();
-  if (!data.choices?.[0]?.message?.content) {
-    throw new Error('Invalid DeepSeek response structure');
-  }
-
-  return data.choices[0].message.content;
-}
+// callDeepSeek has been replaced by callAlex() from lib/ai-fallback.js
+// which provides automatic retry logic and static fallback when API is down
 
 async function createLead(leadData, sessionId, lang, messages) {
   const { name, phone, email, service, description } = leadData;
@@ -419,29 +402,60 @@ async function createLead(leadData, sessionId, lang, messages) {
     return { ok: false, error: 'missing_name_or_contact' };
   }
 
-  const leadId = `chat_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+  try {
+    // === PIPELINE: Smart dedup + lead creation ===
+    const pipelineResult = await createOrMergeLead({
+      name: String(name).slice(0, 160),
+      email: String(email || '').slice(0, 160),
+      phone: String(phone || '').slice(0, 40),
+      service_type: String(service || '').slice(0, 120),
+      message: String(description || '').slice(0, 2000),
+      source: 'website_chat',
+      session_id: sessionId
+    });
 
-  const record = {
-    id: leadId,
-    source: 'ai_chat',
-    status: 'new',
-    full_name: String(name).slice(0, 160),
-    phone: String(phone || '').slice(0, 40),
-    email: String(email || '').slice(0, 160),
-    service_type: String(service || '').slice(0, 120),
-    problem_description: String(description || '').slice(0, 2000),
-    ai_summary: buildSummary(messages, lang).slice(0, 2000),
-    source_details: { session_id: sessionId, lang, channel: 'chat_widget' }
-  };
+    const leadId = pipelineResult.id;
 
-  const result = await restInsert('leads', record, { returning: false });
-  if (!result.ok && !result.skipped) {
-    console.error('[AI_CHAT] Lead insert failed:', result.error, result.details || '');
-    return { ok: false, error: result.error };
+    // Log to pipeline event trail
+    await pipelineLogEvent(leadId, 'ai_chat_capture', {
+      service,
+      lang,
+      session_id: sessionId,
+      is_new: pipelineResult.isNew,
+      conversation_summary: buildSummary(messages, lang).slice(0, 500)
+    }).catch(err => console.error('[PIPELINE_LOG]', err.message));
+
+    console.log('[AI_CHAT] Lead captured:', leadId, service, phone || email, pipelineResult.isNew ? '(new)' : '(merged)');
+    return { ok: true, leadId };
+
+  } catch (err) {
+    console.error('[AI_CHAT] Pipeline error:', err.message);
+    // Fallback to legacy insertion
+    console.warn('[FALLBACK_TO_LEGACY_INSERT]');
+    const fallbackId = `chat_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+
+    const record = {
+      id: fallbackId,
+      source: 'ai_chat',
+      status: 'new',
+      full_name: String(name).slice(0, 160),
+      phone: String(phone || '').slice(0, 40),
+      email: String(email || '').slice(0, 160),
+      service_type: String(service || '').slice(0, 120),
+      problem_description: String(description || '').slice(0, 2000),
+      ai_summary: buildSummary(messages, lang).slice(0, 2000),
+      source_details: { session_id: sessionId, lang, channel: 'chat_widget' }
+    };
+
+    const result = await restInsert('leads', record, { returning: false });
+    if (!result.ok && !result.skipped) {
+      console.error('[AI_CHAT] Lead insert failed:', result.error, result.details || '');
+      return { ok: false, error: result.error };
+    }
+
+    console.log('[AI_CHAT] Lead created (legacy fallback):', fallbackId);
+    return { ok: true, leadId: fallbackId };
   }
-
-  console.log('[AI_CHAT] Lead created:', leadId, service, phone || email);
-  return { ok: true, leadId };
 }
 
 async function saveTurns(sessionId, leadId, userMsg, assistantMsg) {

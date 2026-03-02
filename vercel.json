@@ -29,5 +29,15 @@
       "destination": "https://handyandfriend.com/$1",
       "permanent": true
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/pipeline-cron?action=sla",
+      "schedule": "*/15 15-23,0-4 * * *"
+    },
+    {
+      "path": "/api/pipeline-cron?action=report",
+      "schedule": "0 17 * * 0"
+    }
   ]
 }

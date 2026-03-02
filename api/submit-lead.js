@@ -12,6 +12,7 @@
 const { saveLeadContext } = require('./_lib/lead-context-store.js');
 const { restInsert, logLeadEvent } = require('./_lib/supabase-admin.js');
 const { getClientIp, checkRateLimit } = require('./_lib/rate-limit.js');
+const { createOrMergeLead, logEvent: pipelineLogEvent } = require('../lib/lead-pipeline.js');
 
 export default async function handler(req, res) {
   // CORS headers
@@ -120,8 +121,8 @@ export default async function handler(req, res) {
     }
   }
 
-  // Log lead
-  const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+  // === PIPELINE: Smart deduplication + lead creation ===
+  // Using lib/lead-pipeline.js for intelligent merging of duplicate leads
   const safeAttachments = Array.isArray(attachments)
     ? attachments.slice(0, 6).map((item) => ({
       name: String(item?.name || 'photo.jpg'),
@@ -131,7 +132,6 @@ export default async function handler(req, res) {
     : [];
 
   const leadData = {
-    leadId,
     name,
     email,
     phone,
@@ -145,7 +145,7 @@ export default async function handler(req, res) {
     timestamp: timestamp || new Date().toISOString(),
     ip: req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown',
     userAgent: req.headers['user-agent'] || 'unknown',
-    source: normalizedAttribution.summary || req.headers['referer'] || 'https://handyandfriend.com',
+    source: normalizedAttribution.summary || 'website_form',
     sourceDetails: {
       utmSource: normalizedAttribution.utmSource || '',
       utmCampaign: normalizedAttribution.utmCampaign || '',
@@ -156,47 +156,63 @@ export default async function handler(req, res) {
   console.log('[LEAD_CAPTURED]', JSON.stringify(leadData));
   saveLeadContext(leadData).catch((err) => console.error('[LEAD_CONTEXT_ASYNC_ERROR]', err.message));
 
-  // Persist lead into Supabase CRM (server-only path).
-  const leadRecord = {
-    id: leadId,
-    source: leadData.source || 'direct',
-    status: (!phone && !email) ? 'partial' : 'new',
-    full_name: String(name || '').slice(0, 160),
-    phone: String(phone || '').slice(0, 40),
-    email: String(email || '').slice(0, 160),
-    city: '',
-    zip: String(zip || '').slice(0, 20),
-    service_type: String(service || 'Not specified').slice(0, 120),
-    problem_description: String(message || '').slice(0, 4000),
-    budget_range: '',
-    preferred_date: '',
-    lead_score: 0,
-    ai_summary_short: buildShortSummary({ service, zip, message }),
-    ai_summary_full: buildFullSummary({ service, message, preferredContact, source: leadData.source }),
-    assigned_to: '',
-    next_action_at: null,
-    last_contact_at: null,
-    source_details: leadData.sourceDetails || {}
-  };
+  // Create or merge lead using smart dedup
+  let pipelineResult;
+  let leadId;
+  try {
+    pipelineResult = await createOrMergeLead({
+      name: String(name || 'Unknown'),
+      email,
+      phone,
+      service_type: String(service || 'Not specified'),
+      message: String(message || 'No message'),
+      source: leadData.source,
+      zip: String(zip || '')
+    });
+    leadId = pipelineResult.id;
 
-  const supabaseLeadInsert = await insertLeadWithSchemaFallback(leadRecord);
-  if (supabaseLeadInsert.ok) {
-    await safeLogLeadEvent(leadId, 'lead_created', {
-      service_type: leadRecord.service_type,
-      zip: leadRecord.zip || null,
-      source: leadRecord.source,
+    // Log to pipeline event trail
+    await pipelineLogEvent(leadId, 'form_submission', {
+      service: service,
+      source: leadData.source,
       has_email: Boolean(email),
-      has_phone: Boolean(phone)
-    });
-    await safeLogLeadEvent(leadId, 'ai_summary_saved', {
-      ai_summary_short: leadRecord.ai_summary_short
-    });
-  } else if (!supabaseLeadInsert.skipped) {
-    console.error('[SUPABASE_LEAD_INSERT_ERROR]', supabaseLeadInsert.error, supabaseLeadInsert.details || '');
-    await safeLogLeadEvent(leadId, 'validation_failed', {
-      stage: 'create_lead',
-      error: supabaseLeadInsert.error || 'lead_insert_failed'
-    });
+      has_phone: Boolean(phone),
+      is_new: pipelineResult.isNew,
+      attachments_count: safeAttachments.length
+    }).catch(err => console.error('[PIPELINE_LOG]', err.message));
+
+    if (pipelineResult.isNew) {
+      console.log('[LEAD_CREATED_NEW]', leadId);
+    } else {
+      console.log('[LEAD_MERGED_EXISTING]', leadId);
+    }
+  } catch (err) {
+    console.error('[PIPELINE_ERROR]', err.message);
+    // Fallback to legacy insertion method
+    console.warn('[FALLBACK_TO_LEGACY_INSERT]');
+    leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+    const legacyRecord = {
+      id: leadId,
+      source: leadData.source || 'website_form',
+      status: (!phone && !email) ? 'partial' : 'new',
+      full_name: String(name || '').slice(0, 160),
+      phone: String(phone || '').slice(0, 40),
+      email: String(email || '').slice(0, 160),
+      city: '',
+      zip: String(zip || '').slice(0, 20),
+      service_type: String(service || 'Not specified').slice(0, 120),
+      problem_description: String(message || '').slice(0, 4000),
+      budget_range: '',
+      preferred_date: '',
+      lead_score: 0,
+      ai_summary_short: buildShortSummary({ service, zip, message }),
+      ai_summary_full: buildFullSummary({ service, message, preferredContact, source: leadData.source }),
+      assigned_to: '',
+      next_action_at: null,
+      last_contact_at: null,
+      source_details: leadData.sourceDetails || {}
+    };
+    await insertLeadWithSchemaFallback(legacyRecord);
   }
 
   // Build email HTML
