@@ -425,6 +425,22 @@ export default async function handler(req, res) {
     }
   }
 
+  // Fallback capture when model did not return lead-payload block.
+  if (!leadCaptured) {
+    const inferredLead = inferLeadFromConversation(safeMessages);
+    if (inferredLead) {
+      try {
+        const fallbackResult = await createLead(inferredLead, sessionId, safeLang, safeMessages);
+        if (fallbackResult.ok) {
+          leadCaptured = true;
+          leadId = fallbackResult.leadId;
+        }
+      } catch (err) {
+        console.error('[AI_CHAT] Fallback lead inference failed:', err.message);
+      }
+    }
+  }
+
   // Save conversation turn (fire-and-forget)
   const lastUser = safeMessages[safeMessages.length - 1];
   saveTurns(sessionId, leadId, lastUser?.content, reply).catch(err =>
@@ -812,6 +828,54 @@ function getOutOfScopeReply(lang) {
     es: "Esto no entra en nuestro servicio. Trabajamos solo con los servicios publicados en nuestro sitio: pintura de gabinetes y muebles, pintura interior, pisos, montaje de TV/cuadros, plomería menor y eléctrica menor. Para otros servicios no hacemos cotizaciones."
   };
   return map[lang] || map.en;
+}
+
+function inferLeadFromConversation(messages) {
+  if (!Array.isArray(messages) || !messages.length) return null;
+  const userText = messages.filter((m) => m.role === 'user').map((m) => String(m.content || ''));
+  if (!userText.length) return null;
+  const joined = userText.join('\n');
+  const latest = userText[userText.length - 1] || '';
+
+  const emailMatch = joined.match(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i);
+  const phoneMatch = joined.match(/(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\b/);
+  const email = emailMatch ? emailMatch[0].trim() : '';
+  const phone = phoneMatch ? phoneMatch[0].trim() : '';
+  if (!email && !phone) return null;
+
+  const serviceType = inferServiceType(joined);
+  if (!serviceType) return null;
+
+  const nameMatch = joined.match(/\b(?:my name is|i am|this is|name[:\s])\s+([A-Za-z][A-Za-z' -]{1,40})/i);
+  const rawName = nameMatch ? nameMatch[1].trim() : '';
+  const name = rawName ? rawName.replace(/\s{2,}/g, ' ') : 'Unknown';
+
+  return {
+    name,
+    phone,
+    email,
+    service: serviceType,
+    description: latest.slice(0, 500)
+  };
+}
+
+function inferServiceType(text) {
+  const t = String(text || '').toLowerCase();
+  const map = [
+    ['cabinet painting', ['cabinet', 'door', 'drawer', 'kitchen cabinet']],
+    ['furniture assembly', ['furniture assembly', 'assemble', 'ikea', 'bed frame', 'dresser']],
+    ['furniture painting', ['furniture painting', 'refinish furniture', 'paint furniture']],
+    ['interior painting', ['interior painting', 'paint walls', 'wall paint', 'ceiling paint', 'painting']],
+    ['flooring', ['flooring', 'laminate', 'lvp', 'vinyl floor', 'floor install']],
+    ['tv mounting', ['tv mount', 'tv mounting']],
+    ['art hanging', ['mirror', 'art hanging', 'picture hanging', 'curtain']],
+    ['plumbing', ['plumbing', 'faucet', 'toilet', 'shower head', 'caulk tub']],
+    ['electrical', ['electrical', 'light fixture', 'outlet', 'switch', 'smart lock', 'doorbell']]
+  ];
+  for (const [service, keywords] of map) {
+    if (keywords.some((k) => t.includes(k))) return service;
+  }
+  return '';
 }
 
 async function fetchSessionLeadContext(sessionId) {
