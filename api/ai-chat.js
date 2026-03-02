@@ -168,6 +168,11 @@ export default async function handler(req, res) {
     }
   }
 
+  if (guardMode === GUARD_MODES.POST_CONTACT_EXACT && !isClearlyOutOfScopeRequest(latestUserText)) {
+    const serviceForUpsell = String(capturedLead?.service || inferServiceType(userOnlyMessages.map((m) => m.content).join('\n')) || '').toLowerCase();
+    reply = appendCrossSellNudge(reply, safeLang, serviceForUpsell);
+  }
+
   // Save conversation turn (fire-and-forget)
   const lastUser = safeMessages[safeMessages.length - 1];
   saveTurns(sessionId, leadId, lastUser?.content, reply).catch(err =>
@@ -620,6 +625,82 @@ function enforceContactCaptureCTA(reply, lang, guardMode) {
 
   const cta = ctaByLang[lang] || ctaByLang.en;
   return `${text}\n\n${cta}`;
+}
+
+function appendCrossSellNudge(reply, lang, service) {
+  const text = String(reply || '').trim();
+  if (!text) return text;
+  if (hasCrossSellNudge(text)) return text;
+
+  const map = {
+    en: {
+      cabinet: "Also, we can bundle wall refresh while cabinets dry to save a trip.",
+      paint: "Also, we can add baseboards or ceiling in the same visit for one finish style.",
+      flooring: "Also, we can paint baseboards while flooring is in progress for a clean final look.",
+      tv: "Also, we can hang mirrors or art in the same visit.",
+      furniture: "Also, we can add TV or shelf mounting in the same trip.",
+      plumbing: "Also, we can include a light fixture swap in the same visit.",
+      electrical: "Also, we can include smart lock or doorbell install in the same visit.",
+      generic: "Also, we can bundle one more service in the same visit to save a trip."
+    },
+    ru: {
+      cabinet: "Также можем сразу обновить стены, пока фасады сохнут — это экономит выезд.",
+      paint: "Также можем добавить потолок или плинтус в этот же визит для единого финиша.",
+      flooring: "Также можем покрасить плинтус во время укладки пола для аккуратного финала.",
+      tv: "Также можем повесить зеркала или картины в тот же визит.",
+      furniture: "Также можем добавить монтаж ТВ или полок в ту же поездку.",
+      plumbing: "Также можем заменить светильник в этот же визит.",
+      electrical: "Также можем установить smart-lock или doorbell в этот же визит.",
+      generic: "Также можем объединить еще одну услугу в этот же визит и сэкономить выезд."
+    },
+    uk: {
+      cabinet: "Також можемо оновити стіни, поки фасади сохнуть — це економить виїзд.",
+      paint: "Також можемо додати стелю або плінтус у цей же візит для єдиного фінішу.",
+      flooring: "Також можемо пофарбувати плінтус під час укладання підлоги для чистого фіналу.",
+      tv: "Також можемо повісити дзеркала або картини в той самий візит.",
+      furniture: "Також можемо додати монтаж ТВ або полиць у ту ж поїздку.",
+      plumbing: "Також можемо замінити світильник у цей самий візит.",
+      electrical: "Також можемо встановити smart-lock або doorbell у цей самий візит.",
+      generic: "Також можемо об'єднати ще одну послугу в цей же візит і зекономити виїзд."
+    },
+    es: {
+      cabinet: "Tambien podemos incluir pintura de paredes mientras secan los gabinetes para ahorrar una visita.",
+      paint: "Tambien podemos agregar techo o zocalos en la misma visita para un acabado uniforme.",
+      flooring: "Tambien podemos pintar zocalos mientras se instala el piso para un cierre limpio.",
+      tv: "Tambien podemos colgar espejos o cuadros en la misma visita.",
+      furniture: "Tambien podemos agregar montaje de TV o repisas en el mismo viaje.",
+      plumbing: "Tambien podemos incluir cambio de luminaria en la misma visita.",
+      electrical: "Tambien podemos incluir instalacion de smart lock o timbre en la misma visita.",
+      generic: "Tambien podemos agrupar un servicio mas en la misma visita para ahorrar un viaje."
+    }
+  };
+
+  const local = map[lang] || map.en;
+  let line = local.generic;
+  if (service.includes('cabinet')) line = local.cabinet;
+  else if (service.includes('interior painting') || service.includes('painting')) line = local.paint;
+  else if (service.includes('flooring')) line = local.flooring;
+  else if (service.includes('tv')) line = local.tv;
+  else if (service.includes('furniture assembly')) line = local.furniture;
+  else if (service.includes('plumbing')) line = local.plumbing;
+  else if (service.includes('electrical')) line = local.electrical;
+
+  return `${text}\n\n${line}`;
+}
+
+function hasCrossSellNudge(text) {
+  const t = String(text || '').toLowerCase();
+  return (
+    t.includes('bundle') ||
+    t.includes('same visit') ||
+    t.includes('same trip') ||
+    t.includes('baseboard') ||
+    t.includes('зеконом') ||
+    t.includes('в этот же визит') ||
+    t.includes('в той самий візит') ||
+    t.includes('mismo viaje') ||
+    t.includes('misma visita')
+  );
 }
 
 function inferLeadFromConversation(messages) {
