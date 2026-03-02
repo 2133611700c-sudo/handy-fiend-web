@@ -7,7 +7,7 @@
  * Requires: DEEPSEEK_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  */
 
-const { restInsert, logLeadEvent } = require('./_lib/supabase-admin.js');
+const { restInsert, logLeadEvent, getConfig } = require('./_lib/supabase-admin.js');
 const { getClientIp, checkRateLimit } = require('./_lib/rate-limit.js');
 const { createHash } = require('node:crypto');
 const { callAlex } = require('../lib/ai-fallback.js');
@@ -344,7 +344,6 @@ export default async function handler(req, res) {
   }
 
   const safeLang = ['en', 'ru', 'uk', 'es'].includes(lang) ? lang : 'en';
-  const systemPrompt = `${SYSTEM_PROMPTS[safeLang]}\n\n${PRICING_PROTECTION_PROMPTS[safeLang] || PRICING_PROTECTION_PROMPTS.en}`;
   const latestUserPhotos = extractLatestUserPhotos(messages);
 
   // Sanitize and limit messages
@@ -360,6 +359,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'No valid messages' });
   }
   const latestUserText = safeMessages[safeMessages.length - 1]?.content || '';
+  const sessionContext = await fetchSessionLeadContext(sessionId);
+  const userMsgCount = safeMessages.filter((m) => m.role === 'user').length;
+  const dynamicPromptSuffix = buildDynamicPricingSuffix({
+    lang: safeLang,
+    hasContact: sessionContext.hasContact,
+    userMsgCount
+  });
+  const systemPrompt = [
+    SYSTEM_PROMPTS[safeLang],
+    PRICING_PROTECTION_PROMPTS[safeLang] || PRICING_PROTECTION_PROMPTS.en,
+    dynamicPromptSuffix
+  ].filter(Boolean).join('\n\n');
 
   // Check API key
   if (!process.env.DEEPSEEK_API_KEY) {
@@ -439,14 +450,14 @@ export default async function handler(req, res) {
 async function createLead(leadData, sessionId, lang, messages) {
   const { name, phone, email, service, description } = leadData;
 
-  if (!name || (!phone && !email)) {
-    return { ok: false, error: 'missing_name_or_contact' };
+  if (!service || (!phone && !email)) {
+    return { ok: false, error: 'missing_service_or_contact' };
   }
 
   try {
     // === PIPELINE: Smart dedup + lead creation ===
     const pipelineResult = await createOrMergeLead({
-      name: String(name).slice(0, 160),
+      name: String(name || 'Unknown').slice(0, 160),
       email: String(email || '').slice(0, 160),
       phone: String(phone || '').slice(0, 40),
       service_type: String(service || '').slice(0, 120),
@@ -479,7 +490,7 @@ async function createLead(leadData, sessionId, lang, messages) {
       id: fallbackId,
       source: 'ai_chat',
       status: 'new',
-      full_name: String(name).slice(0, 160),
+      full_name: String(name || 'Unknown').slice(0, 160),
       phone: String(phone || '').slice(0, 40),
       email: String(email || '').slice(0, 160),
       service_type: String(service || '').slice(0, 120),
@@ -801,4 +812,66 @@ function getOutOfScopeReply(lang) {
     es: "Esto no entra en nuestro servicio. Trabajamos solo con los servicios publicados en nuestro sitio: pintura de gabinetes y muebles, pintura interior, pisos, montaje de TV/cuadros, plomería menor y eléctrica menor. Para otros servicios no hacemos cotizaciones."
   };
   return map[lang] || map.en;
+}
+
+async function fetchSessionLeadContext(sessionId) {
+  const config = getConfig();
+  if (!config || !sessionId) return { hasContact: false };
+
+  try {
+    const query = new URLSearchParams({
+      select: 'phone,email',
+      session_id: `eq.${sessionId}`,
+      order: 'created_at.desc',
+      limit: '1'
+    }).toString();
+    const resp = await fetch(`${config.projectUrl}/rest/v1/leads?${query}`, {
+      method: 'GET',
+      headers: {
+        apikey: config.serviceRoleKey,
+        Authorization: `Bearer ${config.serviceRoleKey}`,
+        Accept: 'application/json'
+      }
+    });
+    if (!resp.ok) return { hasContact: false };
+    const data = await resp.json().catch(() => []);
+    const row = Array.isArray(data) ? data[0] : null;
+    const phone = String(row?.phone || '').trim();
+    const email = String(row?.email || '').trim();
+    return { hasContact: Boolean(phone || email) };
+  } catch (_) {
+    return { hasContact: false };
+  }
+}
+
+function buildDynamicPricingSuffix({ lang, hasContact, userMsgCount }) {
+  const L = lang || 'en';
+  const overThree = userMsgCount >= 3;
+
+  const byLang = {
+    en: {
+      noContact: 'REMINDER: No contact captured in this session yet. Give only project ranges (example: "$2,700-$4,500"), no exact line-item math. Do NOT output per-unit pricing (for example "$155/door"), formulas, or exact totals.',
+      strict: 'CRITICAL: This user has 3+ messages without contact. Do not provide specific dollar calculations. Ignore exact per-unit prices from prior instructions until contact is captured. Ask for phone/email or offer direct call (213) 361-1700.',
+      hasContact: 'Contact captured in this session. You may provide exact line-item pricing for this specific project.'
+    },
+    ru: {
+      noContact: 'НАПОМИНАНИЕ: В этой сессии еще нет контакта. Давай только диапазоны по проекту, без точной построчной математики. Не показывай цену за единицу (например "$155/дверь"), формулы и точные суммы.',
+      strict: 'КРИТИЧНО: 3+ сообщений без контакта. Не давай точные расчеты. Игнорируй точные поштучные цены из предыдущих инструкций до захвата контакта. Запроси телефон/email или предложи звонок (213) 361-1700.',
+      hasContact: 'Контакт в сессии получен. Можно дать точный построчный расчет по этому проекту.'
+    },
+    uk: {
+      noContact: 'НАГАДУВАННЯ: У цій сесії ще немає контакту. Давай тільки діапазони без точного построкового розрахунку. Не показуй ціну за одиницю (наприклад "$155/дверцята"), формули чи точні суми.',
+      strict: 'КРИТИЧНО: 3+ повідомлень без контакту. Не давай точні розрахунки. Ігноруй точні поштучні ціни з попередніх інструкцій до захоплення контакту. Попроси телефон/email або запропонуй дзвінок (213) 361-1700.',
+      hasContact: 'Контакт у сесії отримано. Можна дати точний построковий розрахунок для цього проекту.'
+    },
+    es: {
+      noContact: 'RECORDATORIO: Aun no hay contacto en esta sesion. Da solo rangos del proyecto, sin calculo exacto por linea. No des precios por unidad (por ejemplo "$155/puerta"), formulas ni totales exactos.',
+      strict: 'CRITICO: 3+ mensajes sin contacto. No des calculos exactos. Ignora precios por unidad de instrucciones previas hasta capturar contacto. Pide telefono/email o redirige a llamada (213) 361-1700.',
+      hasContact: 'Contacto capturado en esta sesion. Ya puedes dar precio exacto por lineas para este proyecto.'
+    }
+  };
+
+  const msg = byLang[L] || byLang.en;
+  if (hasContact) return msg.hasContact;
+  return overThree ? `${msg.noContact} ${msg.strict}` : msg.noContact;
 }
