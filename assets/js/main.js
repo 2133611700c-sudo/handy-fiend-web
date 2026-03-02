@@ -188,8 +188,8 @@ const T={
     heroAccent:"Instant Help",
     heroSub:"Describe your project and get AI-powered guidance on pricing, timeline, and next steps—instantly.",
     aiPowered:"AI Powered",
-    heroOfferTitle:"Professional Cabinet Painting from $155/door",
-    heroOfferSub:"Spray finish that lasts 10+ years. Save 70% vs replacing.",
+    heroOfferTitle:"Professional Cabinet Painting From $155 Per Door",
+    heroOfferSubHtml:'<span class="hero-included-accent">Premium paint, primer, degreasing, and prep are included in the price</span><br>A smooth spray finish that costs less than replacement',
     aiSearchPlaceholder:"Ask AI: price my project",
     aiBadge:"Smart",
     aiSubmit:"Get Estimate",
@@ -482,8 +482,8 @@ const T={
     heroAccent:"Ayuda al Instante",
     heroSub:"Solo mano de obra · Sin margen en materiales · Misma semana",
     aiPowered:"Con IA",
-    heroOfferTitle:"Pintura profesional de gabinetes desde $155/puerta",
-    heroOfferSub:"Acabado en spray que dura mas de 10 anos. Ahorra frente a reemplazo.",
+    heroOfferTitle:"Pintura profesional de gabinetes desde $155 por puerta",
+    heroOfferSubHtml:'<span class="hero-included-accent">Pintura premium, primer, desengrasado y preparacion estan incluidos en el precio</span><br>Acabado en spray liso que cuesta menos que reemplazar',
     aiSearchPlaceholder:"Pregunta a IA: cotiza mi proyecto",
     aiBadge:"Inteligente",
     aiSubmit:"Obtener Estimado",
@@ -776,8 +776,8 @@ const T={
     heroAccent:"мгновенную помощь",
     heroSub:"Опишите свой проект и получите помощь ИИ по ценам, срокам и следующим шагам — мгновенно.",
     aiPowered:"Работает ИИ",
-    heroOfferTitle:"Покраска кухонных шкафов от $155 за дверцу",
-    heroOfferSub:"Распыление с долговечным покрытием. Экономия по сравнению с заменой.",
+    heroOfferTitle:"Профессиональная покраска шкафов от $155 за дверцу",
+    heroOfferSubHtml:'<span class="hero-included-accent">Премиальная краска, грунт, обезжиривание и подготовка уже включены в стоимость</span><br>Гладкий распылительный финиш стоит дешевле полной замены',
     aiSearchPlaceholder:"ИИ: оцените мой проект",
     aiBadge:"Умный",
     aiSubmit:"Считать смету",
@@ -1070,7 +1070,7 @@ const T={
     heroSub:"Опишіть свій проект і отримайте допомогу ШІ щодо цін, термінів та наступних кроків — миттєво.",
     aiPowered:"Працює ШІ",
     heroOfferTitle:"Професійне фарбування шаф від $155 за дверцята",
-    heroOfferSub:"Розпилювальне покриття, що служить роками. Вигідніше за заміну.",
+    heroOfferSubHtml:'<span class="hero-included-accent">Преміальна фарба, ґрунт, знежирення та підготовка вже входять у вартість</span><br>Гладке розпилювальне покриття коштує дешевше за повну заміну',
     aiSearchPlaceholder:"ШІ: оцініть мій проект",
     aiBadge:"Розумна",
     aiSubmit:"Розрахувати",
@@ -1950,9 +1950,11 @@ function applyLang(){
   document.getElementById('langTxt').textContent=l.lang;
   document.getElementById('langNext').textContent=`→ ${nextL}`;
   const heroOfferTitleEl=document.getElementById('heroOfferTitle');
-  if(heroOfferTitleEl) heroOfferTitleEl.textContent=l.heroOfferTitle||'Professional Cabinet Painting from $155/door';
+  if(heroOfferTitleEl) heroOfferTitleEl.textContent=l.heroOfferTitle||'Professional Cabinet Painting From $155 Per Door';
   const heroOfferSubEl=document.getElementById('heroOfferSub');
-  if(heroOfferSubEl) heroOfferSubEl.textContent=l.heroOfferSub||'Spray finish that lasts 10+ years. Save 70% vs replacing.';
+  if(heroOfferSubEl) {
+    heroOfferSubEl.innerHTML=l.heroOfferSubHtml||'<span class="hero-included-accent">Premium paint, primer, degreasing, and prep are included in the price</span><br>A smooth spray finish that costs less than replacement';
+  }
   const heroSubEl=document.getElementById('heroSub');
   if(heroSubEl)heroSubEl.textContent=l.heroSub;
   document.getElementById('gridLbl').textContent=l.gridLbl;
