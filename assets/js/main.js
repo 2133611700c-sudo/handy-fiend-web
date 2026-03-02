@@ -2111,15 +2111,11 @@ function renderGrid(){
       if(e.target.closest('.drawer'))return;
       // prevent lightbox from opening on service card clicks
       if(e.target.closest('.sph')) e.stopPropagation();
-      // Scroll to calculator and select this service
-      const calcBox = document.getElementById('calcBox');
-      if(calcBox) {
-        calcBox.scrollIntoView({behavior:'smooth',block:'start'});
-        const sel = document.getElementById('svcSel');
-        if(sel){
-          sel.value = svc.id;
-          sel.dispatchEvent(new Event('change',{bubbles:true}));
-        }
+      // Update calculator selection without scrolling
+      const sel = document.getElementById('svcSel');
+      if(sel){
+        sel.value = svc.id;
+        sel.dispatchEvent(new Event('change',{bubbles:true}));
       }
       toggle(svc.id);
     });
