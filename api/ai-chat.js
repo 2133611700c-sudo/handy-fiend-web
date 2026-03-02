@@ -12,45 +12,103 @@ const { getClientIp, checkRateLimit } = require('./_lib/rate-limit.js');
 const { createHash } = require('node:crypto');
 const { callAlex } = require('../lib/ai-fallback.js');
 const { createOrMergeLead, logEvent: pipelineLogEvent } = require('../lib/lead-pipeline.js');
+const { ALEX_V8_PROMPTS, hasContactCapture, extractContact, detectLanguage } = require('../lib/alex-v8-system.js');
 
 const PHOTO_DEDUP_WINDOW_MS = Number(process.env.TELEGRAM_PHOTO_DEDUP_MS || 10 * 60 * 1000);
 const PHOTO_DEDUP_CACHE = globalThis.__HF_CHAT_PHOTO_DEDUP || new Map();
 globalThis.__HF_CHAT_PHOTO_DEDUP = PHOTO_DEDUP_CACHE;
 
 const PRICING_PROTECTION_PROMPTS = {
-  en: `PRICING PROTECTION RULES (MANDATORY):
-1) Ask for name + phone/email by your 2nd reply before giving exact itemized pricing.
-2) Before contact details are captured, provide only realistic ranges (not exact line-by-line totals).
-3) If user asks 3+ unrelated price questions without project details/contact, switch to lead-capture mode:
-   "I can send a detailed estimate in one message. What's your name and best phone?"
-4) Never reveal internal cost structure: material unit costs, labor rates, margins, formulas, multipliers.
-   If asked, answer: "We provide all-inclusive project pricing based on scope."
-5) If user refuses contact details after 3 pricing attempts, stop detailed pricing and offer direct call:
-   "For additional pricing details, please call or text (213) 361-1700."
-6) If request looks commercial/unrealistic for homeowner context (very large volume), route to manager:
-   "This looks like a large/commercial scope. Sergii handles these directly. What's the best phone?"
-7) For competitor-like probing or trade-only interrogation, keep response high-level and move to contact capture.`,
-  ru: `ПРАВИЛА ЗАЩИТЫ ЦЕН (ОБЯЗАТЕЛЬНО):
-1) К 2-му ответу запроси имя + телефон/email до точной детальной цены.
-2) До контактов давай только реалистичные диапазоны, без точного поштучного расчета.
-3) Если 3+ несвязанных ценовых вопроса без проекта/контактов — переходи в сбор лида.
-4) Никогда не раскрывай внутреннюю структуру: себестоимость материалов, ставки, маржу, формулы.
-5) Если после 3 попыток контакты не дают — прекращай детальные цены и направляй на звонок (213) 361-1700.
-6) Для крупных/коммерческих объемов — переводи на Sergii и запрашивай телефон.`,
-  uk: `ПРАВИЛА ЗАХИСТУ ЦІН (ОБОВ'ЯЗКОВО):
-1) До 2-ї відповіді запроси ім'я + телефон/email перед точним детальним розрахунком.
-2) До отримання контактів давай лише реалістичні діапазони.
-3) Якщо 3+ несуміжних питань по цінах без деталей проекту/контактів — переходь у режим збору ліда.
-4) Не розкривай внутрішні витрати, ставки, маржу чи формули.
-5) Після 3 спроб без контактів — зупини деталізацію і запропонуй дзвінок/текст на (213) 361-1700.
-6) Для великих/комерційних запитів — передавай на Sergii, проси телефон.`,
-  es: `REGLAS DE PROTECCION DE PRECIOS (OBLIGATORIO):
-1) Para tu 2da respuesta pide nombre + telefono/email antes de precios detallados.
-2) Sin contacto, da solo rangos realistas (no desglose exacto por linea).
-3) Si hay 3+ preguntas de precios sin detalles/contacto, cambia a captura de lead.
-4) Nunca reveles costos internos: materiales por unidad, tarifa por hora, margenes, formulas.
-5) Si rechazan contacto tras 3 intentos, deja de dar detalle y dirige a llamada/texto (213) 361-1700.
-6) Si parece volumen comercial, escala con Sergii y pide telefono.`
+  en: `PRICING PROTECTION RULES (STRICT):
+1) Before contact is captured, provide ranges only for the specific project.
+2) Before contact, never output per-unit prices, line-item math, formulas, or exact totals.
+3) After 3+ user turns without contact, stop detailed pricing and redirect to phone/text (213) 361-1700.
+4) Never reveal labor rates, material unit costs, margins, or internal formulas.
+5) Contact captured = phone OR email. Name/ZIP are optional follow-ups.`,
+  ru: `ПРАВИЛА ЗАЩИТЫ ЦЕН (СТРОГО):
+1) До получения контакта давай только диапазоны по проекту.
+2) До контакта не показывай поштучные цены, формулы, точные суммы и построчную математику.
+3) После 3+ сообщений без контакта прекращай детализацию и направляй на (213) 361-1700.
+4) Не раскрывай ставки, себестоимость, маржу и внутренние формулы.
+5) Контакт получен = телефон ИЛИ email. Имя/ZIP — опционально.`,
+  uk: `ПРАВИЛА ЗАХИСТУ ЦІН (СТРОГО):
+1) До отримання контакту давай тільки діапазони для проекту.
+2) До контакту не показуй поштучні ціни, формули, точні суми та построковий розрахунок.
+3) Після 3+ повідомлень без контакту припиняй деталізацію та спрямовуй на (213) 361-1700.
+4) Не розкривай ставки, собівартість, маржу та внутрішні формули.
+5) Контакт отримано = телефон АБО email. Ім'я/ZIP — опційно.`,
+  es: `REGLAS DE PROTECCION DE PRECIOS (ESTRICTO):
+1) Antes de capturar contacto, da solo rangos por proyecto.
+2) Sin contacto, no des precios por unidad, formulas, calculos por linea ni totales exactos.
+3) Tras 3+ mensajes sin contacto, deja detalle y redirige a (213) 361-1700.
+4) Nunca reveles tarifa por hora, costos unitarios, margenes ni formulas internas.
+5) Contacto capturado = telefono O email. Nombre/ZIP son opcionales.`
+};
+
+const STYLE_OVERRIDES = {
+  en: `COMMUNICATION STYLE:
+- Max 4-6 short lines; never wall-of-text.
+- One idea per line.
+- One CTA question only.
+- Keep it chat-like, concise, and readable in 3 seconds.
+- Do not use markdown formatting (no **, __, or code fences).
+- Use simple emoji anchors sparingly (max 2-3, excluding "🔹").`,
+  ru: `СТИЛЬ СООБЩЕНИЙ:
+- Максимум 4-6 коротких строк, без "простыни".
+- Одна мысль в строке.
+- Один CTA-вопрос на сообщение.
+- Кратко, по-деловому, как в мессенджере.
+- Без markdown (**, __, code fence).
+- Эмодзи умеренно (максимум 2-3, "🔹" не считается).`,
+  uk: `СТИЛЬ ПОВІДОМЛЕНЬ:
+- Максимум 4-6 коротких рядків, без "стіни тексту".
+- Одна думка в рядку.
+- Лише одне CTA-питання в повідомленні.
+- Коротко та читабельно як у месенджері.
+- Без markdown (**, __, code fence).
+- Емодзі помірно (максимум 2-3, "🔹" не рахуємо).`,
+  es: `ESTILO DE RESPUESTA:
+- Maximo 4-6 lineas cortas; sin bloque largo.
+- Una idea por linea.
+- Una sola pregunta CTA por mensaje.
+- Estilo chat, claro y rapido de leer.
+- Sin markdown (**, __, code fences).
+- Emojis con moderacion (max 2-3, "🔹" no cuenta).`
+};
+
+const ALEX_V8_BASE_PROMPTS = {
+  en: `You are Alex, AI sales assistant for Handy & Friend (Los Angeles).
+Goal: capture qualified leads with a short, human chat style.
+Lead captured minimum: service + (phone OR email). Name/ZIP optional.
+Before contact: give only realistic range for this project.
+After contact: exact line-item pricing is allowed.
+Never reveal internal costs, hourly rates, margins, formulas, or backend details.
+Out-of-scope requests: "We only handle services listed on our website. This request is outside our service scope."
+Services in scope: cabinet/furniture painting, interior painting, flooring, TV/art mounting, furniture assembly, minor plumbing, minor electrical.`,
+  ru: `Ты Алекс, AI-помощник по продажам Handy & Friend (Los Angeles).
+Цель: коротко и понятно собрать лид.
+Минимум лида: услуга + (телефон ИЛИ email). Имя/ZIP опционально.
+До контакта: только диапазон по проекту.
+После контакта: можно точный построчный расчет.
+Не раскрывай внутренние ставки, маржу, формулы и внутренние системы.
+Вне scope: "Мы работаем только с услугами, указанными на сайте. Этот запрос не входит в наш сервис."
+Scope: покраска шкафов/мебели, интерьерная покраска, полы, монтаж ТВ/картин, сборка мебели, мелкая сантехника и электрика.`,
+  uk: `Ти Алекс, AI-помічник з продажів Handy & Friend (Los Angeles).
+Мета: коротко і зрозуміло зібрати лід.
+Мінімум ліда: послуга + (телефон АБО email). Ім'я/ZIP опційно.
+До контакту: тільки діапазон по проекту.
+Після контакту: можна точний построковий розрахунок.
+Не розкривай внутрішні ставки, маржу, формули та внутрішні системи.
+Поза scope: "Ми працюємо тільки з послугами, вказаними на сайті. Цей запит не входить у наш сервіс."
+Scope: фарбування шаф/меблів, інтер'єрне фарбування, підлога, монтаж ТВ/картин, складання меблів, дрібна сантехніка та електрика.`,
+  es: `Eres Alex, asistente AI de ventas de Handy & Friend (Los Angeles).
+Objetivo: capturar leads con mensajes cortos y claros.
+Lead minimo: servicio + (telefono O email). Nombre/ZIP opcional.
+Antes de contacto: solo rango realista del proyecto.
+Despues de contacto: se permite precio exacto por lineas.
+No reveles costos internos, tarifa por hora, margenes, formulas ni sistemas internos.
+Fuera de alcance: "Solo trabajamos con servicios publicados en nuestro sitio. Esta solicitud esta fuera de nuestro alcance."
+Servicios: pintura de gabinetes/muebles, pintura interior, pisos, montaje TV/cuadros, ensamblaje de muebles, plomeria menor y electrica menor.`
 };
 
 const SYSTEM_PROMPTS = {
@@ -343,7 +401,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'messages array required' });
   }
 
-  const safeLang = ['en', 'ru', 'uk', 'es'].includes(lang) ? lang : 'en';
+  // Detect language from messages (auto-detect if not provided)
+  const detectedLang = lang && ['en', 'ru', 'uk', 'es'].includes(lang) ? lang : detectLanguage(messages);
+  const safeLang = ['en', 'ru', 'uk', 'es'].includes(detectedLang) ? detectedLang : 'en';
   const latestUserPhotos = extractLatestUserPhotos(messages);
 
   // Sanitize and limit messages
@@ -361,14 +421,33 @@ export default async function handler(req, res) {
   const latestUserText = safeMessages[safeMessages.length - 1]?.content || '';
   const sessionContext = await fetchSessionLeadContext(sessionId);
   const userMsgCount = safeMessages.filter((m) => m.role === 'user').length;
-  const dynamicPromptSuffix = buildDynamicPricingSuffix({
-    lang: safeLang,
-    hasContact: sessionContext.hasContact,
-    userMsgCount
-  });
+  const hasContact = hasContactCapture(safeMessages) || sessionContext.hasContact;
+
+  const dynamicGuardEnabled = String(process.env.ALEX_DYNAMIC_GUARD || 'on').toLowerCase() !== 'off';
+  const dynamicPromptSuffix = dynamicGuardEnabled
+    ? buildDynamicPricingSuffix({
+        lang: safeLang,
+        hasContact: hasContact,
+        userMsgCount
+      })
+    : '';
+
+  // ALEX v8: 3-message gate for non-contact users
+  let alexV8GatePrompt = '';
+  if (dynamicGuardEnabled && !hasContact && userMsgCount >= 3) {
+    const gateFunc = ALEX_V8_PROMPTS[safeLang]?.v8Gate || ALEX_V8_PROMPTS.en.v8Gate;
+    alexV8GatePrompt = gateFunc(userMsgCount, hasContact) || '';
+  }
+
+  const guardMode = hasContact
+    ? 'post_contact_exact'
+    : (userMsgCount >= 3 ? 'no_contact_hardened' : 'pre_contact_range');
+
+  // ALEX v8: Use simplified prompt focused on rules + gate + dynamic suffix
+  // Don't mix with old PRICING_PROTECTION_PROMPTS or STYLE_OVERRIDES to avoid conflicts
   const systemPrompt = [
-    SYSTEM_PROMPTS[safeLang],
-    PRICING_PROTECTION_PROMPTS[safeLang] || PRICING_PROTECTION_PROMPTS.en,
+    ALEX_V8_PROMPTS[safeLang]?.base || ALEX_V8_PROMPTS.en.base,
+    alexV8GatePrompt,
     dynamicPromptSuffix
   ].filter(Boolean).join('\n\n');
 
@@ -391,6 +470,11 @@ export default async function handler(req, res) {
       // Use resilient AI fallback (handles retries and static fallback)
       const alexResult = await callAlex(safeMessages, systemPrompt);
       rawReply = alexResult.reply;
+      if (dynamicGuardEnabled && shouldRegenerateForStrictRange({ guardMode, reply: rawReply })) {
+        const strictPrompt = `${systemPrompt}\n\nCRITICAL OVERRIDE: Re-answer this user now with ranges only. Do not include per-unit prices, multipliers, or exact totals. Keep answer short and ask one CTA question.`;
+        const retry = await callAlex(safeMessages, strictPrompt);
+        rawReply = retry.reply;
+      }
       if (alexResult.model === 'static_fallback') {
         console.warn('[AI_CHAT] Using static fallback for DeepSeek API');
         await pipelineLogEvent(null, 'alex_fallback', {
@@ -409,6 +493,7 @@ export default async function handler(req, res) {
   let reply = rawReply;
   let leadCaptured = false;
   let leadId = null;
+  let capturedLead = null;
 
   if (leadMatch) {
     // Strip the JSON marker from visible reply
@@ -419,6 +504,7 @@ export default async function handler(req, res) {
       if (result.ok) {
         leadCaptured = true;
         leadId = result.leadId;
+        capturedLead = result.lead || normalizeLeadPreview(leadData);
       }
     } catch (parseErr) {
       console.error('[AI_CHAT] Lead payload parse error:', parseErr.message, leadMatch[1]);
@@ -434,6 +520,7 @@ export default async function handler(req, res) {
         if (fallbackResult.ok) {
           leadCaptured = true;
           leadId = fallbackResult.leadId;
+          capturedLead = fallbackResult.lead || normalizeLeadPreview(inferredLead);
         }
       } catch (err) {
         console.error('[AI_CHAT] Fallback lead inference failed:', err.message);
@@ -447,24 +534,34 @@ export default async function handler(req, res) {
     console.error('[AI_CHAT] saveTurns error:', err.message)
   );
 
-  // Forward chat intake to Telegram (including user photos).
-  sendChatToTelegram({
-    sessionId,
-    leadId,
-    lang: safeLang,
-    userText: lastUser?.content || '',
-    aiReply: reply,
-    photos: latestUserPhotos
-  }).catch((err) => console.error('[AI_CHAT] Telegram forward error:', err.message));
+  // Notify Telegram only for captured leads (cleaner signal, less noise).
+  if (leadCaptured && leadId) {
+    sendLeadCapturedToTelegram({
+      sessionId,
+      leadId,
+      lang: safeLang,
+      userText: lastUser?.content || '',
+      aiReply: reply,
+      photos: latestUserPhotos,
+      lead: capturedLead
+    }).catch((err) => console.error('[AI_CHAT] Telegram forward error:', err.message));
+  }
 
-  return res.status(200).json({ reply, leadCaptured, leadId });
+  return res.status(200).json({
+    reply,
+    leadCaptured,
+    leadId,
+    guard_mode: guardMode,
+    contact_captured: Boolean(sessionContext.hasContact || leadCaptured),
+    price_detail_level: guardMode === 'post_contact_exact' ? 'exact' : 'range'
+  });
 }
 
 // callDeepSeek has been replaced by callAlex() from lib/ai-fallback.js
 // which provides automatic retry logic and static fallback when API is down
 
 async function createLead(leadData, sessionId, lang, messages) {
-  const { name, phone, email, service, description } = leadData;
+  const { name, phone, email, service, description } = normalizeLeadPreview(leadData);
 
   if (!service || (!phone && !email)) {
     return { ok: false, error: 'missing_service_or_contact' };
@@ -494,7 +591,7 @@ async function createLead(leadData, sessionId, lang, messages) {
     }).catch(err => console.error('[PIPELINE_LOG]', err.message));
 
     console.log('[AI_CHAT] Lead captured:', leadId, service, phone || email, pipelineResult.isNew ? '(new)' : '(merged)');
-    return { ok: true, leadId };
+    return { ok: true, leadId, lead: { name, phone, email, service, description } };
 
   } catch (err) {
     console.error('[AI_CHAT] Pipeline error:', err.message);
@@ -522,7 +619,7 @@ async function createLead(leadData, sessionId, lang, messages) {
     }
 
     console.log('[AI_CHAT] Lead created (legacy fallback):', fallbackId);
-    return { ok: true, leadId: fallbackId };
+    return { ok: true, leadId: fallbackId, lead: { name, phone, email, service, description } };
   }
 }
 
@@ -577,7 +674,7 @@ function extractLatestUserPhotos(rawMessages) {
   return [];
 }
 
-async function sendChatToTelegram({ sessionId, leadId, lang, userText, aiReply, photos }) {
+async function sendLeadCapturedToTelegram({ sessionId, leadId, lang, userText, aiReply, photos, lead }) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
@@ -585,7 +682,10 @@ async function sendChatToTelegram({ sessionId, leadId, lang, userText, aiReply, 
   const safeLead = String(leadId || 'pending');
   const safeSession = String(sessionId || 'unknown');
   const photoCount = Array.isArray(photos) ? photos.length : 0;
-  const text = `🤖 <b>AI Chat Message</b>\nSession: <code>${escapeHtml(safeSession)}</code>\nLead: <code>${escapeHtml(safeLead)}</code>\nLang: ${escapeHtml(String(lang || 'en').toUpperCase())}\nPhotos: ${photoCount}\n\n<b>User:</b> ${escapeHtml(String(userText || '—').slice(0, 700))}\n\n<b>Alex:</b> ${escapeHtml(String(aiReply || '—').slice(0, 700))}`;
+  const safeLeadData = normalizeLeadPreview(lead);
+  const contactLine = safeLeadData.phone || safeLeadData.email || '—';
+  const locationLine = safeLeadData.city || safeLeadData.zip || '—';
+  const text = `🔔 <b>LEAD_CAPTURED</b>\nName: <b>${escapeHtml(safeLeadData.name || 'Unknown')}</b>\nContact: <code>${escapeHtml(contactLine)}</code>\nService: ${escapeHtml(safeLeadData.service || '—')}\nArea: ${escapeHtml(locationLine)}\nSession: <code>${escapeHtml(safeSession)}</code>\nLead: <code>${escapeHtml(safeLead)}</code>\nLang: ${escapeHtml(String(lang || 'en').toUpperCase())}\nPhotos: ${photoCount}\n\n<b>User intent:</b> ${escapeHtml(String(userText || '—').slice(0, 320))}\n<b>Alex reply:</b> ${escapeHtml(String(aiReply || '—').slice(0, 320))}`;
 
   const msgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
@@ -822,12 +922,38 @@ function isClearlyOutOfScopeRequest(text) {
 
 function getOutOfScopeReply(lang) {
   const map = {
-    en: "This is outside our service scope. We work only with services published on our website: cabinet painting, furniture painting/assembly, interior painting, flooring, TV/art mounting, minor plumbing, and minor electrical. For other services, we do not provide estimates.",
-    ru: "Это не входит в наш сервис. Мы работаем только с услугами, которые опубликованы на сайте: покраска шкафов и мебели, покраска интерьера, полы, монтаж ТВ/картин, мелкая сантехника и мелкая электрика. По другим услугам мы расчеты не делаем.",
-    uk: "Це не входить у наш сервіс. Ми працюємо тільки з послугами, що опубліковані на сайті: фарбування шаф і меблів, фарбування інтер'єру, підлога, монтаж ТВ/картин, дрібна сантехніка і дрібна електрика. Для інших послуг ми кошториси не робимо.",
-    es: "Esto no entra en nuestro servicio. Trabajamos solo con los servicios publicados en nuestro sitio: pintura de gabinetes y muebles, pintura interior, pisos, montaje de TV/cuadros, plomería menor y eléctrica menor. Para otros servicios no hacemos cotizaciones."
+    en: "We only handle services listed on our website. This request is outside our service scope.",
+    ru: "Мы работаем только с услугами, указанными на сайте. Этот запрос не входит в наш сервис.",
+    uk: "Ми працюємо тільки з послугами, вказаними на сайті. Цей запит не входить у наш сервіс.",
+    es: "Solo trabajamos con servicios publicados en nuestro sitio. Esta solicitud esta fuera de nuestro alcance."
   };
   return map[lang] || map.en;
+}
+
+function normalizeLeadPreview(leadData) {
+  const data = leadData && typeof leadData === 'object' ? leadData : {};
+  return {
+    name: String(data.name || '').trim().slice(0, 160) || 'Unknown',
+    phone: String(data.phone || '').trim().slice(0, 40),
+    email: String(data.email || '').trim().slice(0, 160),
+    service: String(data.service || data.service_type || '').trim().slice(0, 120),
+    description: String(data.description || data.problem_description || '').trim().slice(0, 600),
+    city: String(data.city || '').trim().slice(0, 80),
+    zip: String(data.zip || '').trim().slice(0, 16)
+  };
+}
+
+function shouldRegenerateForStrictRange({ guardMode, reply }) {
+  if (!reply || guardMode === 'post_contact_exact') return false;
+  const text = String(reply || '').toLowerCase();
+
+  const mathIntent = [' x ', ' × ', ' per door', '/door', 'per sq', '/sf', 'line item', 'breakdown', 'subtotal'];
+  const exactSignals = ['exact', 'total is', 'that comes to', 'would come to', 'equals', 'formula'];
+  const hasMathIntent = mathIntent.some((k) => text.includes(k));
+  const hasExactSignal = exactSignals.some((k) => text.includes(k));
+  const hasManyDollarValues = (text.match(/\$\s*\d[\d,.]*/g) || []).length >= 2;
+
+  return (hasMathIntent && hasManyDollarValues) || (hasExactSignal && hasManyDollarValues);
 }
 
 function inferLeadFromConversation(messages) {
@@ -849,13 +975,17 @@ function inferLeadFromConversation(messages) {
   const nameMatch = joined.match(/\b(?:my name is|i am|this is|name[:\s])\s+([A-Za-z][A-Za-z' -]{1,40})/i);
   const rawName = nameMatch ? nameMatch[1].trim() : '';
   const name = rawName ? rawName.replace(/\s{2,}/g, ' ') : 'Unknown';
+  const zipMatch = joined.match(/\b9\d{4}\b/);
+  const cityMatch = joined.match(/\b(los angeles|hollywood|west hollywood|beverly hills|santa monica|burbank|glendale)\b/i);
 
   return {
     name,
     phone,
     email,
     service: serviceType,
-    description: latest.slice(0, 500)
+    description: latest.slice(0, 500),
+    zip: zipMatch ? zipMatch[0] : '',
+    city: cityMatch ? cityMatch[1] : ''
   };
 }
 
