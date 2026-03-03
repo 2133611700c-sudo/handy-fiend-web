@@ -3224,6 +3224,7 @@ if (document.readyState === 'loading') {
 function initSpinners(){
   document.querySelectorAll('#calcBox input[type=number]').forEach(function(inp){
     if(inp.parentElement.classList.contains('num-row')) return;
+    if(inp.closest('.kitchen-extra-calcs')) return;
     var row=document.createElement('div');
     row.className='num-row';
     inp.parentElement.insertBefore(row,inp);
