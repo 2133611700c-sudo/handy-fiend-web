@@ -14,8 +14,8 @@ const { callAlex } = require('../lib/ai-fallback.js');
 const { createOrMergeLead, logEvent: pipelineLogEvent } = require('../lib/lead-pipeline.js');
 const { buildSystemPrompt, getGuardMode, GUARD_MODES } = require('../lib/alex-one-truth.js');
 
-// Legacy support: hasContactCapture for lead detection + language helper
-const { hasContactCapture, detectLanguage } = require('../lib/alex-v8-system.js');
+// Legacy language helper; prompt logic is sourced only from alex-one-truth.js
+const { detectLanguage } = require('../lib/alex-v8-system.js');
 
 const PHOTO_DEDUP_WINDOW_MS = Number(process.env.TELEGRAM_PHOTO_DEDUP_MS || 10 * 60 * 1000);
 const PHOTO_DEDUP_CACHE = globalThis.__HF_CHAT_PHOTO_DEDUP || new Map();
@@ -72,12 +72,11 @@ export default async function handler(req, res) {
   const userOnlyMessages = safeMessages.filter((m) => m.role === 'user');
   const sessionContext = await fetchSessionLeadContext(sessionId);
   const userMsgCount = userOnlyMessages.length;
-  // Contact detection must look at user messages only (not assistant messages).
-  const hasContact = hasContactCapture(userOnlyMessages) || sessionContext.hasContact;
+  const hasPhone = hasPhoneCapture(userOnlyMessages) || sessionContext.hasPhone;
 
   // ALEX v9: Guard mode determination and prompt building
   // Determine guard mode based on contact capture and message count
-  const guardMode = getGuardMode({ hasContact, userMsgCount });
+  const guardMode = getGuardMode({ hasPhone, userMsgCount });
 
   // Build complete system prompt with dynamic guard suffix
   const systemPrompt = buildSystemPrompt({ guardMode });
@@ -104,8 +103,8 @@ export default async function handler(req, res) {
       rawReply = alexResult.reply;
 
       // Optional: Retry with stricter guard if needed (safety measure)
-      if (guardMode === GUARD_MODES.PRE_CONTACT_RANGE && shouldRegenerateForStrictRange({ guardMode, reply: rawReply })) {
-        const strictPrompt = `${systemPrompt}\n\nCRITICAL: User has no contact yet. Give RANGES ONLY. No per-unit prices, no math, no lists.`;
+      if (guardMode !== GUARD_MODES.POST_CONTACT_EXACT && shouldRegenerateForStrictRange({ guardMode, reply: rawReply })) {
+        const strictPrompt = `${systemPrompt}\n\nCRITICAL: User has no phone yet. NO prices, NO ranges, NO dollar amounts. Ask for phone first.`;
         const retry = await callAlex(safeMessages, strictPrompt);
         rawReply = retry.reply;
       }
@@ -124,7 +123,7 @@ export default async function handler(req, res) {
   }
 
   // Enforce a direct contact CTA before contact is captured to improve conversion.
-  if (!hasContact && !isClearlyOutOfScopeRequest(latestUserText)) {
+  if (!hasPhone && !isClearlyOutOfScopeRequest(latestUserText)) {
     rawReply = enforceContactCaptureCTA(rawReply, safeLang, guardMode);
   }
 
@@ -197,8 +196,8 @@ export default async function handler(req, res) {
     leadCaptured,
     leadId,
     guard_mode: guardMode,
-    contact_captured: Boolean(sessionContext.hasContact || leadCaptured),
-    price_detail_level: guardMode === 'post_contact_exact' ? 'exact' : 'range'
+    contact_captured: Boolean(sessionContext.hasPhone || hasPhoneCapture(userOnlyMessages)),
+    price_detail_level: guardMode === 'post_contact_exact' ? 'exact' : 'gated'
   });
 }
 
@@ -588,39 +587,46 @@ function normalizeLeadPreview(leadData) {
   };
 }
 
+function hasPhoneCapture(messages) {
+  if (!Array.isArray(messages) || !messages.length) return false;
+  const fullText = messages.map((m) => String(m.content || '')).join(' ');
+  const phoneRegex = /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\b/;
+  return phoneRegex.test(fullText);
+}
+
 function shouldRegenerateForStrictRange({ guardMode, reply }) {
   if (!reply || guardMode === 'post_contact_exact') return false;
   const text = String(reply || '').toLowerCase();
 
-  const mathIntent = [' x ', ' × ', ' per door', '/door', 'per sq', '/sf', 'line item', 'breakdown', 'subtotal'];
+  const mathIntent = [' x ', ' × ', ' per door', '/door', 'per sq', '/sf', 'line item', 'breakdown', 'subtotal', 'range'];
   const exactSignals = ['exact', 'total is', 'that comes to', 'would come to', 'equals', 'formula'];
   const hasMathIntent = mathIntent.some((k) => text.includes(k));
   const hasExactSignal = exactSignals.some((k) => text.includes(k));
-  const hasManyDollarValues = (text.match(/\$\s*\d[\d,.]*/g) || []).length >= 2;
+  const hasAnyDollarValue = (text.match(/\$\s*\d[\d,.]*/g) || []).length >= 1;
 
-  return (hasMathIntent && hasManyDollarValues) || (hasExactSignal && hasManyDollarValues);
+  return hasAnyDollarValue || hasMathIntent || hasExactSignal;
 }
 
 function enforceContactCaptureCTA(reply, lang, guardMode) {
   const text = String(reply || '').trim();
   if (!text) return text;
 
-  const asksForContact = /(phone|email|number|contact|call|text|телефон|почт|email|номер|контакт|phone\/email|телефон\/email|correo|telefono|n[uú]mero|контакт|дзвінок|пошта|номер)/i.test(text);
+  const asksForContact = /(phone|number|call|text|телефон|номер|дзвінок|telefono|n[uú]mero)/i.test(text);
   if (asksForContact) return text;
 
   const ctaByLang = {
     en: guardMode === GUARD_MODES.NO_CONTACT_HARDENED
-      ? 'Share your phone or email, or call (213) 361-1700 📲'
-      : 'Your name and best phone or email? I’ll send exact numbers 📲',
+      ? 'Share your phone number, or call (213) 361-1700 📲'
+      : 'Send your phone number and I’ll calculate the exact estimate 📲',
     ru: guardMode === GUARD_MODES.NO_CONTACT_HARDENED
-      ? 'Оставьте телефон или email, либо позвоните (213) 361-1700 📲'
-      : 'Ваше имя и лучший телефон или email? Отправлю точный расчет 📲',
+      ? 'Оставьте номер телефона или позвоните (213) 361-1700 📲'
+      : 'Отправьте номер телефона, и я сразу посчитаю точную смету 📲',
     uk: guardMode === GUARD_MODES.NO_CONTACT_HARDENED
-      ? 'Залиште телефон або email, або телефонуйте (213) 361-1700 📲'
-      : "Ваше ім'я та найкращий телефон або email? Надішлю точний розрахунок 📲",
+      ? 'Залиште номер телефону або телефонуйте (213) 361-1700 📲'
+      : "Надішліть номер телефону, і я одразу порахую точний кошторис 📲",
     es: guardMode === GUARD_MODES.NO_CONTACT_HARDENED
-      ? 'Deja tu telefono o email, o llama al (213) 361-1700 📲'
-      : 'Tu nombre y mejor telefono o email? Te envio el calculo exacto 📲'
+      ? 'Deja tu numero de telefono o llama al (213) 361-1700 📲'
+      : 'Envia tu numero de telefono y calculo el presupuesto exacto 📲'
   };
 
   const cta = ctaByLang[lang] || ctaByLang.en;
@@ -757,7 +763,7 @@ function inferServiceType(text) {
 
 async function fetchSessionLeadContext(sessionId) {
   const config = getConfig();
-  if (!config || !sessionId) return { hasContact: false };
+  if (!config || !sessionId) return { hasPhone: false, hasContact: false };
 
   try {
     const query = new URLSearchParams({
@@ -774,13 +780,13 @@ async function fetchSessionLeadContext(sessionId) {
         Accept: 'application/json'
       }
     });
-    if (!resp.ok) return { hasContact: false };
+    if (!resp.ok) return { hasPhone: false, hasContact: false };
     const data = await resp.json().catch(() => []);
     const row = Array.isArray(data) ? data[0] : null;
     const phone = String(row?.phone || '').trim();
     const email = String(row?.email || '').trim();
-    return { hasContact: Boolean(phone || email) };
+    return { hasPhone: Boolean(phone), hasContact: Boolean(phone || email) };
   } catch (_) {
-    return { hasContact: false };
+    return { hasPhone: false, hasContact: false };
   }
 }
