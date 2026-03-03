@@ -172,6 +172,12 @@ export default async function handler(req, res) {
     reply = appendCrossSellNudge(reply, safeLang, serviceForUpsell);
   }
 
+  // Final output hygiene: keep chat text clean and enforce no-price leakage pre-phone.
+  reply = stripMarkdownArtifacts(reply);
+  if (!hasPhone && !isClearlyOutOfScopeRequest(latestUserText)) {
+    reply = removePrePhoneDollarAmounts(reply, safeLang);
+  }
+
   // Save conversation turn (fire-and-forget)
   const lastUser = safeMessages[safeMessages.length - 1];
   saveTurns(sessionId, leadId, lastUser?.content, reply).catch(err =>
@@ -761,6 +767,29 @@ function inferServiceType(text) {
     if (keywords.some((k) => t.includes(k))) return service;
   }
   return '';
+}
+
+function stripMarkdownArtifacts(text) {
+  return String(text || '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/__(.*?)__/g, '$1')
+    .replace(/^\s*[-*]\s+/gm, '• ')
+    .replace(/^\s{0,3}>\s?/gm, '')
+    .replace(/[ \t]+\n/g, '\n')
+    .trim();
+}
+
+function removePrePhoneDollarAmounts(text, lang) {
+  const hasDollar = /\$\s*\d/.test(text);
+  if (!hasDollar) return text;
+  const fallback = {
+    en: 'I can give you exact pricing right away once you share your phone number 📲',
+    ru: 'Сразу дам точный расчет, как только вы отправите номер телефона 📲',
+    uk: 'Одразу дам точний розрахунок, щойно ви надішлете номер телефону 📲',
+    es: 'Te doy el precio exacto en cuanto compartas tu número de teléfono 📲'
+  };
+  return `${text.replace(/\$\s*\d[\d,]*(?:\.\d+)?(?:\s*[-–]\s*\$\s*\d[\d,]*(?:\.\d+)?)?/g, 'pricing')}\n\n${fallback[lang] || fallback.en}`;
 }
 
 async function fetchSessionLeadContext(sessionId) {
