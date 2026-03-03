@@ -3,13 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NQTL3S6Q');</script>
-<!-- End Google Tag Manager -->
+<!-- Google Tag Manager — deferred to idle -->
+<script>window.dataLayer=window.dataLayer||[];</script>
 <title>Handy &amp; Friend | Los Angeles Handyman</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,38 +35,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="recaptcha-site-key" content="6Le1C3gsAAAAAGTzWCcplce_QCITlw1vcqQXjqEy">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z05XJ8E281"></script>
+<!-- gtag stub — real script deferred to idle -->
 <script>
-  window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-Z05XJ8E281');
-
   var recaptchaMeta = document.querySelector('meta[name="recaptcha-site-key"]');
-  window.HF_RECAPTCHA_SITE_KEY = window.HF_RECAPTCHA_SITE_KEY || (recaptchaMeta ? recaptchaMeta.content.trim() : '');
-  if (window.HF_RECAPTCHA_SITE_KEY) {
-    var rc = document.createElement('script');
-    rc.src = 'https://www.google.com/recaptcha/api.js?render=' + encodeURIComponent(window.HF_RECAPTCHA_SITE_KEY);
-    rc.async = true;
-    document.head.appendChild(rc);
-  }
+  window.HF_RECAPTCHA_SITE_KEY = recaptchaMeta ? recaptchaMeta.content.trim() : '';
 </script>
 
-<!-- Meta Pixel -->
+<!-- All heavy third-party scripts deferred to after page is interactive -->
 <script>
-  window.addEventListener('load', function () {
+(function(){
+  /* helper: load a script after requestIdleCallback (or 3.5s fallback) */
+  function idle(fn){
+    if('requestIdleCallback' in window) requestIdleCallback(fn,{timeout:3500});
+    else setTimeout(fn,3500);
+  }
+
+  function loadScript(src,cb){
+    var s=document.createElement('script');s.async=true;s.src=src;
+    if(cb) s.onload=cb;
+    document.head.appendChild(s);
+  }
+
+  idle(function(){
+    /* 1. GTM (includes GA4 if configured inside GTM) */
+    dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-NQTL3S6Q');
+
+    /* 2. GA4 standalone (gtag.js) */
+    loadScript('https://www.googletagmanager.com/gtag/js?id=G-Z05XJ8E281', function(){
+      gtag('js', new Date());
+      gtag('config', 'G-Z05XJ8E281');
+    });
+
+    /* 3. Meta Pixel */
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '741929941112529');
-    fbq('track', 'PageView');
+    fbq('init','741929941112529');
+    fbq('track','PageView');
   });
+
+  /* 4. reCAPTCHA — load only when user interacts with a form */
+  var rcLoaded=false;
+  function loadRecaptcha(){
+    if(rcLoaded||!window.HF_RECAPTCHA_SITE_KEY) return;
+    rcLoaded=true;
+    loadScript('https://www.google.com/recaptcha/api.js?render='+encodeURIComponent(window.HF_RECAPTCHA_SITE_KEY));
+  }
+  /* Trigger on first form focus, scroll past 50%, or after 8s */
+  document.addEventListener('focusin',function(e){
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') loadRecaptcha();
+  },{once:true});
+  setTimeout(loadRecaptcha,8000);
+})();
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=741929941112529&ev=PageView&noscript=1"
