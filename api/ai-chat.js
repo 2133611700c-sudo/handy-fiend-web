@@ -51,9 +51,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'messages array required' });
   }
 
-  // Detect language from messages (auto-detect if not provided)
-  const detectedLang = lang && ['en', 'ru', 'uk', 'es'].includes(lang) ? lang : detectLanguage(messages);
-  const safeLang = ['en', 'ru', 'uk', 'es'].includes(detectedLang) ? detectedLang : 'en';
+  // Prefer message language auto-detection to avoid mixed-language output when UI lang differs.
+  const detectedLang = detectLanguage(messages);
+  const safeLang = ['en', 'ru', 'uk', 'es'].includes(detectedLang)
+    ? detectedLang
+    : (['en', 'ru', 'uk', 'es'].includes(lang) ? lang : 'en');
   const latestUserPhotos = extractLatestUserPhotos(messages);
 
   // Sanitize and limit messages
