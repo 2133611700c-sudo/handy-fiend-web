@@ -272,6 +272,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input type="number" id="endPanelQty" min="0" value="0" placeholder="0" inputmode="numeric">
           </div>
           <div class="agroup" id="kitchenAddonGroup"></div>
+
+          <!-- Quick sqft & linear ft calculators for kitchen -->
+          <div class="kitchen-extra-calcs">
+            <div class="kec-divider"><span id="kecDividerLabel">Also calculate by area</span></div>
+            <div class="kec-row">
+              <div class="kec-block">
+                <span class="kec-title" id="kecSqftTitle">Price per Sq Ft</span>
+                <div class="kec-inputs">
+                  <input type="number" id="kecSqftPrice" placeholder="3.50" step="0.01" min="0" inputmode="decimal">
+                  <input type="number" id="kecSqftArea" placeholder="300" min="1" inputmode="numeric">
+                </div>
+                <div class="kec-result" id="kecSqftResult">—</div>
+              </div>
+              <div class="kec-block">
+                <span class="kec-title" id="kecLinearTitle">Price per Linear Ft</span>
+                <div class="kec-inputs">
+                  <input type="number" id="kecLinearPrice" placeholder="4.50" step="0.01" min="0" inputmode="decimal">
+                  <input type="number" id="kecLinearLen" placeholder="100" min="1" inputmode="numeric">
+                </div>
+                <div class="kec-result" id="kecLinearResult">—</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- FURNITURE PAINTING -->
@@ -1019,8 +1042,8 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
 <style>
 @keyframes wave{0%{transform:rotate(0deg)}10%{transform:rotate(14deg)}20%{transform:rotate(-8deg)}30%{transform:rotate(14deg)}40%{transform:rotate(-4deg)}50%{transform:rotate(10deg)}60%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
 @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
-#hf-chat-btn{position:fixed;bottom:26px;right:26px;z-index:9000;width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#FF6B9D 0%,#FF85C0 50%,#FFB3D9 100%);border:3px solid #fff;cursor:grab;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(255,107,157,.5);transition:transform .2s,box-shadow .2s;font-weight:700;color:#fff;font-size:14px;font-family:inherit;padding:0;animation:float 3s ease-in-out infinite;user-select:none;-webkit-user-select:none}
-#hf-chat-btn:hover{transform:scale(1.1);box-shadow:0 12px 48px rgba(255,107,157,.7)}
+#hf-chat-btn{position:fixed;bottom:26px;right:26px;z-index:9000;width:88px;height:88px;border-radius:50%;background:#0d57c5;border:2px solid rgba(255,255,255,.95);cursor:grab;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 32px rgba(11,72,168,.45);transition:transform .2s,box-shadow .2s;font-weight:700;color:#fff;font-size:14px;font-family:inherit;padding:0;animation:float 3s ease-in-out infinite;user-select:none;-webkit-user-select:none;overflow:hidden}
+#hf-chat-btn:hover{transform:scale(1.1);box-shadow:0 14px 44px rgba(11,72,168,.58)}
 #hf-chat-btn:active{cursor:grabbing}
 #hf-chat-btn svg{width:20px;height:20px;fill:#fff;flex-shrink:0}
 #hf-chat-badge{position:absolute;top:-8px;right:-8px;background:#FF2D55;color:#fff;font-size:12px;font-weight:800;border-radius:50%;width:24px;height:24px;display:none;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 2px 8px rgba(255,45,85,.6)}
@@ -1061,7 +1084,7 @@ document.getElementById('leadPhotos')?.addEventListener('change', (e) => {
 
 <!-- Chat button -->
 <button id="hf-chat-btn" aria-label="Chat with Alex" onclick="hfChatToggle()" title="Chat with Alex! 👋">
-  <img id="hf-char-wave" loading="lazy" src="assets/img/alex-avatar-v3.png" alt="Alex" style="width:100%;height:100%;border-radius:50%;object-fit:cover;animation:wave 0.6s ease-in-out infinite;display:block;cursor:grab">
+  <img id="hf-char-wave" loading="lazy" src="assets/img/alex-avatar-v4.png" alt="Alex" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center;animation:wave 0.6s ease-in-out infinite;display:block;cursor:grab">
   <span id="hf-chat-badge">1</span>
 </button>
 
