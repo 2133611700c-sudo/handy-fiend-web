@@ -176,6 +176,7 @@ export default async function handler(req, res) {
   reply = stripMarkdownArtifacts(reply);
   if (!hasPhone && !isClearlyOutOfScopeRequest(latestUserText)) {
     reply = removePrePhoneDollarAmounts(reply, safeLang);
+    reply = enforceMaterialPolicyHint(reply, latestUserText, safeLang);
   }
 
   // Save conversation turn (fire-and-forget)
@@ -790,6 +791,41 @@ function removePrePhoneDollarAmounts(text, lang) {
     es: 'Te doy el precio exacto en cuanto compartas tu número de teléfono 📲'
   };
   return `${text.replace(/\$\s*\d[\d,]*(?:\.\d+)?(?:\s*[-–]\s*\$\s*\d[\d,]*(?:\.\d+)?)?/g, 'pricing')}\n\n${fallback[lang] || fallback.en}`;
+}
+
+function enforceMaterialPolicyHint(reply, userText, lang) {
+  const r = String(reply || '').trim();
+  const u = String(userText || '').toLowerCase();
+  if (!u) return r;
+
+  const asksMaterials = /(material|materials|входят|материал|включ|materiales|incluye|incluidos|incluye)/i.test(u);
+  if (!asksMaterials) return r;
+
+  const service = inferServiceType(u);
+  const alreadyMentions = /(labor-only|materials.*separate|материалы.*отдель|solo mano de obra|materiales.*separ|premium paint.*included|краска.*включ|pintura.*incluid)/i.test(r);
+  if (alreadyMentions) return r;
+
+  const byLang = {
+    en: {
+      cabinet: 'For cabinet painting, premium paint, primer, degreasing, and prep are included.',
+      labor: 'For this service, it is labor-only. You purchase and provide materials.'
+    },
+    ru: {
+      cabinet: 'Для покраски кухонных фасадов краска, грунт, обезжиривание и подготовка включены.',
+      labor: 'По этой услуге это только работа. Материалы покупаете и предоставляете вы.'
+    },
+    uk: {
+      cabinet: 'Для фарбування кухонних фасадів фарба, ґрунт, знежирення і підготовка включені.',
+      labor: 'За цією послугою це тільки робота. Матеріали купуєте та надаєте ви.'
+    },
+    es: {
+      cabinet: 'Para pintura de gabinetes, pintura premium, primer, desengrasado y preparación están incluidos.',
+      labor: 'Para este servicio es solo mano de obra. Usted compra y proporciona los materiales.'
+    }
+  };
+  const l = byLang[lang] || byLang.en;
+  const line = service.includes('cabinet') ? l.cabinet : l.labor;
+  return `${r}\n\n${line}`.trim();
 }
 
 async function fetchSessionLeadContext(sessionId) {
