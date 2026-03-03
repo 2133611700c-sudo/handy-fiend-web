@@ -40,9 +40,9 @@
 
 ### Blockers Remaining
 
-1. **FB_PAGE_ACCESS_TOKEN not set** — Alex cannot reply to Messenger DMs yet
-   - Action needed: Create Meta app → generate Page Access Token → add to Vercel env vars
-   - Guide: `ops/fb-messenger-connect.md`
+1. ~~**FB_PAGE_ACCESS_TOKEN not set**~~ → ✅ RESOLVED 2026-03-03 23:15 PT
+   - Page token set, verify token set, webhook verified, page subscribed
+   - Alex now live in Messenger — receiving and replying to DMs autonomously
 
 2. **GPT images not yet generated** — image prompts ready at `ops/gpt-image-prompts-2026-03-03.md`
    - Action needed: Run prompts through DALL-E 3 or Midjourney, save to `/output/marketing/images/2026-03-03/`
