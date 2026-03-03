@@ -54,10 +54,13 @@ export default async function handler(req, res) {
 }
 
 function verifyWebhook(req, res) {
-  const verifyToken = process.env.FB_VERIFY_TOKEN || '';
-  const mode = req.query['hub.mode'];
-  const token = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
+  const verifyToken = String(process.env.FB_VERIFY_TOKEN || '').trim();
+  const query = req.query && typeof req.query === 'object' ? req.query : {};
+  const urlQuery = parseUrlQuery(req?.url || '');
+
+  const mode = firstNonEmpty(query['hub.mode'], urlQuery.get('hub.mode'));
+  const token = firstNonEmpty(query['hub.verify_token'], urlQuery.get('hub.verify_token')).trim();
+  const challenge = firstNonEmpty(query['hub.challenge'], urlQuery.get('hub.challenge'));
 
   if (!verifyToken) {
     return res.status(500).send('FB_VERIFY_TOKEN is not configured');
@@ -67,6 +70,28 @@ function verifyWebhook(req, res) {
     return res.status(200).send(String(challenge || 'ok'));
   }
   return res.status(403).send('Forbidden');
+}
+
+function parseUrlQuery(url) {
+  try {
+    const base = 'https://handyandfriend.com';
+    return new URL(url, base).searchParams;
+  } catch (_) {
+    return new URLSearchParams();
+  }
+}
+
+function firstNonEmpty(...values) {
+  for (const value of values) {
+    if (Array.isArray(value) && value.length) {
+      const candidate = String(value[0] || '').trim();
+      if (candidate) return candidate;
+      continue;
+    }
+    const candidate = String(value || '').trim();
+    if (candidate) return candidate;
+  }
+  return '';
 }
 
 async function handleMessagingEvent(event) {
