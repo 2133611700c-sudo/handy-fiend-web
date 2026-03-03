@@ -29,7 +29,7 @@ const POSTBACK_RESPONSES = {
   MENU_SERVICES: "🔧 Our Services & Prices:\n\n📺 TV Mounting — from $165\n🎨 Cabinet Painting — from $95/door\n🖌️ Interior Painting — from $3/sq ft\n🪑 Furniture Assembly — from $150\n🖼️ Art/Mirror Hanging — $175\n🏠 LVP Flooring — from $3.50/sq ft\n\n💡 Book 2+ services = 20% combo discount\n\nFull pricing: handyandfriend.com\nOr just ask me anything here 👋"
 };
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -49,19 +49,28 @@ export default async function handler(req, res) {
     return res.status(404).json({ error: 'Unsupported webhook object' });
   }
 
-  try {
-    for (const entry of body.entry || []) {
-      for (const event of entry.messaging || []) {
+  const errors = [];
+  for (const entry of body.entry || []) {
+    for (const event of entry.messaging || []) {
+      try {
         await handleMessagingEvent(event);
+      } catch (err) {
+        const msg = String(err?.message || err || 'Unknown error');
+        errors.push(msg);
+        console.error('[ALEX_WEBHOOK] Event processing error:', msg);
       }
     }
-  } catch (err) {
-    console.error('[ALEX_WEBHOOK] Processing error:', err.message);
-    return res.status(500).json({ error: 'Webhook processing failed' });
+  }
+
+  if (errors.length) {
+    // Always ack the webhook to avoid repeated delivery loops from Meta.
+    console.error('[ALEX_WEBHOOK] Completed with errors:', errors.slice(0, 5));
   }
 
   return res.status(200).send('EVENT_RECEIVED');
 }
+
+module.exports = handler;
 
 function verifyWebhook(req, res) {
   const verifyToken = String(process.env.FB_VERIFY_TOKEN || '').trim();
@@ -110,11 +119,11 @@ async function handleMessagingEvent(event) {
 
   if (event.message?.is_echo) return;
 
-  const postbackPayload = event.postback?.payload || ‘’;
+  const postbackPayload = event.postback?.payload || '';
   const postbackText = POSTBACK_RESPONSES[postbackPayload];
   if (postbackText) {
     await sendFacebookMessage(senderId, postbackText);
-    if (postbackPayload !== ‘GET_STARTED’) {
+    if (postbackPayload !== 'GET_STARTED') {
       await saveTurns(`fb_${senderId}`, null, `[${postbackPayload}]`, postbackText);
     }
     return;
