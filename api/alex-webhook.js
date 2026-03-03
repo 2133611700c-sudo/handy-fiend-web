@@ -19,6 +19,16 @@ const { buildSystemPrompt, getGuardMode, GUARD_MODES } = require('../lib/alex-on
 const FB_GRAPH_VERSION = process.env.FB_GRAPH_VERSION || 'v19.0';
 const MAX_HISTORY_TURNS = 16;
 
+const POSTBACK_RESPONSES = {
+  GET_STARTED: "Hi! I'm Alex from Handy & Friend 👋\n\nTell me what service you need and I'll guide you to the right estimate.\n\nWe're available same-week in LA — what can I help you with?",
+  ICE_TV: "📺 TV Mounting Pricing:\n\n• Standard flat/tilt mount — $165\n• Full-motion mount — $165\n• Concealed in-wall wiring — $250\n\nIncludes stud location, level mount, and cleanup.\n\nWhat size TV and what type of wall? Send your phone number and I'll confirm availability today 📲",
+  ICE_CABINET: "🎨 Cabinet Painting Pricing:\n\n• Full spray finish (both sides) — $155/door\n• 2-side spray — $125/door\n• 1-side spray — $95/door\n• Roller finish — $45/door\n• Drawer fronts — from $65\n• Island — $460\n\nIncludes premium paint, primer, degreasing, and prep.\n\nHow many doors do you have? Send your phone and I'll calculate your exact quote 📲",
+  ICE_SERVICES: "🔧 Handy & Friend — Full Service List:\n\n📺 TV Mounting from $165\n🎨 Cabinet Painting from $95/door\n🖌️ Interior Painting from $3/sq ft\n🪑 Furniture Assembly from $150\n🖼️ Art & Mirror Hanging $175\n🏠 LVP Flooring from $3.50/sq ft\n🔧 Minor Plumbing from $150\n⚡ Minor Electrical from $150\n\nBook 2+ services = 20% off combo!\n\nInsured. Upfront pricing. Same-week availability.\n\nText your project details and I'll quote you instantly 📲",
+  ICE_BOOK: "📅 Ready to book? Let's go!\n\nWe're available same-week Mon–Sat 8am–8pm in LA.\n\nJust tell me:\n1️⃣ What service do you need?\n2️⃣ Your neighborhood or zip code\n3️⃣ Your phone number\n\nI'll confirm the date and price within minutes! 🚀",
+  MENU_QUOTE: "Let's get your free quote!\n\nTell me:\n• What service do you need?\n• Your neighborhood in LA\n• Your phone number\n\nI'll calculate the exact price and check availability right now 📲",
+  MENU_SERVICES: "🔧 Our Services & Prices:\n\n📺 TV Mounting — from $165\n🎨 Cabinet Painting — from $95/door\n🖌️ Interior Painting — from $3/sq ft\n🪑 Furniture Assembly — from $150\n🖼️ Art/Mirror Hanging — $175\n🏠 LVP Flooring — from $3.50/sq ft\n\n💡 Book 2+ services = 20% combo discount\n\nFull pricing: handyandfriend.com\nOr just ask me anything here 👋"
+};
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -100,11 +110,13 @@ async function handleMessagingEvent(event) {
 
   if (event.message?.is_echo) return;
 
-  if (event.postback?.payload === 'GET_STARTED') {
-    await sendFacebookMessage(
-      senderId,
-      "Hi! I'm Alex from Handy & Friend 👋 Tell me what service you need and I’ll guide you to the right estimate."
-    );
+  const postbackPayload = event.postback?.payload || ‘’;
+  const postbackText = POSTBACK_RESPONSES[postbackPayload];
+  if (postbackText) {
+    await sendFacebookMessage(senderId, postbackText);
+    if (postbackPayload !== ‘GET_STARTED’) {
+      await saveTurns(`fb_${senderId}`, null, `[${postbackPayload}]`, postbackText);
+    }
     return;
   }
 
